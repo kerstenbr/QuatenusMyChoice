@@ -1,7 +1,20 @@
+import 'dotenv/config'
 import express from 'express'
+import mongoose from 'mongoose'
+import familiaRoute from './routes/familiasRoute.js'
 
 const app = express()
 
-app.listen(3000, () => {
-    console.log("Servidor conectado na porta 3000!")
-})
+// app.use(express.json())
+app.use('/familias', familiaRoute)
+
+mongoose.connect(process.env.DB_URL)
+    .then(() => {
+        console.log("Conectado ao banco de dados com sucesso")
+        app.listen(process.env.PORT || 5555, () => {
+            console.log(`Servidor rodando na porta ${process.env.PORT}`)
+        })
+    })
+    .catch((error) => {
+        console.log(`Não foi possivel conectar ao banco de dados: ${error}`)
+    })
