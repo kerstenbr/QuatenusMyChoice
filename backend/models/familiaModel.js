@@ -14,6 +14,6 @@ const familiaModel = new Schema({
     infoAdicional: String,
     segmentosDoProduto: Object,
     infoTecnica: String
-})
+}, { timestamps: true })
 
 export const Familia = mongoose.model("Familia", familiaModel)
