@@ -1,12 +1,12 @@
 import 'dotenv/config'
 import express from 'express'
 import mongoose from 'mongoose'
-import familiaRoute from './routes/familiasRoute.js'
+import routes from './routes/index.js'
 
 const app = express()
 
 // app.use(express.json())
-app.use('/familias', familiaRoute)
+app.use(routes)
 
 mongoose.connect(process.env.DB_URL)
     .then(() => {
