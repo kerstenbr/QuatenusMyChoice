@@ -17,7 +17,7 @@ router.post("/", async (request, response) => {
     try {
 
         if (!request.body.nome) {
-            return response.status(400).send({ message: "Preencha o NOME da família de produtos!"})
+            return response.status(400).send({ message: "Preencha o NOME da família de produtos" })
         }
 
         const newFamilia = {
@@ -27,7 +27,7 @@ router.post("/", async (request, response) => {
             desc: request.body.desc,
             canva: request.body.canva,
             infoAdicional: request.body.infoAdicional,
-            segmentosDoProduto: request.body.segmentosDoProduto,
+            produtos: request.body.produtos,
             infoTecnica: request.body.infoTecnica
         }
         console.log(newFamilia)
@@ -38,5 +38,28 @@ router.post("/", async (request, response) => {
         return response.status(400).send({ message: error.message })
     }
 })
+
+router.put('/:id', async (request, response) => {
+    try {
+
+        if (!request.body.nome) {
+            return response.status(400).send({ message: "Preencha o NOME da família de produtos" })
+        }
+
+        const { id } = request.params
+        const result = await Familia.findByIdAndUpdate(id, request.body)
+
+        if (!result) {
+            return response.status(400).send({ message: "Família não encontrada" })
+        }
+
+        return response.status(200).send({ message: "Família atualizada com sucesso" })
+
+    } catch (error) {
+        console.log(error)
+        return response.status(400).send({ message: error.message })
+    }
+})
+
 
 export default router

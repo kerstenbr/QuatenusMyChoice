@@ -12,7 +12,7 @@ const familiaModel = new Schema({
     desc: String,
     canva: String,
     infoAdicional: String,
-    segmentosDoProduto: Object,
+    produtos: Object,
     infoTecnica: String
 }, { timestamps: true })
 
