@@ -13,6 +13,17 @@ router.get("/", async (request, response) => {
     }
 })
 
+router.get("/:id", async (request, response) => {
+    try {
+        const { id } = request.params
+        const familia = await Familia.findById(id)
+        return response.status(200).json(familia)
+    } catch (error) {
+        console.log(error)
+        return response.status(400).send({ message: error.message })
+    }
+})
+
 router.post("/", async (request, response) => {
     try {
 
