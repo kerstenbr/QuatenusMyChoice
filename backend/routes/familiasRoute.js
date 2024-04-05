@@ -61,11 +61,26 @@ router.put('/:id', async (request, response) => {
         const result = await Familia.findByIdAndUpdate(id, request.body)
 
         if (!result) {
-            return response.status(400).send({ message: "Família não encontrada" })
+            return response.status(404).send({ message: "Família não encontrada" })
         }
 
         return response.status(200).send({ message: "Família atualizada com sucesso" })
 
+    } catch (error) {
+        console.log(error)
+        return response.status(400).send({ message: error.message })
+    }
+})
+
+router.delete('/:id', async (request, response) => {
+    try {
+        const { id } = request.params
+        const result = await Familia.findByIdAndDelete(id)
+
+        if (!result) {
+            return response.status(404).send("Família não encontrada")
+        }
+        return response.status(200).json(result)
     } catch (error) {
         console.log(error)
         return response.status(400).send({ message: error.message })
