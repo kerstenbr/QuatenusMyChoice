@@ -8,11 +8,13 @@ const app = express()
 app.use(express.json())
 app.use(routes)
 
-mongoose.connect(process.env.DB_URL)
+const PORT = process.env.PORT || 5555
+
+mongoose.connect(process.env.DB_URI)
     .then(() => {
         console.log("Conectado ao banco de dados com sucesso")
-        app.listen(process.env.PORT || 5555, () => {
-            console.log(`Servidor rodando na porta ${process.env.PORT}`)
+        app.listen(PORT, () => {
+            console.log(`Servidor rodando na porta ${PORT}`)
         })
     })
     .catch((error) => {
