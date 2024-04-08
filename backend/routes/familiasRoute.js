@@ -20,7 +20,7 @@ router.get("/:id", async (request, response) => {
         return response.status(200).json(familia)
     } catch (error) {
         console.log(error)
-        return response.status(400).send({ message: error.message })
+        return response.status(500).send({ message: error.message })
     }
 })
 
@@ -46,7 +46,7 @@ router.post("/", async (request, response) => {
         return response.status(201).send(familia)
     } catch (error) {
         console.log(error)
-        return response.status(400).send({ message: error.message })
+        return response.status(500).send({ message: error.message })
     }
 })
 
@@ -68,7 +68,7 @@ router.put('/:id', async (request, response) => {
 
     } catch (error) {
         console.log(error)
-        return response.status(400).send({ message: error.message })
+        return response.status(500).send({ message: error.message })
     }
 })
 
@@ -83,9 +83,8 @@ router.delete('/:id', async (request, response) => {
         return response.status(200).json(result)
     } catch (error) {
         console.log(error)
-        return response.status(400).send({ message: error.message })
+        return response.status(500).send({ message: error.message })
     }
 })
-
 
 export default router
