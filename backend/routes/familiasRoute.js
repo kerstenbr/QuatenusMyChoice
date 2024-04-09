@@ -33,13 +33,13 @@ router.post("/", async (request, response) => {
 
         const newFamilia = {
             nome: request.body.nome,
-            banner: request.body.banner,
-            codigo: request.body.codigo,
+            bannerLink: request.body.bannerLink,
+            codigoQBM: request.body.codigoQBM,
             desc: request.body.desc,
-            canva: request.body.canva,
-            infoAdicional: request.body.infoAdicional,
+            canvaLink: request.body.canvaLink,
+            infoAdicionalLink: request.body.infoAdicionalLink,
             produtos: request.body.produtos,
-            infoTecnica: request.body.infoTecnica
+            infoTecnicaLink: request.body.infoTecnicaLink
         }
         console.log(newFamilia)
         const familia = await Familia.create(newFamilia)

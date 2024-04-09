@@ -2,18 +2,18 @@ import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
 const familiaModel = new Schema({
-    banner: String,
     nome: {
         type: String,
         required: true,
         unique: true
     },
-    codigo: String,
+    bannerLink: String,
+    codigoQBM: String,
     desc: String,
-    canva: String,
-    infoAdicional: String,
+    canvaLink: String,
+    infoAdicionalLink: String,
     produtos: Object,
-    infoTecnica: String
+    infoTecnicaLink: String,
 }, { timestamps: true })
 
 export const Familia = mongoose.model("Familia", familiaModel)
