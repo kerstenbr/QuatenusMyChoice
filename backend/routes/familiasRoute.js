@@ -1,17 +1,10 @@
 import express from 'express'
 import { Familia } from '../models/familiaModel.js'
+import { findAll } from "../controllers/familiaController.js"
 
 const router = express.Router()
 
-router.get("/", async (request, response) => {
-    try {
-        const familias = await Familia.find({})
-        return response.status(200).json({ familias })
-    } catch (error) {
-        console.log(error)
-        return response.status(500).send({ message: error.message })
-    }
-})
+router.get("/", findAll)
 
 router.get("/:id", async (request, response) => {
     try {
