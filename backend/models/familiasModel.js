@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
-const familiaModel = new Schema({
+const familiaSchema = new Schema({
     nome: {
         type: String,
         required: true,
@@ -16,6 +16,6 @@ const familiaModel = new Schema({
     infoTecnicaLink: String,
 }, { timestamps: true })
 
-const Familia = mongoose.model("Familia", familiaModel)
+const Familia = mongoose.model("Familia", familiaSchema)
 
 export default Familia
