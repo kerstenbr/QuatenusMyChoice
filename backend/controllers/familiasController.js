@@ -1,4 +1,4 @@
-import { Familia } from '../models/familiasModel.js'
+import Familia from '../models/familiasModel.js'
 
 const findAll = async (request, response) => {
     try {
@@ -25,7 +25,7 @@ const createNews = async (request, response) => {
     try {
 
         if (!request.body.nome) {
-            return response.status(400).send({ message: "Preencha o NOME da família de produtos" })
+            return response.status(400).send({ message: "O nome da família é obrigátorio" })
         }
 
         const newFamilia = {
@@ -51,7 +51,7 @@ const editNews = async (request, response) => {
     try {
 
         if (!request.body.nome) {
-            return response.status(400).send({ message: "Preencha o NOME da família de produtos" })
+            return response.status(400).send({ message: "O nome da família é obrigátorio" })
         }
 
         const { id } = request.params
@@ -77,7 +77,7 @@ const deleteNews = async (request, response) => {
         if (!result) {
             return response.status(404).send("Família não encontrada")
         }
-        return response.status(200).json(result)
+        return response.status(200).send({message: `${result.nome}: excluido com sucesso`})
     } catch (error) {
         console.log(error)
         return response.status(500).send({ message: error.message })

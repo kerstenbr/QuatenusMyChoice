@@ -1,5 +1,5 @@
 import express from 'express'
-import { Familia } from '../models/familiasModel.js'
+import Familia from '../models/familiasModel.js'
 import { findAll, findById, createNews, editNews, deleteNews } from "../controllers/familiasController.js"
 
 const router = express.Router()

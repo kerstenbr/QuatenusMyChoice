@@ -16,4 +16,6 @@ const familiaModel = new Schema({
     infoTecnicaLink: String,
 }, { timestamps: true })
 
-export const Familia = mongoose.model("Familia", familiaModel)
+const Familia = mongoose.model("Familia", familiaModel)
+
+export default Familia
