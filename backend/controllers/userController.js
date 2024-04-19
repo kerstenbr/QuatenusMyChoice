@@ -1,22 +1,22 @@
-import Usuario from "../models/usuarioModel.js";
+import User from "../models/userModel.js";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 
 const create = async (request, response) => {
     try {
-        if (!request.body.nome || !request.body.email || !request.body.password) {
+        if (!request.body.name || !request.body.email || !request.body.password) {
             return response.status(400).send({ message: "Preencha todos os campos" })
         }
 
-        const newUsuario = {
-            nome: request.body.nome,
+        const newUser = {
+            name: request.body.name,
             email: request.body.email,
             password: request.body.password,
             admin: request.body.admin
         }
-        // console.log(newUsuario)
-        const usuario = await Usuario.create(newUsuario)
-        return response.status(201).send({ message: `Usuário: ${usuario.nome} - criado com sucesso` })
+        // console.log(newUser)
+        const user = await User.create(newUser)
+        return response.status(201).send({ message: `Usuário: ${user.name} - criado com sucesso` })
 
     } catch (error) {
         console.log(error)
@@ -28,17 +28,17 @@ const login = async (request, response) => {
     try {
         const { email, password } = request.body
 
-        const usuario = await Usuario.findOne({ email }).select("+password")
-        if (!usuario) {
+        const user = await User.findOne({ email }).select("+password")
+        if (!user) {
             return response.status(401).send({ message: "Credenciais inválidas" })
         }
 
-        const passwordMatch = await bcrypt.compare(password, usuario.password)
+        const passwordMatch = await bcrypt.compare(password, user.password)
         if (!passwordMatch) {
             return response.status(401).send({ message: "Credenciais inválidas" })
         }
 
-        const token = jwt.sign({ usuarioId: usuario._id, email: usuario.email }, process.env.SECRET_JWT, {
+        const token = jwt.sign({ userId: user._id, email: user.email }, process.env.SECRET_JWT, {
             expiresIn: process.env.SECRET_JWT_EXP
         })
 

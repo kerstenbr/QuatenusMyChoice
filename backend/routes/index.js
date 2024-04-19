@@ -1,10 +1,10 @@
 import { Router } from "express";
-import familiaRoute from './familiaRoute.js'
-import usuariosRoute from './usuarioRoute.js'
+import familyRoute from './familyRoute.js'
+import userRoute from './userRoute.js'
 
 const router = Router()
 
-router.use('/familias', familiaRoute)
-router.use('/usuario', usuariosRoute)
+router.use('/families', familyRoute)
+router.use('/user', userRoute)
 
 export default router

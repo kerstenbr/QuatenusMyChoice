@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 import { Schema } from "mongoose";
 import bcrypt from "bcrypt"
 
-const usuarioSchema = new Schema({
-    nome: {
+const userSchema = new Schema({
+    name: {
         type: String,
         required: true
     },
@@ -24,11 +24,11 @@ const usuarioSchema = new Schema({
     }
 })
 
-usuarioSchema.pre("save", async function(next) {
+userSchema.pre("save", async function(next) {
     this.password = await bcrypt.hash(this.password, 10)
     next()
 })
 
-const Usuario = mongoose.model("Usuario", usuarioSchema)
+const User = mongoose.model("User", userSchema)
 
-export default Usuario
+export default User
