@@ -38,7 +38,7 @@ const createFamily = async (request, response) => {
             products: request.body.products,
             tecInfoLink: request.body.tecInfoLink
         }
-        console.log(newFamily)
+        
         const family = await Family.create(newFamily)
         return response.status(201).send(family)
     } catch (error) {

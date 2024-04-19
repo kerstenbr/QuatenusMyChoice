@@ -14,7 +14,7 @@ const register = async (request, response) => {
             password: request.body.password,
             admin: request.body.admin
         }
-        // console.log(newUser)
+        
         const user = await User.create(newUser)
         return response.status(201).send({ message: `Usuário: ${user.name} - criado com sucesso` })
 

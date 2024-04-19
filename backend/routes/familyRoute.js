@@ -5,13 +5,9 @@ import { authenticateUser } from "../middlewares/authMiddleware.js"
 const router = express.Router()
 
 router.get("/", findAll)
-
 router.get("/:id", findById)
-
 router.post("/", authenticateUser, createFamily)
-
 router.put('/:id', authenticateUser, editFamily)
-
 router.delete('/:id', authenticateUser, deleteFamily)
 
 export default router

@@ -1,6 +1,5 @@
 import 'dotenv/config'
 import jwt from 'jsonwebtoken'
-import User from '../models/userModel.js'
 
 const authenticateUser = (request, response, next) => {
     try {
@@ -25,17 +24,16 @@ const authenticateUser = (request, response, next) => {
 
         const decoded = jwt.verify(token, process.env.SECRET_JWT)
 
-
         request.userId = decoded.userId
         request.email = decoded.email
 
-        console.log(decoded.userId)
-        console.log(decoded.email)
+        // console.log(decoded.userId)
+        // console.log(decoded.email)
 
         next()
     } catch (error) {
         console.log(error)
-        return response.status(500).send({ message: "Token inválido" })
+        return response.status(500).send({ message: error.message })
     }
 }
 
