@@ -1,6 +1,6 @@
 import { Router } from "express";
-import familiaRoute from './familiasRoute.js'
-import usuariosRoute from './usuariosRoute.js'
+import familiaRoute from './familiaRoute.js'
+import usuariosRoute from './usuarioRoute.js'
 
 const router = Router()
 

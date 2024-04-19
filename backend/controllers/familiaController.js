@@ -1,4 +1,4 @@
-import Familia from '../models/familiasModel.js'
+import Familia from '../models/familiaModel.js'
 
 const findAll = async (request, response) => {
     try {
