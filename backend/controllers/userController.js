@@ -2,7 +2,7 @@ import User from "../models/userModel.js";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 
-const create = async (request, response) => {
+const register = async (request, response) => {
     try {
         if (!request.body.name || !request.body.email || !request.body.password) {
             return response.status(400).send({ message: "Preencha todos os campos" })
@@ -50,4 +50,4 @@ const login = async (request, response) => {
     }
 }
 
-export { create, login }
+export { register, login }
