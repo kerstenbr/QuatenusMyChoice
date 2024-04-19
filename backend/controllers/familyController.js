@@ -14,6 +14,11 @@ const findById = async (request, response) => {
     try {
         const { id } = request.params
         const family = await Family.findById(id)
+
+        if (!family) {
+            return response.status(400).send({ message: "Nenhuma família encontrada" })
+        }
+
         return response.status(200).json(family)
     } catch (error) {
         console.log(error)
@@ -38,7 +43,7 @@ const createFamily = async (request, response) => {
             products: request.body.products,
             tecInfoLink: request.body.tecInfoLink
         }
-        
+
         const family = await Family.create(newFamily)
         return response.status(201).send(family)
     } catch (error) {
