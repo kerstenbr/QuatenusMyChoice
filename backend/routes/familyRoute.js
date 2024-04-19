@@ -1,13 +1,13 @@
 import express from 'express'
 import { findAll, findById, createFamily, editFamily, deleteFamily } from "../controllers/familyController.js"
-import { authenticateUser } from "../middlewares/authMiddleware.js"
+import { authenticateUser, isAdmin } from "../middlewares/authMiddleware.js"
 
 const router = express.Router()
 
 router.get("/", findAll)
 router.get("/:id", findById)
-router.post("/", authenticateUser, createFamily)
-router.put('/:id', authenticateUser, editFamily)
-router.delete('/:id', authenticateUser, deleteFamily)
+router.post("/", authenticateUser, isAdmin, createFamily)
+router.put('/:id', authenticateUser, isAdmin, editFamily)
+router.delete('/:id', authenticateUser, isAdmin, deleteFamily)
 
 export default router
