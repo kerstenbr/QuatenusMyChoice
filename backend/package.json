@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "backend da aplicação Quatenus MyChoice. Ferramenta desenvolvida para facilitar a busca por produtos dos funcionários da Quatenus",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "dev": "nodemon index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Kerstenbr",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
