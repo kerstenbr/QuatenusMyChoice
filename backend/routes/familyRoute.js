@@ -4,8 +4,8 @@ import { authenticateUser, isAdmin } from "../middlewares/authMiddleware.js"
 
 const router = express.Router()
 
-router.get("/", findAll)
-router.get("/:id", findById)
+router.get("/", authenticateUser, findAll)
+router.get("/:id", authenticateUser, findById)
 router.post("/", authenticateUser, isAdmin, createFamily)
 router.put('/:id', authenticateUser, isAdmin, editFamily)
 router.delete('/:id', authenticateUser, isAdmin, deleteFamily)
