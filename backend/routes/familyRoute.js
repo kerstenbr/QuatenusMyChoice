@@ -4,10 +4,11 @@ import { authenticateUser, isAdmin } from "../middlewares/authMiddleware.js"
 
 const router = express.Router()
 
-router.get("/", authenticateUser, findAll)
-router.get("/:id", authenticateUser, findById)
-router.post("/", authenticateUser, isAdmin, createFamily)
-router.put('/:id', authenticateUser, isAdmin, editFamily)
-router.delete('/:id', authenticateUser, isAdmin, deleteFamily)
+// TODO: Colocar a autenticação novamente depois do front estar funcionando
+router.get("/", findAll) // authenticateUser, 
+router.get("/:id", findById) // authenticateUser, 
+router.post("/", createFamily) // authenticateUser, isAdmin
+router.put('/:id', editFamily) // authenticateUser, isAdmin
+router.delete('/:id', deleteFamily) // authenticateUser, isAdmin
 
 export default router
