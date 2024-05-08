@@ -26,6 +26,36 @@ const findById = async (request, response) => {
     }
 }
 
+const findByName = async (request, response) => {
+    try {
+        const { name } = request.query
+        console.log(request.query)
+        const families = await Family.find({ name: { $regex: `${name || ""}`, $options: "i" } })
+
+        if (!families) {
+            return response.status(400).send({ message: "Nenhuma família encontrada" })
+        }
+
+        return response.send({
+            results: families.map(family => ({
+                id: family._id,
+                name: family.name,
+                alias: family.alias,
+                bannerLink: family.bannerLink,
+                qbmCode: family.qbmCode,
+                desc: family.desc,
+                canvaLink: family.canvaLink,
+                addInfoLink: family.addInfoLink,
+                products: family.products,
+                tecInfoLink: family.tecInfoLink
+            })),
+        })
+    } catch (error) {
+        console.log(error)
+        return response.status(500).send({ message: error.message })
+    }
+}
+
 const createFamily = async (request, response) => {
     try {
 
@@ -35,6 +65,7 @@ const createFamily = async (request, response) => {
 
         const newFamily = {
             name: request.body.name,
+            alias: request.body.alias,
             bannerLink: request.body.bannerLink,
             qbmCode: request.body.qbmCode,
             desc: request.body.desc,
@@ -89,4 +120,4 @@ const deleteFamily = async (request, response) => {
     }
 }
 
-export { findAll, findById, createFamily, editFamily, deleteFamily }
+export { findAll, findById, findByName, createFamily, editFamily, deleteFamily }
