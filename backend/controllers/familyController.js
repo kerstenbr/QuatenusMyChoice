@@ -36,7 +36,10 @@ const findByName = async (request, response) => {
             return response.status(400).send({ message: "Nenhuma família encontrada" })
         }
 
+        // return response.status(200).json(families)
+
         return response.send({
+            total: families.length,
             results: families.map(family => ({
                 id: family._id,
                 name: family.name,
