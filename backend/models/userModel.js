@@ -3,10 +3,10 @@ import { Schema } from "mongoose";
 import bcrypt from "bcrypt"
 
 const userSchema = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
+    // name: {
+    //     type: String,
+    //     required: true
+    // },
     email: {
         type: String,
         required: true,
@@ -16,7 +16,8 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
-        select: false
+        // A linha abaixo faz com que o Mongodb não retorne a senha, desativei por enquanto por não tenho um GET de user
+        // select: false
     },
     admin: {
         type: Boolean,
