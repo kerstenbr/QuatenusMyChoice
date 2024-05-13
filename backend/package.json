@@ -2,6 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "backend da aplicação Quatenus MyChoice. Ferramenta desenvolvida para facilitar a busca por produtos dos funcionários da Quatenus",
+  "repository": "https://github.com/kerstenbr/QuatenusMyChoice",
   "type": "module",
   "main": "index.js",
   "scripts": {
