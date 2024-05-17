@@ -5,9 +5,9 @@ const Navbar = () => {
 
     return (
         <header>
-            <div className="container">
-                <Link to="/">
-                    <img className='logo' src={Logo}/>
+            <div className="container shadow-sm">
+                <Link className='navbar-brand p-0' to="/">
+                    <img className='logo' src={Logo} />
                 </Link>
             </div>
         </header>
