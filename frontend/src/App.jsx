@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Footer from './components/Footer'
+import CreateFamily from './pages/CreateFamily'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
         <main className='pages'>
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/create' element={<CreateFamily />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
           </Routes>

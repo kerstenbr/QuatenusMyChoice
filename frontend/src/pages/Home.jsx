@@ -1,28 +1,41 @@
 import { useEffect, useState } from "react"
+import axios from "axios"
 
-import Card from "../components/Card"
+import Card from "../components/Card/Card"
 import Searchbar from "../components/Searchbar"
+import CreateFamily from "../components/CreateFamilyButton"
 
 const Home = () => {
   const [families, setFamilies] = useState(null)
 
   useEffect(() => {
-    const fetchFamilies = async () => {
-      const response = await fetch('http://localhost:5555/api/families/')
-      const json = await response.json()
+    axios
+      .get('http://localhost:5555/api/families/')
+      .then((response) => {
+        setFamilies(response.data)
+      }).catch((error) => {
+        alert("Ocorreu um erro, olhe o console")
+        console.log(error)
+      })
+  })
 
-      if (response.ok) {
-        setFamilies(json)
-      }
-    }
+  // useEffect(() => {
+  //   const fetchFamilies = async () => {
+  //     const response = await fetch('http://localhost:5555/api/families/')
+  //     const json = await response.json()
 
-    fetchFamilies()
-  }, [])
+  //     if (response.ok) {
+  //       setFamilies(json)
+  //     }
+  //   }
+
+  //   fetchFamilies()
+  // }, [])
 
   return (
-    <div className="py-5 bg-light">
+    <div className="py-2 bg-light">
       <div className="container">
-
+        <CreateFamily />
         <Searchbar />
         {
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -31,7 +44,6 @@ const Home = () => {
             ))}
           </div>
         }
-
       </div>
     </div>
   )

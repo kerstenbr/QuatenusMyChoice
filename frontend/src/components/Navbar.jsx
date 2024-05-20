@@ -5,7 +5,7 @@ const Navbar = () => {
 
     return (
         <header>
-            <div className="container shadow-sm">
+            <div className="container">
                 <Link className='navbar-brand p-0' to="/">
                     <img className='logo' src={Logo} />
                 </Link>
