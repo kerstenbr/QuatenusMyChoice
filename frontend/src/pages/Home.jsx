@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
+import { Link } from "react-router-dom"
 
-import Card from "../components/Card/Card"
+import Card from "../components/Card"
 import Searchbar from "../components/Searchbar"
-import CreateFamily from "../components/CreateFamilyButton"
 
 const Home = () => {
   const [families, setFamilies] = useState(null)
@@ -19,23 +19,12 @@ const Home = () => {
       })
   })
 
-  // useEffect(() => {
-  //   const fetchFamilies = async () => {
-  //     const response = await fetch('http://localhost:5555/api/families/')
-  //     const json = await response.json()
-
-  //     if (response.ok) {
-  //       setFamilies(json)
-  //     }
-  //   }
-
-  //   fetchFamilies()
-  // }, [])
-
   return (
     <div className="py-2 bg-light">
       <div className="container">
-        <CreateFamily />
+        <Link to='/create'>
+          <button type="button" className="btn btn-sm btn-qorange mb-1">Criar Família</button>
+        </Link>
         <Searchbar />
         {
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">

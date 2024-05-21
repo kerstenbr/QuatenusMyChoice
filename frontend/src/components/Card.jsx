@@ -1,9 +1,17 @@
 import { Link } from "react-router-dom"
-import DeleteCard from "./DeleteCard"
-import EditCard from "./EditCard"
-import SeeMore from "./SeeMore"
 
 const Card = ({ family }) => {
+
+    const handleMore = () => {
+        console.log("handleMore")
+    }
+    const handleEdit = () => {
+        console.log("handleEdit")
+    }
+    const handleDelete = () => {
+        console.log("handleDelete")
+    }
+
     return (
         <div className="col">
             <div className="card shadow-sm" style={{ height: '450px' }}>
@@ -15,9 +23,9 @@ const Card = ({ family }) => {
                 </div>
 
                 <div className="ms-3 mb-3 me-3">
-                    <SeeMore id={family._id} />
-                    <EditCard id={family._id} />
-                    <DeleteCard id={family._id} />
+                    <button type="button" className="btn btn-sm btn-qblue me-1" onClick={handleMore}>Ver mais</button>
+                    <button type="button" className="btn btn-sm btn-warning me-1" onClick={handleEdit}>Editar</button>
+                    <button type="button" className="btn btn-sm btn-danger" onClick={handleDelete}>Excluir</button>
                 </div>
             </div>
         </div>

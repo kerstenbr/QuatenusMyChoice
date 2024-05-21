@@ -133,7 +133,7 @@ const CreateFamily = () => {
                                 <input
                                     key={valueIndex}
                                     type="text"
-                                    placeholder={valueIndex === 0 ? "Adesão" : valueIndex === 1 ? "12 meses" : valueIndex === 2 ? "24 meses" : valueIndex === 3 ? "36 meses" : valueIndex === 4 ? "12 meses S/E" : valueIndex === 5 ? "24 meses S/E" : valueIndex === 6 ? "36 meses S/E" : valueIndex === 7 ? "48 meses S/E" : valueIndex === 8 ? "60 meses S/E" : "Valor"}
+                                    placeholder={valueIndex === 0 ? "Adesão" : valueIndex === 1 ? "12 meses" : valueIndex === 2 ? "24 meses" : valueIndex === 3 ? "36 meses" : valueIndex === 4 ? "12 meses S/A" : valueIndex === 5 ? "24 meses S/A" : valueIndex === 6 ? "36 meses S/A" : valueIndex === 7 ? "48 meses S/A" : valueIndex === 8 ? "60 meses S/A" : "Valor"}
                                     value={value}
                                     onChange={(e) => handleProductValueChange(productIndex, valueIndex, e.target.value)}
                                 />
