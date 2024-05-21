@@ -10,9 +10,8 @@ const createFamily = async (request, response) => {
 
         const newFamily = {
             name: request.body.name,
-            alias: request.body.alias,
-            bannerLink: request.body.bannerLink,
             qbmCode: request.body.qbmCode,
+            bannerLink: request.body.bannerLink,
             desc: request.body.desc,
             canvaLink: request.body.canvaLink,
             addInfoLink: request.body.addInfoLink,
@@ -70,22 +69,6 @@ const findByName = async (request, response) => {
         }
 
         return response.status(200).json(families)
-
-        // return response.send({
-        //     total: families.length,
-        //     results: families.map(family => ({
-        //         id: family._id,
-        //         name: family.name,
-        //         alias: family.alias,
-        //         bannerLink: family.bannerLink,
-        //         qbmCode: family.qbmCode,
-        //         desc: family.desc,
-        //         canvaLink: family.canvaLink,
-        //         addInfoLink: family.addInfoLink,
-        //         products: family.products,
-        //         tecInfoLink: family.tecInfoLink
-        //     })),
-        // })
     } catch (error) {
         console.log(error)
         return response.status(500).json({ message: error.message })
@@ -108,7 +91,6 @@ const editFamily = async (request, response) => {
         }
 
         return response.status(200).json(family)
-
     } catch (error) {
         console.log(error)
         return response.status(500).json({ message: error.message })
@@ -123,7 +105,7 @@ const deleteFamily = async (request, response) => {
         if (!family) {
             return response.status(404).json("Família não encontrada")
         }
-        return response.status(200).json({ message: `${family.name}: excluido com sucesso` })
+        return response.status(200).json({ message: `${family.name}: excluida com sucesso` })
     } catch (error) {
         console.log(error)
         return response.status(500).json({ message: error.message })

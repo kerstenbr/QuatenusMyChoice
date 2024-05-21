@@ -7,9 +7,8 @@ const familySchema = new Schema({
         required: true,
         unique: true
     },
-    alias: String,
-    bannerLink: String,
     qbmCode: String,
+    bannerLink: String,
     desc: String,
     canvaLink: String,
     addInfoLink: String,

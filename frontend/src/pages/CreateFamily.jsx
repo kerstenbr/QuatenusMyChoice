@@ -5,7 +5,6 @@ import BackButton from '../components/BackButton'
 
 const CreateFamily = () => {
     const [name, setName] = useState('');
-    const [alias, setAlias] = useState('');
     const [bannerLink, setBannerLink] = useState('');
     const [qbmCode, setQbmCode] = useState('');
     const [desc, setDesc] = useState('');
@@ -23,7 +22,7 @@ const CreateFamily = () => {
         }, {});
 
         const data = {
-            name, alias, bannerLink, qbmCode, desc, canvaLink, addInfoLink, products: productsObject, tecInfoLink
+            name, bannerLink, qbmCode, desc, canvaLink, addInfoLink, products: productsObject, tecInfoLink
         };
 
         axios
@@ -32,7 +31,6 @@ const CreateFamily = () => {
                 navigate('/');
             }).catch((error) => {
                 alert(error.response.data.message);
-                console.log(error);
             });
     };
 
@@ -71,11 +69,11 @@ const CreateFamily = () => {
                     />
                 </div>
                 <div>
-                    <label>Alias</label>
+                    <label>Código do QBM</label>
                     <input
                         type="text"
-                        value={alias}
-                        onChange={(e) => setAlias(e.target.value)}
+                        value={qbmCode}
+                        onChange={(e) => setQbmCode(e.target.value)}
                     />
                 </div>
                 <div>
@@ -84,14 +82,6 @@ const CreateFamily = () => {
                         type="text"
                         value={bannerLink}
                         onChange={(e) => setBannerLink(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>Código do QBM</label>
-                    <input
-                        type="text"
-                        value={qbmCode}
-                        onChange={(e) => setQbmCode(e.target.value)}
                     />
                 </div>
                 <div>
