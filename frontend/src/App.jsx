@@ -6,6 +6,9 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Footer from './components/Footer'
 import CreateFamily from './pages/CreateFamily'
+import SeeMoreFamily from './pages/SeeMoreFamily'
+import EditFamily from './pages/EditFamily'
+import DeleteFamily from './pages/DeleteFamily'
 
 function App() {
 
@@ -13,10 +16,13 @@ function App() {
     <>
       <BrowserRouter>
         <Navbar />
-        <main className='pages'>
+        <main>
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/create' element={<CreateFamily />} />
+            <Route path='/family/create' element={<CreateFamily />} />
+            <Route path='/family/seemore/:id' element={<SeeMoreFamily />} />
+            <Route path='/family/edit/:id' element={<EditFamily />} />
+            <Route path='/family/delete/:id' element={<DeleteFamily />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
           </Routes>

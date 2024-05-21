@@ -14,7 +14,7 @@ const Home = () => {
       .then((response) => {
         setFamilies(response.data)
       }).catch((error) => {
-        alert("Ocorreu um erro, olhe o console")
+        // alert(error.response.data.message)
         console.log(error)
       })
   })
@@ -22,8 +22,8 @@ const Home = () => {
   return (
     <div className="py-2 bg-light">
       <div className="container">
-        <Link to='/create'>
-          <button type="button" className="btn btn-sm btn-qorange mb-1">Criar Família</button>
+        <Link to='/family/create'>
+          <button type="button" className="btn btn-sm btn-qorange mb-1 float-end">Criar Família</button>
         </Link>
         <Searchbar />
         {
