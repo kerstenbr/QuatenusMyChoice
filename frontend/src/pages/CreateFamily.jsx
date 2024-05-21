@@ -31,8 +31,7 @@ const CreateFamily = () => {
             .then(() => {
                 navigate('/');
             }).catch((error) => {
-                // TODO: Melhorar essa mensagem de erro
-                alert("Ocorreu um erro, olhe o console");
+                alert(error.response.data.message);
                 console.log(error);
             });
     };

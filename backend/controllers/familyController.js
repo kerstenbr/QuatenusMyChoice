@@ -5,7 +5,7 @@ const createFamily = async (request, response) => {
     try {
 
         if (!request.body.name) {
-            return response.status(400).send({ message: "O nome da família é obrigátorio" })
+            return response.status(400).send({ message: "O nome da família é obrigatório" })
         }
 
         const newFamily = {
