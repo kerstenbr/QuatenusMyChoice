@@ -105,7 +105,7 @@ const deleteFamily = async (request, response) => {
         if (!family) {
             return response.status(404).json("Família não encontrada")
         }
-        return response.status(200).json({ message: `${family.name}: excluida com sucesso` })
+        return response.status(200).json({ message: `A família ${family.name.toLocaleUpperCase()} foi excluida com sucesso` })
     } catch (error) {
         console.log(error)
         return response.status(500).json({ message: error.message })
