@@ -17,7 +17,7 @@ const Home = () => {
         // alert(error.response.data.message)
         console.log(error)
       })
-  })
+  }, [])
 
   return (
     <div className="py-2 bg-light">
