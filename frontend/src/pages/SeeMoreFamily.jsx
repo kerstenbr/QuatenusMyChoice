@@ -1,49 +1,28 @@
-import { useEffect, useState } from "react"
-import axios from "axios"
-import { useParams } from "react-router-dom"
-import BackButton from "../components/BackButton"
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const SeeMoreFamily = () => {
-  const [family, setFamily] = useState({})
-  const { id } = useParams()
+  const [family, setFamily] = useState({});
+  const { id } = useParams();
 
   useEffect(() => {
     axios
       .get(`http://localhost:5555/api/families/${id}`)
       .then((response) => {
-        setFamily(response.data)
+        setFamily(response.data);
       })
       .catch((error) => {
-        console.log(error)
-      })
-  }, [])
-
-  const renderProductsTable = (products) => {
-    if (!products) return null;
-
-    return Object.keys(products).map((productName) => {
-      const values = products[productName];
-      return (
-        <tr key={productName}>
-          <td>{productName}</td>
-          <td className="text-center">R$ {values[0]}</td>
-          <td className="text-center">R$ {values[1]}</td>
-          <td className="text-center">R$ {values[2]}</td>
-          <td className="text-center">R$ {values[3]}</td>
-          <td className="text-center">R$ {values[4]}</td>
-          <td className="text-center">R$ {values[5]}</td>
-          <td className="text-center">R$ {values[6]}</td>
-          <td className="text-center">R$ {values[7]}</td>
-          <td className="text-center">R$ {values[8]}</td>
-        </tr>
-      );
-    });
-  };
+        alert(`Oops, algo deu errado! 
+        - ${error.response.data.message}`)
+        console.error(error.response);
+      });
+  }, []);
 
   return (
     <div className="py-2 bg-light">
       <div className="container">
-        {/* <BackButton /> */}
+
         <button className="btn btn-sm btn-qorange mb-2 float-end" onClick={() => self.close()}>Fechar</button>
 
         <div>
@@ -56,9 +35,13 @@ const SeeMoreFamily = () => {
           <p>{family.desc}</p>
         </div>
 
-        <img style={{ width: '1296px' }} src={family.canvaLink} />
+        {family.canvaLink ? (
+          <>
+            <img style={{ width: '1296px' }} src={family.canvaLink} alt="Canva" />
+            <hr />
+          </>
+        ) : (<></>)}
 
-        <hr />
         <div>
           <h4>Segmentos de produtos:</h4>
           <div className="table-responsive">
@@ -83,24 +66,54 @@ const SeeMoreFamily = () => {
                 </tr>
               </thead>
               <tbody>
-                {renderProductsTable(family.products)}
+                {family.products ? (
+                  Object.keys(family.products).map((productName) => {
+                    const values = family.products[productName];
+                    return (
+                      <tr key={productName}>
+                        <td>{productName}</td>
+                        <td className="text-center">R$ {values[0]}</td>
+                        <td className="text-center">R$ {values[1]}</td>
+                        <td className="text-center">R$ {values[2]}</td>
+                        <td className="text-center">R$ {values[3]}</td>
+                        <td className="text-center">R$ {values[4]}</td>
+                        <td className="text-center">R$ {values[5]}</td>
+                        <td className="text-center">R$ {values[6]}</td>
+                        <td className="text-center">R$ {values[7]}</td>
+                        <td className="text-center">R$ {values[8]}</td>
+                      </tr>
+                    )
+                  })
+                ) : (
+                  <tr>
+                    <td colSpan="10" className="text-center">Nenhum produto encontrado nessa família</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
         </div>
-        <hr />
+
+        {family.products ? (<hr />) : (<></>)}
 
         <div>
-          <h4>Informações Técnicas:</h4>
-          <img style={{ width: '1296px' }} src={family.addInfoLink} />
+          {family.addInfoLink ? (
+            <>
+              <h4>Informações Adicional:</h4>
+              <img style={{ width: '1296px' }} src={family.addInfoLink} alt="Informações Adicionais" />
+              <hr />
+            </>
+          ) : (<></>)}
         </div>
-        <hr />
 
         <div>
-          <h4>Informação Adicional:</h4>
-          <img style={{ width: '1296px' }} src={family.tecInfoLink} />
+          {family.tecInfoLink ? (
+            <>
+              <h4>Informação Técnicas:</h4>
+              <img style={{ width: '1296px' }} src={family.tecInfoLink} alt="Informações Adicionais" />
+            </>
+          ) : (<></>)}
         </div>
-
 
         <div>
           <hr />
@@ -108,7 +121,7 @@ const SeeMoreFamily = () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default SeeMoreFamily
+export default SeeMoreFamily;
