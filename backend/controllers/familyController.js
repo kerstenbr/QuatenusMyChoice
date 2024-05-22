@@ -90,7 +90,7 @@ const editFamily = async (request, response) => {
             return response.status(404).json({ message: "Família não encontrada" })
         }
 
-        return response.status(200).json(family)
+        return response.status(200).json({ message: "Família Editada" })
     } catch (error) {
         console.log(error)
         return response.status(500).json({ message: error.message })
@@ -103,7 +103,7 @@ const deleteFamily = async (request, response) => {
         const family = await Family.findByIdAndDelete(id)
 
         if (!family) {
-            return response.status(404).json("Família não encontrada")
+            return response.status(404).json({ message: "Família não encontrada" })
         }
         return response.status(200).json({ message: `A família ${family.name.toLocaleUpperCase()} foi excluida com sucesso` })
     } catch (error) {
