@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import BackButton from '../components/BackButton'
@@ -60,6 +60,7 @@ const CreateFamily = () => {
         <div className="py-2 bg-light">
             <div className="container">
                 <BackButton />
+                <h1>CRIAR FAMÍLIA</h1>
                 <div>
                     <label>Nome</label>
                     <input
@@ -140,7 +141,7 @@ const CreateFamily = () => {
                         onChange={(e) => setTecInfoLink(e.target.value)}
                     />
                 </div>
-                <button onClick={handleCreateFamily}>Criar</button>
+                <button onClick={handleCreateFamily}>Salvar</button>
             </div>
         </div>
     );

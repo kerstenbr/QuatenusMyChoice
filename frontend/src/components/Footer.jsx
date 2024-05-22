@@ -13,7 +13,7 @@ const Footer = () => {
                 </p>
 
                 <p>Criado por <Link to={'https://kerstenbr.github.io/SitePei/'} target="_blank" rel="noopener noreferrer">Projetos e Inovações</Link>
-                    <p>Com ajuda de  <Link to={'https://github.com/codebruno'} target="_blank" rel="noopener noreferrer">Bruno Silva</Link>, <Link to={'https://github.com/EricSemE'} target="_blank" rel="noopener noreferrer">Eric Caetano</Link> e <Link to={'https://github.com/lucind0'} target="_blank" rel="noopener noreferrer">Kauã Lucindo</Link></p>
+                    <span><br />Com ajuda de  <Link to={'https://github.com/codebruno'} target="_blank" rel="noopener noreferrer">Bruno Silva</Link>, <Link to={'https://github.com/EricSemE'} target="_blank" rel="noopener noreferrer">Eric Caetano</Link> e <Link to={'https://github.com/lucind0'} target="_blank" rel="noopener noreferrer">Kauã Lucindo</Link></span>
                 </p>
                 <p>v0.0.0 - Em testes</p>
             </div>

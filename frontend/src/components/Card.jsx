@@ -19,7 +19,9 @@ const Card = ({ family }) => {
                     <Link to={`/family/seemore/${family._id}`} target="_blank" rel="noopener noreferrer">
                         <button type="button" className="btn btn-sm btn-qblue me-1">Ver mais</button>
                     </Link>
-                    <button type="button" className="btn btn-sm btn-warning me-1">Editar</button>
+                    <Link to={`/family/edit/${family._id}`}>
+                        <button type="button" className="btn btn-sm btn-warning me-1">Editar</button>
+                    </Link>
                     <Link to={`/family/delete/${family._id}`}>
                         <button type="button" className="btn btn-sm btn-danger">Excluir</button>
                     </Link>
