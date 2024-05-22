@@ -12,7 +12,9 @@ const Footer = () => {
                     <Link to={'https://qbm01.quatenus-system.com.br/quatenus10/QBM/Login/Login.aspx'} target="_blank" rel="noopener noreferrer">Reporte um bug</Link>
                 </p>
 
-                <p>Criado por <Link to={'https://kerstenbr.github.io/SitePei/'} target="_blank" rel="noopener noreferrer">Projetos e Inovações</Link></p>
+                <p>Criado por <Link to={'https://kerstenbr.github.io/SitePei/'} target="_blank" rel="noopener noreferrer">Projetos e Inovações</Link>
+                    <p>Com ajuda de  <Link to={'https://github.com/codebruno'} target="_blank" rel="noopener noreferrer">Bruno Silva</Link>, <Link to={'https://github.com/EricSemE'} target="_blank" rel="noopener noreferrer">Eric Caetano</Link> e <Link to={'https://github.com/lucind0'} target="_blank" rel="noopener noreferrer">Kauã Lucindo</Link></p>
+                </p>
                 <p>v0.0.0 - Em testes</p>
             </div>
         </footer >
