@@ -41,7 +41,7 @@ const EditFamily = () => {
         - ${error}`)
         console.error(error)
       })
-  }, [id]) // Adicionado [id] como dependência para que o efeito só seja executado quando o id mudar
+  }, [])
 
   const handleEditFamily = () => {
     const productsObject = products.reduce((acc, { name, values }) => {

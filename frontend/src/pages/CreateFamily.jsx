@@ -26,12 +26,14 @@ const CreateFamily = () => {
         };
 
         axios
-            .post('http://localhost:5555/api/families/', data)
+            .post('http://localhost:5555/api/familiess/', data)
             .then(() => {
                 navigate('/');
             }).catch((error) => {
-                alert(error.response.data.message);
-            });
+                alert(`Oops, algo deu errado! 
+                - ${error}`)
+                console.error(error)
+            })
     };
 
     const handleAddProduct = () => {
