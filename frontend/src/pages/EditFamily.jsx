@@ -20,7 +20,7 @@ const EditFamily = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5555/api/families/${id}`)
+      .get(`${import.meta.env.VITE_BASE_URL}/api/families/${id}`)
       .then((response) => {
         const { name, bannerLink, qbmCode, desc, canvaLink, addInfoLink, products, tecInfoLink } = response.data
 
@@ -57,7 +57,7 @@ const EditFamily = () => {
     }
 
     axios
-      .put(`http://localhost:5555/api/families/${id}`, data)
+      .put(`${import.meta.env.VITE_BASE_URL}/api/families/${id}`, data)
       .then(() => {
         navigate('/')
       })

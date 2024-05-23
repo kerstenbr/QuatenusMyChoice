@@ -10,7 +10,7 @@ const DeleteFamily = () => {
 
   const handleDeleteFamily = () => {
     axios
-      .delete(`http://localhost:5555/api/families/${id}`)
+      .delete(`${import.meta.env.VITE_BASE_URL}/api/families/${id}`)
       .then((response) => {
         alert(response.data.message)
         navigate('/')

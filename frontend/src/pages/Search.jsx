@@ -10,7 +10,7 @@ const Search = () => {
 
     const search = () => {
         axios
-            .get(`http://localhost:5555/api/families/search?name=${name}`)
+            .get(`${import.meta.env.VITE_BASE_URL}/api/families/search?name=${name}`)
             .then((response) => {
                 setFamilies(response.data)
             })

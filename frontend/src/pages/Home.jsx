@@ -9,7 +9,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5555/api/families/')
+      .get(`${import.meta.env.VITE_BASE_URL}/api/families/`)
       .then((response) => {
         setFamilies(response.data)
       }).catch((error) => {

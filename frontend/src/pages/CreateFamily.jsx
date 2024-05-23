@@ -28,7 +28,8 @@ const CreateFamily = () => {
         };
 
         axios
-            .post('http://localhost:5555/api/families/', data)
+            // .post('http://localhost:5555/api/families/', data)
+            .post(`${import.meta.env.VITE_BASE_URL}/api/families/`, data)
             .then(() => {
                 navigate('/');
             }).catch((error) => {

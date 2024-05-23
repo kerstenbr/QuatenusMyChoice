@@ -8,7 +8,7 @@ const SeeMoreFamily = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5555/api/families/${id}`)
+      .get(`${import.meta.env.VITE_BASE_URL}/api/families/${id}`)
       .then((response) => {
         setFamily(response.data);
       })
