@@ -1,7 +1,8 @@
-import { useState } from "react"
 import axios from 'axios'
 import { useNavigate, useParams } from "react-router-dom"
-import BackButton from "../components/BackButton"
+
+// TODO: Estilizar essa página
+// TODO: Trocar essa página por um modal
 
 const DeleteFamily = () => {
   const navigate = useNavigate()

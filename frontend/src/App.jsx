@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Navbar from "./components/Navbar"
 import Home from './pages/Home'
+import Search from './pages/Search'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Footer from './components/Footer'
@@ -19,6 +20,7 @@ function App() {
         <main>
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/search/:name' element={<Search />} />
             <Route path='/family/create' element={<CreateFamily />} />
             <Route path='/family/seemore/:id' element={<SeeMoreFamily />} />
             <Route path='/family/edit/:id' element={<EditFamily />} />

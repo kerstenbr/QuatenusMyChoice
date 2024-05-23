@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 
 const Footer = () => {
     return (
+        // TODO: Refazer o footer por completo, do jeito que está agora está muito bagunçado
         <footer className="text-muted py-5">
             <div className="container">
                 <p className="float-end mb-1">

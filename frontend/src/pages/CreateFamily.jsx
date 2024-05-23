@@ -14,6 +14,8 @@ const CreateFamily = () => {
     const [tecInfoLink, setTecInfoLink] = useState('');
     const navigate = useNavigate();
 
+    // TODO: Refazer essa parte por completo basicamente, agora está tudo muito complexo e, acredito eu, difícil de entender o que está acontencedo.
+    // TODO: Estilizar essa página inteira
     const handleCreateFamily = () => {
         // transformando o array products em um objeto onde as chaves são os nomes dos produtos e os valores são os arrays de valores associados a cada produto.
         const productsObject = products.reduce((acc, { name, values }) => {
@@ -26,7 +28,7 @@ const CreateFamily = () => {
         };
 
         axios
-            .post('http://localhost:5555/api/familiess/', data)
+            .post('http://localhost:5555/api/families/', data)
             .then(() => {
                 navigate('/');
             }).catch((error) => {
