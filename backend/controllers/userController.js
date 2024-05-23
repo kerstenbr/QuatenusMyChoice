@@ -2,8 +2,8 @@ import User from "../models/userModel.js";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 
-const createToken = (_id) => {
-    return jwt.sign({ _id }, process.env.SECRET_JWT, { expiresIn: process.env.SECRET_JWT_EXP })
+const createToken = (_id, admin) => {
+    return jwt.sign({ _id, admin }, process.env.SECRET_JWT, { expiresIn: process.env.SECRET_JWT_EXP })
 }
 
 const register = async (request, response) => {
@@ -21,9 +21,9 @@ const register = async (request, response) => {
 
         const user = await User.create({ email, password, admin })
 
-        const token = createToken(user._id)
+        const token = createToken(user._id, user.admin)
 
-        return response.status(201).json({ email, token })
+        return response.status(201).json(token)
     } catch (error) {
         console.log(error)
         return response.status(500).json({ message: error.message })
@@ -45,9 +45,9 @@ const login = async (request, response) => {
             return response.status(401).json({ message: "Credenciais inválidas" })
         }
 
-        const token = createToken(user._id)
+        const token = createToken(user._id, user.admin)
 
-        return response.status(200).json({ email, token })
+        return response.status(200).json(token)
 
     } catch (error) {
         console.log(error)

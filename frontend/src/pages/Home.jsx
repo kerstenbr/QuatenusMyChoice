@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
-
+import Cookies from "js-cookie"
 import Card from "../components/Card"
 import Searchbar from "../components/Searchbar"
 
@@ -15,6 +15,7 @@ const Home = () => {
       }).catch((error) => {
         console.log(error)
       })
+    console.log(Cookies.get("token"))
   }, [])
 
   return (
