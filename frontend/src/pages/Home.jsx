@@ -15,7 +15,7 @@ const Home = () => {
       }).catch((error) => {
         console.log(error)
       })
-    console.log(Cookies.get("token"))
+    // console.log(Cookies.get("token"))
   }, [])
 
   return (

@@ -57,4 +57,27 @@ const login = async (request, response) => {
     }
 }
 
-export { register, login }
+const findUser = async (request, response) => {
+    try {
+        // console.log(request.userId)
+        const { id } = request.params
+        // console.log("controller id: ", id)
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return response.status(404).json({ message: "Mongo ID inválido" })
+        }
+
+        const user = await User.findById(id)
+
+        if (!user) {
+            return response.status(404).json({ message: "Usuário não encontrado" })
+        }
+
+        return response.status(200).json(user)
+    } catch (error) {
+        console.log(error)
+        return response.status(500).json({ message: error.message })
+    }
+}
+
+export { register, login, findUser }

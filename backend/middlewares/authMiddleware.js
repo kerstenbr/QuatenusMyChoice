@@ -25,13 +25,13 @@ const authenticateUser = async (request, response, next) => {
         // console.log(decoded._id)
         const user = await User.findById(decoded._id)
 
-        request.userId = user._id
-        // console.log(request.userId)
+        if (!user) {
+            return response.status(404).json({ message: "Usuário não encontrado" });
+        }
+
+        request.userId = user._id.toString()
         request.email = user.email
-        // // console.log(request.email)
         request.admin = user.admin
-        // // console.log(request.admin)
-        // console.log(request)
 
         next()
     } catch (error) {
@@ -42,10 +42,9 @@ const authenticateUser = async (request, response, next) => {
 
 const isAdmin = (request, response, next) => {
     try {
-        response.json({ message: "Lembre-se de reativar essa função" })
-        // if (request.admin !== true) {
-        //     return response.status(401).send({ message: "Sem permissão" })
-        // }
+        if (request.admin !== true) {
+            return response.status(401).send({ message: "Sem permissão" })
+        }
 
         next()
     } catch (error) {
