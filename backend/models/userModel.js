@@ -17,7 +17,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
         // A linha abaixo faz com que o Mongodb não retorne a senha, desativei por enquanto por não tenho um GET de user
-        // select: false
+        select: false
     },
     admin: {
         type: Boolean,

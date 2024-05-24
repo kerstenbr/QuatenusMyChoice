@@ -22,11 +22,16 @@ const authenticateUser = async (request, response, next) => {
         }
 
         const decoded = jwt.verify(token, process.env.SECRET_JWT)
-        const user = await User.findById(decoded.userId)
+        // console.log(decoded._id)
+        const user = await User.findById(decoded._id)
 
-        request.userId = decoded.userId
-        request.email = decoded.email
+        request.userId = user._id
+        // console.log(request.userId)
+        request.email = user.email
+        // // console.log(request.email)
         request.admin = user.admin
+        // // console.log(request.admin)
+        // console.log(request)
 
         next()
     } catch (error) {
@@ -37,11 +42,10 @@ const authenticateUser = async (request, response, next) => {
 
 const isAdmin = (request, response, next) => {
     try {
-        const admin = request.admin
-
-        if (admin !== true) {
-            return response.status(401).send({ message: "Sem permissão" })
-        }
+        response.json({ message: "Lembre-se de reativar essa função" })
+        // if (request.admin !== true) {
+        //     return response.status(401).send({ message: "Sem permissão" })
+        // }
 
         next()
     } catch (error) {
