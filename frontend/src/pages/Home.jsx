@@ -12,6 +12,7 @@ const Home = () => {
       .get(`${import.meta.env.VITE_BASE_URL}/api/families/`)
       .then((response) => {
         setFamilies(response.data)
+        console.log(response)
       }).catch((error) => {
         console.log(error)
       })

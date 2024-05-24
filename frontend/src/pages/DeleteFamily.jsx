@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useNavigate, useParams } from "react-router-dom"
+import Cookies from "js-cookie"
 
 // TODO: Estilizar essa página
 // TODO: Trocar essa página por um modal
@@ -10,7 +11,11 @@ const DeleteFamily = () => {
 
   const handleDeleteFamily = () => {
     axios
-      .delete(`${import.meta.env.VITE_BASE_URL}/api/families/${id}`)
+      .delete(`${import.meta.env.VITE_BASE_URL}/api/families/${id}`, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`
+        }
+      })
       .then((response) => {
         alert(response.data.message)
         navigate('/')

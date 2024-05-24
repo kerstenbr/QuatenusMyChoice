@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom"
 import LimitedParagraph from "./LimitedParagraph"
+import { useContext } from 'react'
+import { UserContext } from '../context/userContext'
+
+// TODO: Adicionar páginação
 
 const Card = ({ family }) => {
+    const { user } = useContext(UserContext)
 
     return (
         // TODO: Melhorar a responsividade do card em si, principalmente em telas menores aonde só aparece dois cards um do lado do outro
@@ -20,12 +25,24 @@ const Card = ({ family }) => {
                     <Link to={`/family/seemore/${family._id}`} target="_blank" rel="noopener noreferrer">
                         <button type="button" className="btn btn-sm btn-qblue me-1">Ver mais</button>
                     </Link>
-                    <Link to={`/family/edit/${family._id}`}>
+                    {/* <Link to={`/family/edit/${family._id}`}>
                         <button type="button" className="btn btn-sm btn-warning me-1">Editar</button>
                     </Link>
                     <Link to={`/family/delete/${family._id}`}>
                         <button type="button" className="btn btn-sm btn-danger">Excluir</button>
-                    </Link>
+                    </Link> */}
+                    {/* {console.log(user)} */}
+                    {/* TODO: Achar outra maneira de fazer esse check, atualmente ele faz isso pra TODOS os cards... nada legal. */}
+                    {user && user.admin === true ? (
+                        <>
+                            <Link to={`/family/edit/${family._id}`}>
+                                <button type="button" className="btn btn-sm btn-warning me-1">Editar</button>
+                            </Link>
+                            <Link to={`/family/delete/${family._id}`}>
+                                <button type="button" className="btn btn-sm btn-danger">Excluir</button>
+                            </Link>
+                        </>
+                    ) : (<></>)}
                 </div>
             </div>
         </div>

@@ -2,6 +2,8 @@ import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import Cookies from "js-cookie"
 import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { UserContext } from '../context/userContext'
 
 const Login = () => {
 
@@ -10,13 +12,11 @@ const Login = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm()
 
   const onLogin = (data) => {
-    // console.log(data)
-    // const body = { ...data, email: data.email, password: data.password }
+
     axios
       .post(`${import.meta.env.VITE_BASE_URL}/api/user/login`, data)
       .then((response) => {
-        // console.log(response.data.token)
-        Cookies.set("token", response.data, { expires: 3 })
+        Cookies.set("token", response.data, { expires: 3, sameSite: 'strict' })
         navigate("/")
       })
       .catch((error) => {

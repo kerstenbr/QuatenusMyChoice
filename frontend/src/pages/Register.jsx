@@ -10,13 +10,11 @@ const Register = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm()
 
   const onRegister = (data) => {
-    // console.log(data)
     const body = { ...data, email: data.email, password: data.password }
     axios
       .post(`${import.meta.env.VITE_BASE_URL}/api/user/register`, body)
       .then((response) => {
-        // console.log(response.data.token)
-        Cookies.set("token", response.data, {expires: 3})
+        Cookies.set("token", response.data, { expires: 3, sameSite: 'strict' })
         navigate("/")
       })
       .catch((error) => {

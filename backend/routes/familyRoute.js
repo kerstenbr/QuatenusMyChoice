@@ -8,8 +8,8 @@ const router = express.Router()
 router.get("/", findAll) // authenticateUser
 router.get("/search", findByName) // authenticateUser, 
 router.get("/:id", findById) // authenticateUser, 
-router.post("/", createFamily) // authenticateUser, isAdmin
-router.put('/:id', editFamily) // authenticateUser, isAdmin
-router.delete('/:id', deleteFamily) // authenticateUser, isAdmin
+router.post("/", authenticateUser, isAdmin, createFamily) // authenticateUser, isAdmin
+router.put('/:id', authenticateUser, isAdmin, editFamily) // authenticateUser, isAdmin
+router.delete('/:id', authenticateUser, isAdmin, deleteFamily) // authenticateUser, isAdmin
 
 export default router

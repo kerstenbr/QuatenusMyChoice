@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import BackButton from '../components/BackButton'
+import Cookies from "js-cookie"
 
 const CreateFamily = () => {
     const [name, setName] = useState('');
@@ -28,8 +29,11 @@ const CreateFamily = () => {
         };
 
         axios
-            // .post('http://localhost:5555/api/families/', data)
-            .post(`${import.meta.env.VITE_BASE_URL}/api/families/`, data)
+            .post(`${import.meta.env.VITE_BASE_URL}/api/families/`, data, {
+                headers: {
+                    Authorization: `Bearer ${Cookies.get("token")}`
+                }
+            })
             .then(() => {
                 navigate('/');
             }).catch((error) => {
