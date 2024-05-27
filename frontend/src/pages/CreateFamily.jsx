@@ -38,7 +38,7 @@ const CreateFamily = () => {
                 navigate('/');
             }).catch((error) => {
                 alert(`Oops, algo deu errado! 
-                - ${error}`)
+                - ${error.response.data.message}`)
                 console.error(error)
             })
     };

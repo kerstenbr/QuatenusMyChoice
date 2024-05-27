@@ -36,7 +36,7 @@ const Card = ({ family }) => {
                     {user && user.admin === true ? (
                         <>
                             <Link to={`/family/edit/${family._id}`}>
-                                <button type="button" className="btn btn-sm btn-warning me-1">Editar</button>
+                                <button type="button" className="btn btn-sm btn-warning me-1 text-white">Editar</button>
                             </Link>
                             <Link to={`/family/delete/${family._id}`}>
                                 <button type="button" className="btn btn-sm btn-danger">Excluir</button>
