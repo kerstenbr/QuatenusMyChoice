@@ -45,8 +45,8 @@ const EditFamily = () => {
         setTecInfoLink(tecInfoLink)
       })
       .catch((error) => {
-        alert(`Oops, algo deu errado! 
-        - ${error}`)
+        alert(`Oops, algo deu errado!
+        - ${error.response.data.message}`)
         console.error(error)
       })
   }, [])
@@ -62,12 +62,18 @@ const EditFamily = () => {
     }
 
     axios
-      .put(`${import.meta.env.VITE_BASE_URL}/api/families/${id}`, data)
+      .put(`${import.meta.env.VITE_BASE_URL}/api/families/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`
+        }
+      })
       .then(() => {
         navigate('/')
       })
       .catch((error) => {
-        alert(error.response.data.message)
+        alert(`Oops, algo deu errado!
+        - ${error.response.data.message}`)
+        console.error(error)
       })
   }
 
