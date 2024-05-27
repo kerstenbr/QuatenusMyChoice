@@ -18,7 +18,9 @@ const Register = () => {
         navigate("/")
       })
       .catch((error) => {
-        console.log(error)
+        alert(`Oops, algo deu errado!
+        - ${error.response.data.message}`)
+        console.error(error)
       })
   }
 

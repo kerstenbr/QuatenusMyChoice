@@ -2,8 +2,6 @@ import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import Cookies from "js-cookie"
 import { useNavigate } from 'react-router-dom'
-import { useContext } from 'react'
-import { UserContext } from '../context/userContext'
 
 const Login = () => {
 
@@ -20,7 +18,9 @@ const Login = () => {
         navigate("/")
       })
       .catch((error) => {
-        console.log(error)
+        alert(`Oops, algo deu errado!
+        - ${error.response.data.message}`)
+        console.error(error)
       })
   }
 

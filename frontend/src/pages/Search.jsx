@@ -15,8 +15,9 @@ const Search = () => {
                 setFamilies(response.data)
             })
             .catch((error) => {
-                console.log(error.response)
-                setFamilies([])
+                alert(`Oops, algo deu errado!
+                - ${error.response.data.message}`)
+                console.error(error)
             })
     }
 

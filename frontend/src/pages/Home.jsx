@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
-import Cookies from "js-cookie"
 import Card from "../components/Card"
 import Searchbar from "../components/Searchbar"
 
@@ -14,9 +13,10 @@ const Home = () => {
         setFamilies(response.data)
         console.log(response)
       }).catch((error) => {
-        console.log(error)
+        alert(`Oops, algo deu errado!
+        - ${error.response.data.message}`)
+        console.error(error)
       })
-    // console.log(Cookies.get("token"))
   }, [])
 
   return (
