@@ -21,18 +21,11 @@ const Card = ({ family }) => {
 
                 </div>
 
+                {/* TODO: Achar outra maneira de fazer esse check, atualmente ele faz isso pra TODOS os cards... nada legal. */}
                 <div className="ms-3 mb-3 me-3">
                     <Link to={`/family/seemore/${family._id}`} target="_blank" rel="noopener noreferrer">
                         <button type="button" className="btn btn-sm btn-qblue me-1">Ver mais</button>
                     </Link>
-                    {/* <Link to={`/family/edit/${family._id}`}>
-                        <button type="button" className="btn btn-sm btn-warning me-1">Editar</button>
-                    </Link>
-                    <Link to={`/family/delete/${family._id}`}>
-                        <button type="button" className="btn btn-sm btn-danger">Excluir</button>
-                    </Link> */}
-                    {/* {console.log(user)} */}
-                    {/* TODO: Achar outra maneira de fazer esse check, atualmente ele faz isso pra TODOS os cards... nada legal. */}
                     {user && user.admin === true ? (
                         <>
                             <Link to={`/family/edit/${family._id}`}>
