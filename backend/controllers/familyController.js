@@ -58,17 +58,45 @@ const findById = async (request, response) => {
     }
 }
 
+// const findByName = async (request, response) => {
+//     try {
+//         const { name } = request.query
+
+//         const families = await Family.find({ name: { $regex: `${name || ""}`, $options: "i" } })
+
+//         if (!families) {
+//             return response.status(404).json({ message: "Nenhuma família encontrada" })
+//         }
+
+//         return response.status(200).json(families)
+//     } catch (error) {
+//         console.log(error)
+//         return response.status(500).json({ message: error.message })
+//     }
+// }
+
+// Essa função pesquisa pelo nome do field do products
 const findByName = async (request, response) => {
     try {
         const { name } = request.query
 
-        const families = await Family.find({ name: { $regex: `${name || ""}`, $options: "i" } })
+        if (!name) {
+            return response.status(400).json({ message: "Nome do produto não fornecido" })
+        }
 
-        if (!families) {
+        const regex = new RegExp(name, "i")
+
+        const families = await Family.find()
+
+        const filteredFamilies = families.filter(family => {
+            return Object.keys(family.products).some(key => regex.test(key))
+        })
+
+        if (filteredFamilies.length === 0) {
             return response.status(404).json({ message: "Nenhuma família encontrada" })
         }
 
-        return response.status(200).json(families)
+        return response.status(200).json(filteredFamilies)
     } catch (error) {
         console.log(error)
         return response.status(500).json({ message: error.message })
