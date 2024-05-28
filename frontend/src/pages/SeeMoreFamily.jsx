@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const SeeMoreFamily = () => {
   const [family, setFamily] = useState({});
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -19,11 +20,15 @@ const SeeMoreFamily = () => {
       });
   }, []);
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="py-2 bg-light">
       <div className="container">
 
-        <button className="btn btn-sm btn-qorange mb-2 float-end" onClick={() => self.close()}>Fechar</button>
+        <button className="btn btn-sm btn-qorange mb-2 float-end" onClick={goBack}>Voltar</button>
 
         <div>
           <h3 className="mt-1">{family.name} - {family.qbmCode}</h3>

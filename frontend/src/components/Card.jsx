@@ -23,7 +23,7 @@ const Card = ({ family }) => {
 
                 {/* TODO: Achar outra maneira de fazer esse check, atualmente ele faz isso pra TODOS os cards... nada legal. */}
                 <div className="ms-3 mb-3 me-3">
-                    <Link to={`/family/seemore/${family._id}`} target="_blank" rel="noopener noreferrer">
+                    <Link to={`/family/seemore/${family._id}`}>
                         <button type="button" className="btn btn-sm btn-qblue me-1">Ver mais</button>
                     </Link>
                     {user && user.admin === true ? (
