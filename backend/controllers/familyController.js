@@ -78,30 +78,35 @@ const findById = async (request, response) => {
 // Essa função pesquisa pelo nome do field do products
 const findByName = async (request, response) => {
     try {
-        const { name } = request.query
+        const { name } = request.query;
 
         if (!name) {
-            return response.status(400).json({ message: "Nome do produto não fornecido" })
+            return response.status(400).json({ message: "Nome do produto não fornecido" });
         }
 
-        const regex = new RegExp(name, "i")
+        const regex = new RegExp(name, "i");
 
-        const families = await Family.find()
+        const families = await Family.find();
+        console.log("Total families found:", families.length);
 
         const filteredFamilies = families.filter(family => {
-            return Object.keys(family.products).some(key => regex.test(key))
-        })
+            const keys = Object.keys(family.products);
+            console.log("Family:", family.name, "Product keys:", keys);
+            return keys.some(key => regex.test(key));
+        });
+
+        console.log("Filtered families:", filteredFamilies.length);
 
         if (filteredFamilies.length === 0) {
-            return response.status(404).json({ message: "Nenhuma família encontrada" })
+            return response.status(404).json({ message: "Nenhuma família encontrada" });
         }
 
-        return response.status(200).json(filteredFamilies)
+        return response.status(200).json(filteredFamilies);
     } catch (error) {
-        console.log(error)
-        return response.status(500).json({ message: error.message })
+        console.log(error);
+        return response.status(500).json({ message: error.message });
     }
-}
+};
 
 const editFamily = async (request, response) => {
     try {

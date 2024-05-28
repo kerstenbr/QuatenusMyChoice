@@ -78,7 +78,7 @@ const EditFamily = () => {
   }
 
   const handleAddProduct = () => {
-    setProducts([...products, { name: '', values: Array(9).fill('') }])
+    setProducts([...products, { name: '', values: Array(11).fill('') }])
   }
 
   const handleDeleteProduct = (index) => {
@@ -167,8 +167,18 @@ const EditFamily = () => {
                   key={valueIndex}
                   type="text"
                   placeholder={
-                    valueIndex === 0 ? "Adesão" : valueIndex === 1 ? "12 meses" : valueIndex === 2 ? "24 meses" : valueIndex === 3 ? "36 meses" : valueIndex === 4 ? "12 meses S/A" : valueIndex === 5 ? "24 meses S/A" : valueIndex === 6 ? "36 meses S/A" : valueIndex === 7 ? "48 meses S/A" : valueIndex === 8 ? "60 meses S/A" : "Valor"
-                  }
+                    valueIndex === 0 ? "Código do Produto" :
+                    valueIndex === 1 ? "Descrição" :
+                    valueIndex === 2 ? "Adesão" : 
+                    valueIndex === 3 ? "12 meses" : 
+                    valueIndex === 4 ? "24 meses" : 
+                    valueIndex === 5 ? "36 meses" : 
+                    valueIndex === 6 ? "12 meses S/A" : 
+                    valueIndex === 7 ? "24 meses S/A" : 
+                    valueIndex === 8 ? "36 meses S/A" : 
+                    valueIndex === 9 ? "48 meses S/A" : 
+                    valueIndex === 10 ? "60 meses S/A" : 
+                    "Valor"}
                   value={value}
                   onChange={(e) => handleProductValueChange(productIndex, valueIndex, e.target.value)}
                 />

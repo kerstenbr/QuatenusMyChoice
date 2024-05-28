@@ -50,6 +50,7 @@ const SeeMoreFamily = () => {
         <div>
           <h4>Segmentos de produtos:</h4>
           <div className="table-responsive">
+            
             <table className="table table-bordered table-hover">
               <thead>
                 <tr>
@@ -76,9 +77,7 @@ const SeeMoreFamily = () => {
                     const values = family.products[productName];
                     return (
                       <tr key={productName}>
-                        <td>{productName}</td>
-                        <td className="text-center">R$ {values[0]}</td>
-                        <td className="text-center">R$ {values[1]}</td>
+                        <td title={values[1]}>{values[0]} - {productName}</td>
                         <td className="text-center">R$ {values[2]}</td>
                         <td className="text-center">R$ {values[3]}</td>
                         <td className="text-center">R$ {values[4]}</td>
@@ -86,6 +85,8 @@ const SeeMoreFamily = () => {
                         <td className="text-center">R$ {values[6]}</td>
                         <td className="text-center">R$ {values[7]}</td>
                         <td className="text-center">R$ {values[8]}</td>
+                        <td className="text-center">R$ {values[9]}</td>
+                        <td className="text-center">R$ {values[10]}</td>
                       </tr>
                     )
                   })
