@@ -7,7 +7,22 @@ import cors from 'cors'
 const app = express()
 
 app.use(express.json())
-app.use(cors())
+
+app.use(
+    cors({
+        origin: "*", // Explicitly specify the allowed origin
+        credentials: true, // Important for cookies, authorization headers with HTTPS
+        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+        allowedHeaders: [
+            "Origin",
+            "Content-Type",
+            "Accept",
+            "Authorization",
+            "X-Request-With",
+        ],
+    })
+);
+
 app.use('/api', routes)
 
 const PORT = process.env.PORT || 5555
