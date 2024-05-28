@@ -87,15 +87,11 @@ const findByName = async (request, response) => {
         const regex = new RegExp(name, "i");
 
         const families = await Family.find();
-        console.log("Total families found:", families.length);
 
         const filteredFamilies = families.filter(family => {
             const keys = Object.keys(family.products);
-            console.log("Family:", family.name, "Product keys:", keys);
             return keys.some(key => regex.test(key));
         });
-
-        console.log("Filtered families:", filteredFamilies.length);
 
         if (filteredFamilies.length === 0) {
             return response.status(404).json({ message: "Nenhuma família encontrada" });
