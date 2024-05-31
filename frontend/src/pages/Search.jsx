@@ -17,9 +17,11 @@ const Search = () => {
                 console.log(response.data)
             })
             .catch((error) => {
-                alert(`Oops, algo deu errado!
-                - ${error.response.data.message}`)
-                console.error(error)
+                // Decidir retirar o alerta para melhorar a UX
+                // alert(`Oops, algo deu errado!
+                // - ${error.response.data.message}`)
+                console.error(error.response.data.message)
+                setFamilies([])
             })
     }
 
@@ -33,7 +35,7 @@ const Search = () => {
                 <Searchbar />
                 <p className="alert alert-secondary p-1">
                     {families.length !== 0 ?
-                        `${families.length} ${families.length > 1 ? "famílias encontradas" : "família encontrada"}` : "Nenhuma família encontrada :("}
+                        `${families.length} ${families.length > 1 ? `produtos encontrados para a pesquisa: ${name} :)` : `produto encontrado para a pesquisa: ${name} :)`}` : `Nenhum produto encontrado para: ${name} :(`}
                 </p>
                 {
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
