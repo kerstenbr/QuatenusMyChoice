@@ -1,21 +1,19 @@
-import { useForm } from 'react-hook-form'
-import axios from 'axios'
-import Cookies from "js-cookie"
-import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
+import Cookies from "js-cookie";
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
-  const navigate = useNavigate()
-
-  const { register, handleSubmit, formState: { errors }, reset } = useForm()
+  const navigate = useNavigate();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const onLogin = (data) => {
-
     axios
       .post(`${import.meta.env.VITE_BASE_URL}/api/user/login`, data)
       .then((response) => {
-        Cookies.set("token", response.data, { expires: 3, sameSite: 'strict' })
-        navigate("/")
+        Cookies.set("token", response.data, { expires: 3, sameSite: 'strict' });
+        navigate("/");
       })
       .catch((error) => {
         alert(`Oops, algo deu errado!
@@ -25,17 +23,45 @@ const Login = () => {
   }
 
   return (
-    <div className="py-2 bg-light">
+    <div className="py-5 bg-light d-flex">
       <div className="container">
-        <h1>Login</h1>
-        <form onSubmit={handleSubmit(onLogin)}>
-          <input type="email" placeholder="E-mail" name="email" {...register("email", { required: true })} />
-          <input type="password" placeholder="Senha" name="password" {...register("password", { required: true })} />
-          <button type="submit">Entrar</button>
-        </form>
+        <div className="row justify-content-center">
+          <div className="col-md-6 col-lg-4">
+            <div className="card p-4 shadow-sm">
+              <div className="card-body">
+                <h1 className="h3 mb-3 fw-normal text-center">Login</h1>
+                <form onSubmit={handleSubmit(onLogin)}>
+                  <div className="form-floating mb-3">
+                    <input
+                      type="email"
+                      className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                      id="floatingEmail"
+                      placeholder="E-mail"
+                      {...register("email", { required: 'O e-mail é obrigatório' })}
+                    />
+                    <label htmlFor="floatingEmail">E-mail</label>
+                    {errors.email && <div className="invalid-feedback">{errors.email.message}</div>}
+                  </div>
+                  <div className="form-floating mb-3">
+                    <input
+                      type="password"
+                      className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                      id="floatingPassword"
+                      placeholder="Senha"
+                      {...register("password", { required: 'A senha é obrigatória' })}
+                    />
+                    <label htmlFor="floatingPassword">Senha</label>
+                    {errors.password && <div className="invalid-feedback">{errors.password.message}</div>}
+                  </div>
+                  <button className="btn btn-lg btn-qorange w-100" type="submit">Entrar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
