@@ -16,7 +16,6 @@ const Searchbar = () => {
         <form className="input-group mb-3 mt-2" onSubmit={handleSubmit(onSearch)}>
             <input {...register("name", { required: true })} aria-invalid={errors.name ? "true" : "false"} type="search" className="form-control" placeholder="Pesquise aqui" />
             {errors.name?.type === "required" && (
-                // alert("Digite algo para pesquisar")
                 // TODO: Melhorar este erro depois, como estou na dev build ele fica lançando duas vezes e estava atrapalhando
                 console.error("Digite algo para pesquisar")
             )}

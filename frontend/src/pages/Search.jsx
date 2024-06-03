@@ -17,9 +17,6 @@ const Search = () => {
                 console.log(response.data)
             })
             .catch((error) => {
-                // Decidir retirar o alerta para melhorar a UX
-                // alert(`Oops, algo deu errado!
-                // - ${error.response.data.message}`)
                 console.error(error.response.data.message)
                 setFamilies([])
             })
