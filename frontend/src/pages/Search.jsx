@@ -35,7 +35,7 @@ const Search = () => {
                 <Searchbar />
                 <p className="alert alert-secondary p-1">
                     {families.length !== 0 ?
-                        `${families.length} ${families.length > 1 ? `produtos encontrados para a pesquisa: ${name} :)` : `produto encontrado para a pesquisa: ${name} :)`}` : `Nenhum produto encontrado para: ${name} :(`}
+                        `${families.length} ${families.length > 1 ? `famílias contém o produto: ${name}` : `família contém o produto: ${name}`}` : `Nenhum produto encontrado para: ${name} :(`}
                 </p>
                 {
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
