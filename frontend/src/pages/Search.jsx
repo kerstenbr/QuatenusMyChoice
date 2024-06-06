@@ -12,9 +12,7 @@ const Search = () => {
         axios
             .get(`${import.meta.env.VITE_BASE_URL}/api/families/search?name=${name}`)
             .then((response) => {
-                console.log(response)
                 setFamilies(response.data)
-                console.log(response.data)
             })
             .catch((error) => {
                 console.error(error.response.data.message)
