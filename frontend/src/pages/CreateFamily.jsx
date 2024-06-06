@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import BackButton from '../components/BackButton'
-import Cookies from "js-cookie"
+import BackButton from '../components/BackButton';
+import Cookies from "js-cookie";
 
 const CreateFamily = () => {
     const [name, setName] = useState('');
@@ -15,12 +15,9 @@ const CreateFamily = () => {
     const [tecInfoLink, setTecInfoLink] = useState('');
     const navigate = useNavigate();
 
-    // TODO: Refazer essa parte por completo basicamente, agora está tudo muito complexo e, acredito eu, difícil de entender o que está acontencedo.
-    // TODO: Estilizar essa página inteira
     const handleCreateFamily = () => {
-        // transformando o array products em um objeto onde as chaves são os nomes dos produtos e os valores são os arrays de valores associados a cada produto.
-        const productsObject = products.reduce((acc, { name, values }) => {
-            acc[name] = values;
+        const productsObject = products.reduce((acc, { name, codigoQbm, desc, preco }) => {
+            acc[name] = { codigoQbm, desc, preco };
             return acc;
         }, {});
 
@@ -38,13 +35,22 @@ const CreateFamily = () => {
                 navigate('/');
             }).catch((error) => {
                 alert(`Oops, algo deu errado! 
-                - ${error.response.data.message}`)
-                console.error(error)
-            })
+                - ${error.response.data.message}`);
+                console.error(error.response.data.message);
+            });
     };
 
     const handleAddProduct = () => {
-        setProducts([...products, { name: '', values: Array(11).fill('') }]);
+        setProducts([...products, {
+            name: '',
+            codigoQbm: '',
+            desc: '',
+            preco: {
+                comAdesao: Array(4).fill(''),
+                semAdesao: Array(5).fill(''),
+                fecho: ''
+            }
+        }]);
     };
 
     const handleDeleteProduct = (index) => {
@@ -59,9 +65,21 @@ const CreateFamily = () => {
         setProducts(newProducts);
     };
 
-    const handleProductValueChange = (productIndex, valueIndex, value) => {
+    const handleProductValueChange = (index, key, value) => {
         const newProducts = [...products];
-        newProducts[productIndex].values[valueIndex] = value;
+        newProducts[index][key] = value;
+        setProducts(newProducts);
+    };
+
+    const handleProductPriceChange = (productIndex, type, priceIndex, value) => {
+        const newProducts = [...products];
+        newProducts[productIndex].preco[type][priceIndex] = value;
+        setProducts(newProducts);
+    };
+
+    const handleProductPriceFechoChange = (productIndex, value) => {
+        const newProducts = [...products];
+        newProducts[productIndex].preco.fecho = value;
         setProducts(newProducts);
     };
 
@@ -128,27 +146,64 @@ const CreateFamily = () => {
                                 value={product.name}
                                 onChange={(e) => handleProductNameChange(productIndex, e.target.value)}
                             />
-                            {product.values.map((value, valueIndex) => (
+                            <input
+                                type="text"
+                                placeholder="Código do Produto"
+                                value={product.codigoQbm}
+                                onChange={(e) => handleProductValueChange(productIndex, 'codigoQbm', e.target.value)}
+                            />
+                            <input
+                                type="text"
+                                placeholder="Descrição"
+                                value={product.desc}
+                                onChange={(e) => handleProductValueChange(productIndex, 'desc', e.target.value)}
+                            />
+                            <div>
+                                <label>Preços com Adesão</label>
+                                {product.preco.comAdesao.map((value, valueIndex) => (
+                                    <input
+                                        key={valueIndex}
+                                        type="text"
+                                        placeholder={
+                                            valueIndex === 0 ? "Adesão" :
+                                                valueIndex === 1 ? "12 meses" :
+                                                    valueIndex === 2 ? "24 meses" :
+                                                        valueIndex === 3 ? "36 meses" :
+                                                            "Erro"
+                                        }
+                                        value={value}
+                                        onChange={(e) => handleProductPriceChange(productIndex, 'comAdesao', valueIndex, e.target.value)}
+                                    />
+                                ))}
+                            </div>
+                            <div>
+                                <label>Preços sem Adesão</label>
+                                {product.preco.semAdesao.map((value, valueIndex) => (
+                                    <input
+                                        key={valueIndex}
+                                        type="text"
+                                        placeholder={
+                                            valueIndex === 0 ? "12 meses" :
+                                                valueIndex === 1 ? "24 meses" :
+                                                    valueIndex === 2 ? "36 meses" :
+                                                        valueIndex === 3 ? "48 meses" :
+                                                            valueIndex === 4 ? "60 meses" :
+                                                                "Erro"
+                                        }
+                                        value={value}
+                                        onChange={(e) => handleProductPriceChange(productIndex, 'semAdesao', valueIndex, e.target.value)}
+                                    />
+                                ))}
+                            </div>
+                            <div>
+                                <label>Fecho</label>
                                 <input
-                                    key={valueIndex}
                                     type="text"
-                                    placeholder={
-                                        valueIndex === 0 ? "Código do Produto" :
-                                        valueIndex === 1 ? "Descrição" :
-                                        valueIndex === 2 ? "Adesão" : 
-                                        valueIndex === 3 ? "12 meses" : 
-                                        valueIndex === 4 ? "24 meses" : 
-                                        valueIndex === 5 ? "36 meses" : 
-                                        valueIndex === 6 ? "12 meses S/A" : 
-                                        valueIndex === 7 ? "24 meses S/A" : 
-                                        valueIndex === 8 ? "36 meses S/A" : 
-                                        valueIndex === 9 ? "48 meses S/A" : 
-                                        valueIndex === 10 ? "60 meses S/A" : 
-                                        "Valor"}
-                                    value={value}
-                                    onChange={(e) => handleProductValueChange(productIndex, valueIndex, e.target.value)}
+                                    placeholder="Fecho"
+                                    value={product.preco.fecho}
+                                    onChange={(e) => handleProductPriceFechoChange(productIndex, e.target.value)}
                                 />
-                            ))}
+                            </div>
                             <button onClick={() => handleDeleteProduct(productIndex)}>Excluir</button>
                         </div>
                     ))}

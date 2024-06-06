@@ -1,23 +1,20 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import { useNavigate, useParams } from 'react-router-dom'
-import BackButton from '../components/BackButton'
-import Cookies from "js-cookie"
-
-// TODO: Estilizar essa página
-// TODO: Trocar essa página por um modal
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
+import BackButton from '../components/BackButton';
+import Cookies from "js-cookie";
 
 const EditFamily = () => {
-  const [name, setName] = useState('')
-  const [bannerLink, setBannerLink] = useState('')
-  const [qbmCode, setQbmCode] = useState('')
-  const [desc, setDesc] = useState('')
-  const [canvaLink, setCanvaLink] = useState('')
-  const [addInfoLink, setAddInfoLink] = useState('')
-  const [products, setProducts] = useState([])
-  const [tecInfoLink, setTecInfoLink] = useState('')
-  const navigate = useNavigate()
-  const { id } = useParams()
+  const [name, setName] = useState('');
+  const [bannerLink, setBannerLink] = useState('');
+  const [qbmCode, setQbmCode] = useState('');
+  const [desc, setDesc] = useState('');
+  const [canvaLink, setCanvaLink] = useState('');
+  const [addInfoLink, setAddInfoLink] = useState('');
+  const [products, setProducts] = useState([]);
+  const [tecInfoLink, setTecInfoLink] = useState('');
+  const navigate = useNavigate();
+  const { id } = useParams();
 
   useEffect(() => {
     axios
@@ -27,39 +24,39 @@ const EditFamily = () => {
         }
       })
       .then((response) => {
-        const { name, bannerLink, qbmCode, desc, canvaLink, addInfoLink, products, tecInfoLink } = response.data
+        const { name, bannerLink, qbmCode, desc, canvaLink, addInfoLink, products, tecInfoLink } = response.data;
 
-        // Transformando products em um array de objetos com name e values
+        // Transformando products em um array de objetos com os valores corretos
         const productsArray = products ? Object.keys(products).map((productName) => ({
           name: productName,
-          values: products[productName]
-        })) : []
+          ...products[productName]
+        })) : [];
 
-        setName(name)
-        setBannerLink(bannerLink)
-        setQbmCode(qbmCode)
-        setDesc(desc)
-        setCanvaLink(canvaLink)
-        setAddInfoLink(addInfoLink)
-        setProducts(productsArray)
-        setTecInfoLink(tecInfoLink)
+        setName(name);
+        setBannerLink(bannerLink);
+        setQbmCode(qbmCode);
+        setDesc(desc);
+        setCanvaLink(canvaLink);
+        setAddInfoLink(addInfoLink);
+        setProducts(productsArray);
+        setTecInfoLink(tecInfoLink);
       })
       .catch((error) => {
         alert(`Oops, algo deu errado!
-        - ${error.response.data.message}`)
-        console.error(error)
-      })
-  }, [])
+        - ${error.response.data.message}`);
+        console.error(error.response.data.message);
+      });
+  }, [id]);
 
   const handleEditFamily = () => {
-    const productsObject = products.reduce((acc, { name, values }) => {
-      acc[name] = values
-      return acc
-    }, {})
+    const productsObject = products.reduce((acc, { name, codigoQbm, desc, preco }) => {
+      acc[name] = { codigoQbm, desc, preco };
+      return acc;
+    }, {});
 
     const data = {
       name, bannerLink, qbmCode, desc, canvaLink, addInfoLink, products: productsObject, tecInfoLink
-    }
+    };
 
     axios
       .put(`${import.meta.env.VITE_BASE_URL}/api/families/${id}`, data, {
@@ -68,36 +65,57 @@ const EditFamily = () => {
         }
       })
       .then(() => {
-        navigate('/')
+        navigate('/');
       })
       .catch((error) => {
         alert(`Oops, algo deu errado!
-        - ${error.response.data.message}`)
-        console.error(error)
-      })
-  }
+        - ${error.response.data.message}`);
+        console.error(error.response.data.message);
+      });
+  };
 
   const handleAddProduct = () => {
-    setProducts([...products, { name: '', values: Array(11).fill('') }])
-  }
+    setProducts([...products, {
+      name: '',
+      codigoQbm: '',
+      desc: '',
+      preco: {
+        comAdesao: Array(4).fill(''),
+        semAdesao: Array(5).fill(''),
+        fecho: ''
+      }
+    }]);
+  };
 
   const handleDeleteProduct = (index) => {
-    const newProducts = [...products]
-    newProducts.splice(index, 1)
-    setProducts(newProducts)
-  }
+    const newProducts = [...products];
+    newProducts.splice(index, 1);
+    setProducts(newProducts);
+  };
 
   const handleProductNameChange = (index, value) => {
-    const newProducts = [...products]
-    newProducts[index].name = value
-    setProducts(newProducts)
-  }
+    const newProducts = [...products];
+    newProducts[index].name = value;
+    setProducts(newProducts);
+  };
 
-  const handleProductValueChange = (productIndex, valueIndex, value) => {
-    const newProducts = [...products]
-    newProducts[productIndex].values[valueIndex] = value
-    setProducts(newProducts)
-  }
+  const handleProductValueChange = (index, key, value) => {
+    const newProducts = [...products];
+    newProducts[index][key] = value;
+    setProducts(newProducts);
+  };
+
+  const handleProductPriceChange = (productIndex, type, priceIndex, value) => {
+    const newProducts = [...products];
+    newProducts[productIndex].preco[type][priceIndex] = value;
+    setProducts(newProducts);
+  };
+
+  const handleProductPriceFechoChange = (productIndex, value) => {
+    const newProducts = [...products];
+    newProducts[productIndex].preco.fecho = value;
+    setProducts(newProducts);
+  };
 
   return (
     <div className="py-2 bg-light">
@@ -162,27 +180,64 @@ const EditFamily = () => {
                 value={product.name}
                 onChange={(e) => handleProductNameChange(productIndex, e.target.value)}
               />
-              {product.values.map((value, valueIndex) => (
+              <input
+                type="text"
+                placeholder="Código do Produto"
+                value={product.codigoQbm}
+                onChange={(e) => handleProductValueChange(productIndex, 'codigoQbm', e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Descrição"
+                value={product.desc}
+                onChange={(e) => handleProductValueChange(productIndex, 'desc', e.target.value)}
+              />
+              <div>
+                <label>Preços com Adesão</label>
+                {product.preco.comAdesao.map((value, valueIndex) => (
+                  <input
+                    key={valueIndex}
+                    type="text"
+                    placeholder={
+                      valueIndex === 0 ? "Adesão" :
+                        valueIndex === 1 ? "12 meses" :
+                          valueIndex === 2 ? "24 meses" :
+                            valueIndex === 3 ? "36 meses" :
+                              "Erro"
+                    }
+                    value={value}
+                    onChange={(e) => handleProductPriceChange(productIndex, 'comAdesao', valueIndex, e.target.value)}
+                  />
+                ))}
+              </div>
+              <div>
+                <label>Preços sem Adesão</label>
+                {product.preco.semAdesao.map((value, valueIndex) => (
+                  <input
+                    key={valueIndex}
+                    type="text"
+                    placeholder={
+                      valueIndex === 0 ? "12 meses" :
+                        valueIndex === 1 ? "24 meses" :
+                          valueIndex === 2 ? "36 meses" :
+                            valueIndex === 3 ? "48 meses" :
+                              valueIndex === 4 ? "60 meses" :
+                                "Erro"
+                    }
+                    value={value}
+                    onChange={(e) => handleProductPriceChange(productIndex, 'semAdesao', valueIndex, e.target.value)}
+                  />
+                ))}
+              </div>
+              <div>
+                <label>Fecho</label>
                 <input
-                  key={valueIndex}
                   type="text"
-                  placeholder={
-                    valueIndex === 0 ? "Código do Produto" :
-                    valueIndex === 1 ? "Descrição" :
-                    valueIndex === 2 ? "Adesão" : 
-                    valueIndex === 3 ? "12 meses" : 
-                    valueIndex === 4 ? "24 meses" : 
-                    valueIndex === 5 ? "36 meses" : 
-                    valueIndex === 6 ? "12 meses S/A" : 
-                    valueIndex === 7 ? "24 meses S/A" : 
-                    valueIndex === 8 ? "36 meses S/A" : 
-                    valueIndex === 9 ? "48 meses S/A" : 
-                    valueIndex === 10 ? "60 meses S/A" : 
-                    "Valor"}
-                  value={value}
-                  onChange={(e) => handleProductValueChange(productIndex, valueIndex, e.target.value)}
+                  placeholder="Fecho"
+                  value={product.preco.fecho}
+                  onChange={(e) => handleProductPriceFechoChange(productIndex, e.target.value)}
                 />
-              ))}
+              </div>
               <button onClick={() => handleDeleteProduct(productIndex)}>Excluir</button>
             </div>
           ))}
@@ -199,7 +254,7 @@ const EditFamily = () => {
         <button onClick={handleEditFamily}>Salvar</button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default EditFamily
+export default EditFamily;
