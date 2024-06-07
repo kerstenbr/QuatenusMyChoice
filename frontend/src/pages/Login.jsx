@@ -14,6 +14,8 @@ const Login = () => {
       .then((response) => {
         Cookies.set("token", response.data, { expires: 3, sameSite: 'strict' });
         navigate("/");
+        // TODO: Eu estou forçando um reload para que o navbar seja atualizado, por que atualmente o contexto não está funcionando direito. Trocar isso depois.
+        window.location.reload()
       })
       .catch((error) => {
         alert(`Oops, algo deu errado!
