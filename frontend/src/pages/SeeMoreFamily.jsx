@@ -115,15 +115,6 @@ const SeeMoreFamily = () => {
         </div>
 
         <div>
-          {family.tecInfoLink ? (
-            <>
-              <h4>Informação Técnicas:</h4>
-              <img style={{ width: '1296px' }} src={family.tecInfoLink} alt="Informações Técnicas" />
-            </>
-          ) : (<></>)}
-        </div>
-
-        <div>
           <hr />
           <p className="m-0 p-0">{family._id} - Atualizado em: {new Date(family.updatedAt).toLocaleString()}</p>
         </div>

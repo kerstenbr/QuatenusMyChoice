@@ -15,8 +15,7 @@ const createFamily = async (request, response) => {
             desc: request.body.desc,
             canvaLink: request.body.canvaLink,
             addInfoLink: request.body.addInfoLink,
-            products: request.body.products,
-            tecInfoLink: request.body.tecInfoLink
+            products: request.body.products
         }
 
         const family = await Family.create(newFamily)

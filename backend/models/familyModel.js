@@ -12,8 +12,7 @@ const familySchema = new Schema({
     desc: String,
     canvaLink: String,
     addInfoLink: String,
-    products: Object,
-    tecInfoLink: String,
+    products: Object
 }, { timestamps: true })
 
 const Family = mongoose.model("Family", familySchema)

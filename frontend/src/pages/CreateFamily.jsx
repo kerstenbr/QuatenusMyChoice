@@ -12,7 +12,6 @@ const CreateFamily = () => {
     const [canvaLink, setCanvaLink] = useState('');
     const [addInfoLink, setAddInfoLink] = useState('');
     const [products, setProducts] = useState([]);
-    const [tecInfoLink, setTecInfoLink] = useState('');
     const navigate = useNavigate();
 
     const handleCreateFamily = () => {
@@ -22,7 +21,7 @@ const CreateFamily = () => {
         }, {});
 
         const data = {
-            name, bannerLink, qbmCode, desc, canvaLink, addInfoLink, products: productsObject, tecInfoLink
+            name, bannerLink, qbmCode, desc, canvaLink, addInfoLink, products: productsObject
         };
 
         axios
@@ -208,14 +207,6 @@ const CreateFamily = () => {
                         </div>
                     ))}
                     <button onClick={handleAddProduct}>Adicionar Produto</button>
-                </div>
-                <div>
-                    <label>Link da Informação Técnica</label>
-                    <input
-                        type="text"
-                        value={tecInfoLink}
-                        onChange={(e) => setTecInfoLink(e.target.value)}
-                    />
                 </div>
                 <button onClick={handleCreateFamily}>Salvar</button>
             </div>
