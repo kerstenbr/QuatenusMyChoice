@@ -109,7 +109,6 @@ const SeeMoreFamily = () => {
             <>
               <h4>Informações Adicional:</h4>
               <img style={{ width: '1296px' }} src={family.addInfoLink} alt="Informações Adicionais" />
-              <hr />
             </>
           ) : (<></>)}
         </div>
