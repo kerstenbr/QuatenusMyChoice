@@ -12,7 +12,6 @@ const EditFamily = () => {
   const [canvaLink, setCanvaLink] = useState('');
   const [addInfoLink, setAddInfoLink] = useState('');
   const [products, setProducts] = useState([]);
-  const [tecInfoLink, setTecInfoLink] = useState('');
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -24,7 +23,7 @@ const EditFamily = () => {
         }
       })
       .then((response) => {
-        const { name, bannerLink, qbmCode, desc, canvaLink, addInfoLink, products, tecInfoLink } = response.data;
+        const { name, bannerLink, qbmCode, desc, canvaLink, addInfoLink, products } = response.data;
 
         // Transformando products em um array de objetos com os valores corretos
         const productsArray = products ? Object.keys(products).map((productName) => ({
@@ -39,7 +38,6 @@ const EditFamily = () => {
         setCanvaLink(canvaLink);
         setAddInfoLink(addInfoLink);
         setProducts(productsArray);
-        setTecInfoLink(tecInfoLink);
       })
       .catch((error) => {
         alert(`Oops, algo deu errado!
@@ -55,7 +53,7 @@ const EditFamily = () => {
     }, {});
 
     const data = {
-      name, bannerLink, qbmCode, desc, canvaLink, addInfoLink, products: productsObject, tecInfoLink
+      name, bannerLink, qbmCode, desc, canvaLink, addInfoLink, products: productsObject
     };
 
     axios
@@ -242,14 +240,6 @@ const EditFamily = () => {
             </div>
           ))}
           <button onClick={handleAddProduct}>Adicionar Produto</button>
-        </div>
-        <div>
-          <label>Link da Informação Técnica</label>
-          <input
-            type="text"
-            value={tecInfoLink}
-            onChange={(e) => setTecInfoLink(e.target.value)}
-          />
         </div>
         <button onClick={handleEditFamily}>Salvar</button>
       </div>
