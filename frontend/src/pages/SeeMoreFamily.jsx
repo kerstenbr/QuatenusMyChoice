@@ -107,8 +107,8 @@ const SeeMoreFamily = () => {
         <div>
           {family.addInfoLink ? (
             <>
-              <h4>Informações Adicional:</h4>
-              <img style={{ width: '1296px' }} src={family.addInfoLink} alt="Informações Adicionais" />
+              <h4>Informação adicional da família:</h4>
+              <img style={{ width: '1296px' }} src={family.addInfoLink} alt="Informação adicional da família" />
             </>
           ) : (<></>)}
         </div>
