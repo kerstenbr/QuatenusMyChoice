@@ -83,12 +83,12 @@ const findByName = async (request, response) => {
             return response.status(400).json({ message: "Nome do produto não fornecido" });
         }
 
-        const regex = new RegExp(name, "i");
+        const regex = new RegExp(name.normalize("NFD"), "i");
 
         const families = await Family.find();
 
         const filteredFamilies = families.filter(family => {
-            const keys = Object.keys(family.products);
+            const keys = Object.keys(family.products).map(key => key.normalize("NFD"));
             return keys.some(key => regex.test(key));
         });
 
