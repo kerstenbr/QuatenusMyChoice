@@ -170,8 +170,7 @@ Exemplo de `body` a ser enviado:
         "fecho": "100"
       }
     }
-  },
-  "tecInfoLink": "https://i.imgur.com/TrUgnuM.png"
+  }
 }
 ```
 
