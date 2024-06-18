@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import { UserContext } from "../context/userContext";
 
 const SeeMoreFamily = () => {
+  const { user } = useContext(UserContext)
   const [family, setFamily] = useState({});
   const { id } = useParams();
   const navigate = useNavigate();
@@ -29,6 +31,13 @@ const SeeMoreFamily = () => {
       <div className="container">
 
         <button className="btn btn-sm btn-qorange mb-2 float-end" onClick={goBack}>Voltar</button>
+        {user && user.admin === true ? (
+          <>
+            <Link to={`/family/edit/${family._id}`}>
+              <button type="button" className="btn btn-sm btn-warning me-1 text-white float-end">Editar</button>
+            </Link>
+          </>
+        ) : (<></>)}
 
         <div>
           <h3 className="mt-1">{family.name} - {family.qbmCode}</h3>
