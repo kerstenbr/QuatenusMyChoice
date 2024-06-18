@@ -1,11 +1,14 @@
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const BackButton = () => {
+    const navigate = useNavigate();
+
+    const goBack = () => {
+        navigate(-1)
+    }
+
     return (
-        // TODO: Em vez de voltar direto pra Home, fazer voltar pro link anterior
-        <Link to='/'>
-            <button type="button" className="btn btn-sm btn-qorange mb-1 mt-1 float-end">Voltar</button>
-        </Link>
+        <button type="button" className="btn btn-sm btn-qorange mb-1 mt-1 float-end" onClick={goBack}>Voltar</button>
     )
 }
 
