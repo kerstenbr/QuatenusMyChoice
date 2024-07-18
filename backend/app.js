@@ -28,12 +28,12 @@ app.use('/api', routes)
 const PORT = process.env.PORT || 5555
 
 if (!process.env.DB_URI) {
-    console.log("Sem URI de conexão ao MongoDB Atlas no .env")
+    console.log("Sem URI de conexão ao MongoDB no .env")
 }
 
 mongoose.connect(process.env.DB_URI)
     .then(() => {
-        console.log("Conectado ao MongoDB Atlas com sucesso")
+        console.log("Conectado ao MongoDB com sucesso")
         app.listen(PORT, () => {
             console.log(`Servidor rodando na porta ${PORT}`)
         })
