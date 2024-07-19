@@ -86,129 +86,157 @@ const CreateFamily = () => {
         <div className="py-2 bg-light">
             <div className="container">
                 <BackButton />
-                <h1>CRIAR FAMÍLIA</h1>
-                <div>
-                    <label>Nome</label>
-                    <input
-                        type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>Código do QBM</label>
-                    <input
-                        type="text"
-                        value={qbmCode}
-                        onChange={(e) => setQbmCode(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>Link do Banner</label>
-                    <input
-                        type="text"
-                        value={bannerLink}
-                        onChange={(e) => setBannerLink(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>Descrição</label>
-                    <input
-                        type="text"
-                        value={desc}
-                        onChange={(e) => setDesc(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>Link do Canva</label>
-                    <input
-                        type="text"
-                        value={canvaLink}
-                        onChange={(e) => setCanvaLink(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>Link da Informação Adicional</label>
-                    <input
-                        type="text"
-                        value={addInfoLink}
-                        onChange={(e) => setAddInfoLink(e.target.value)}
-                    />
+                <h1 className="mt-3 mb-4">Criar Família</h1>
+                <div className="row">
+                    <div className="col-6 mb-2">
+                        <label>Nome</label>
+                        <input
+                            type="text"
+                            className="form-control form-control-sm"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
+                    <div className="col-6 mb-2">
+                        <label>Código do QBM</label>
+                        <input
+                            type="text"
+                            className="form-control form-control-sm"
+                            value={qbmCode}
+                            onChange={(e) => setQbmCode(e.target.value)}
+                        />
+                    </div>
+                    <div className="mb-2">
+                        <label>Link do Banner</label>
+                        <input
+                            type="text"
+                            className="form-control form-control-sm"
+                            value={bannerLink}
+                            onChange={(e) => setBannerLink(e.target.value)}
+                        />
+                    </div>
+                    <div className="mb-2">
+                        <label>Descrição</label>
+                        <input
+                            type="text"
+                            className="form-control form-control-sm"
+                            value={desc}
+                            onChange={(e) => setDesc(e.target.value)}
+                        />
+                    </div>
+                    <div className="col-6 mb-2">
+                        <label>Link do Canva</label>
+                        <input
+                            type="text"
+                            className="form-control form-control-sm"
+                            value={canvaLink}
+                            onChange={(e) => setCanvaLink(e.target.value)}
+                        />
+                    </div>
+                    <div className="col-6 mb-2">
+                        <label>Link da Informação Adicional</label>
+                        <input
+                            type="text"
+                            className="form-control form-control-sm"
+                            value={addInfoLink}
+                            onChange={(e) => setAddInfoLink(e.target.value)}
+                        />
+                    </div>
                 </div>
                 <div>
                     <label>Segmento de Produtos</label>
                     {products.map((product, productIndex) => (
-                        <div key={productIndex}>
-                            <input
-                                type="text"
-                                placeholder="Nome do Produto"
-                                value={product.name}
-                                onChange={(e) => handleProductNameChange(productIndex, e.target.value)}
-                            />
-                            <input
-                                type="text"
-                                placeholder="Código do Produto"
-                                value={product.codigoQbm}
-                                onChange={(e) => handleProductValueChange(productIndex, 'codigoQbm', e.target.value)}
-                            />
-                            <input
-                                type="text"
-                                placeholder="Descrição"
-                                value={product.desc}
-                                onChange={(e) => handleProductValueChange(productIndex, 'desc', e.target.value)}
-                            />
-                            <div>
+                        <div key={productIndex} className="row mb-3 border p-3">
+                            <div className='col-6 mb-2'>
+                                <input
+                                    type="text"
+                                    className="form-control form-control-sm"
+                                    placeholder="Nome do Produto"
+                                    value={product.name}
+                                    onChange={(e) => handleProductNameChange(productIndex, e.target.value)}
+                                />
+                            </div>
+                            <div className='col-6 mb-2'>
+                                <input
+                                    type="text"
+                                    className="form-control form-control-sm"
+                                    placeholder="Código do Produto"
+                                    value={product.codigoQbm}
+                                    onChange={(e) => handleProductValueChange(productIndex, 'codigoQbm', e.target.value)}
+                                />
+                            </div>
+                            <div className='col-12 mb-2'>
+                                <input
+                                    type="text"
+                                    className="form-control form-control-sm"
+                                    placeholder="Descrição"
+                                    value={product.desc}
+                                    onChange={(e) => handleProductValueChange(productIndex, 'desc', e.target.value)}
+                                />
+                            </div>
+                            <div className="mb-2">
                                 <label>Preços com Adesão</label>
                                 {product.preco.comAdesao.map((value, valueIndex) => (
-                                    <input
-                                        key={valueIndex}
-                                        type="text"
-                                        placeholder={
-                                            valueIndex === 0 ? "Adesão" :
-                                                valueIndex === 1 ? "12 meses" :
-                                                    valueIndex === 2 ? "24 meses" :
-                                                        valueIndex === 3 ? "36 meses" :
-                                                            "Erro"
-                                        }
-                                        value={value}
-                                        onChange={(e) => handleProductPriceChange(productIndex, 'comAdesao', valueIndex, e.target.value)}
-                                    />
+                                    <div>
+                                        <input
+                                            key={valueIndex}
+                                            type="text"
+                                            className="form-control form-control-sm mb-2"
+                                            placeholder={
+                                                valueIndex === 0 ? "Adesão" :
+                                                    valueIndex === 1 ? "12 meses" :
+                                                        valueIndex === 2 ? "24 meses" :
+                                                            valueIndex === 3 ? "36 meses" :
+                                                                "Erro"
+                                            }
+                                            value={value}
+                                            onChange={(e) => handleProductPriceChange(productIndex, 'comAdesao', valueIndex, e.target.value)}
+                                        />
+                                    </div>
                                 ))}
                             </div>
-                            <div>
+                            <div className="mb-2">
                                 <label>Preços sem Adesão</label>
                                 {product.preco.semAdesao.map((value, valueIndex) => (
-                                    <input
-                                        key={valueIndex}
-                                        type="text"
-                                        placeholder={
-                                            valueIndex === 0 ? "12 meses" :
-                                                valueIndex === 1 ? "24 meses" :
-                                                    valueIndex === 2 ? "36 meses" :
-                                                        valueIndex === 3 ? "48 meses" :
-                                                            valueIndex === 4 ? "60 meses" :
-                                                                "Erro"
-                                        }
-                                        value={value}
-                                        onChange={(e) => handleProductPriceChange(productIndex, 'semAdesao', valueIndex, e.target.value)}
-                                    />
+                                    <div>
+                                        <input
+                                            key={valueIndex}
+                                            type="text"
+                                            className="form-control form-control-sm mb-2"
+                                            placeholder={
+                                                valueIndex === 0 ? "12 meses" :
+                                                    valueIndex === 1 ? "24 meses" :
+                                                        valueIndex === 2 ? "36 meses" :
+                                                            valueIndex === 3 ? "48 meses" :
+                                                                valueIndex === 4 ? "60 meses" :
+                                                                    "Erro"
+                                            }
+                                            value={value}
+                                            onChange={(e) => handleProductPriceChange(productIndex, 'semAdesao', valueIndex, e.target.value)}
+                                        />
+                                    </div>
                                 ))}
                             </div>
-                            <div>
+                            <div className="mb-2">
                                 <label>Fecho</label>
                                 <input
                                     type="text"
+                                    className="form-control form-control-sm"
                                     placeholder="Fecho"
                                     value={product.preco.fecho}
                                     onChange={(e) => handleProductPriceFechoChange(productIndex, e.target.value)}
                                 />
                             </div>
-                            <button onClick={() => handleDeleteProduct(productIndex)}>Excluir</button>
+                            <div>
+                                <button className="btn btn-sm btn-danger" onClick={() => handleDeleteProduct(productIndex)}>Excluir {product.name}</button>
+                            </div>
                         </div>
                     ))}
-                    <button onClick={handleAddProduct}>Adicionar Produto</button>
                 </div>
-                <button onClick={handleCreateFamily}>Salvar</button>
+                <button className="btn btn-sm btn-primary" onClick={handleAddProduct}>Adicionar Produto</button>
+                <div className='mt-3'>
+                    <button className="btn btn-sm btn-success" onClick={handleCreateFamily}>Salvar</button>
+                </div>
             </div>
         </div>
     );
