@@ -119,7 +119,7 @@ const EditFamily = () => {
     <div className="py-2 bg-light">
       <div className="container">
         <BackButton />
-        <h1 className="mt-3 mb-4">EDITAR FAMÍLIA</h1>
+        <h1 className="mt-3 mb-4">Editar Família</h1>
         <div className="row">
           <div className="col-6 mb-2">
             <label>Nome</label>
