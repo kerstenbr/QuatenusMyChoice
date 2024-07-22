@@ -148,6 +148,10 @@ Exemplo de `body` a ser enviado:
           "180"
         ],
         "fecho": "100"
+      },
+      "telemetry": {
+          "digital": "3",
+          "analog": "2"
       }
     },
     "Fleet Teste 2": {
