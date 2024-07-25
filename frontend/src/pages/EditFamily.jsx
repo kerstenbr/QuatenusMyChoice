@@ -53,7 +53,9 @@ const EditFamily = () => {
         setProducts(productsArray);
       })
       .catch((error) => {
-        alert(`Oops, algo deu errado! - ${error.response.data.message}`);
+        // alert(`Oops, algo deu errado! 
+        // - ${error.response.data.message}`);
+        navigate("*")
         console.error(error.response.data.message);
       });
   }, [id]);
