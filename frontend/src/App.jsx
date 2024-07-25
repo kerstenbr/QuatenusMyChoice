@@ -12,6 +12,7 @@ import EditFamily from "./pages/EditFamily";
 import DeleteFamily from "./pages/DeleteFamily";
 import Panel from "./pages/Panel";
 import UserPanel from "./pages/UserPanel";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/panel" element={<Panel />} />
             <Route path="/panel/users" element={<UserPanel />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />
