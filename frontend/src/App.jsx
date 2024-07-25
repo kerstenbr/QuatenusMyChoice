@@ -13,8 +13,11 @@ import DeleteFamily from "./pages/DeleteFamily";
 import Panel from "./pages/Panel";
 import UserPanel from "./pages/UserPanel";
 import NotFound from "./pages/NotFound";
+import { useContext } from "react";
+import { UserContext } from "./context/userContext";
 
 function App() {
+  const { user } = useContext(UserContext);
   return (
     <>
       <BrowserRouter>
@@ -23,14 +26,22 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/search/:name" element={<Search />} />
-            <Route path="/family/create" element={<CreateFamily />} />
             <Route path="/family/seemore/:id" element={<SeeMoreFamily />} />
-            <Route path="/family/edit/:id" element={<EditFamily />} />
-            <Route path="/family/delete/:id" element={<DeleteFamily />} />
+
+            {user && user.admin === true ? (
+              <>
+                <Route path="/family/create" element={<CreateFamily />} />
+                <Route path="/family/edit/:id" element={<EditFamily />} />
+                <Route path="/family/delete/:id" element={<DeleteFamily />} />
+                <Route path="/panel" element={<Panel />} />
+                <Route path="/panel/users" element={<UserPanel />} />
+              </>
+            ) : (
+              <Route element={<NotFound />} />
+            )}
+
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/panel" element={<Panel />} />
-            <Route path="/panel/users" element={<UserPanel />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
