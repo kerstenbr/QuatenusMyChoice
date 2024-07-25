@@ -3,40 +3,32 @@
 
 O Quatenus MyChoice é uma ferramenta interna da Quatenus Brasil. 
 Usada pra facilitar e simplificar a visualização das famílias de produtos e auxiliar o usuário a entender melhor o produto.
+
 ## Screenshots
 
-![App Screenshot](https://i.imgur.com/Qe7Bp2U.png)
-![App Screenshot](https://i.imgur.com/Mrgbb78.png)
--- Screenshot do "Ver mais", "Editar" e "Excluir" não incluso
-
+![App Screenshot](https://i.imgur.com/jax2qzQ.png)
+![App Screenshot](https://i.imgur.com/7noOxyj.png)
+![App Screenshot](https://i.imgur.com/9pefd0K.png)
 
 ## Stack utilizada
 
 **Frontend:** React, Bootstrap
-
 **Backend:** Node, Express
-
 **Database:** MongoDB
-
 
 ## Variáveis de Ambiente
 
 Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
 
 Para o backend:
-
 `DB_URI`
-
 `SECRET_JWT` 
-
 `SECRET_JWT_EXP`
 
 Opcional: `PORT`
 
 Para o frontend:
-
 `VITE_BASE_URL`
-
 
 ## Rodando localmente
 
@@ -82,12 +74,15 @@ Inicie o servidor
 ```
 
 ## Documentação da API
+
 ### Famílias:
+
 #### Retorna todas as famílias
 
 ```http
   GET /api/families/
 ```
+
 #### Retorna as famílias que contém o produto procurado
 
 ```http
@@ -117,7 +112,6 @@ Inicie o servidor
 | :---------- | :--------- | :------------------------------------------ |
 | `nome`      | `string` | **Obrigatório**. Nome da família de produtos |
 | `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
-
 
 Exemplo de `body` a ser enviado:
 
@@ -183,7 +177,6 @@ Exemplo de `body` a ser enviado:
 ```http
   PUT /api/families/{id}
 ```
-
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
 | `id`      | `ObjectId` | **Obrigatório**. O ID da família que você quer |
@@ -202,18 +195,28 @@ Exemplo de `body` a ser enviado:
 ```http
   DELETE /api/families/{id}
 ```
-
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
 | `id`      | `ObjectId` | **Obrigatório**. O ID da família que você quer excluir|
 | `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
 
 ### Usuários:
-#### Registrar um usuário
+
+#### Retorna todos os usuários
+
+```http
+  GET /api/user/
+```
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+
+#### Registrar
 
 ```http
   POST /api/user/register
 ```
+
 Exemplo de `body` a ser enviado:
 
 ```json
@@ -241,8 +244,35 @@ Exemplo de `body` a ser enviado:
 ```http
   GET /api/user/findUser/{id}
 ```
-
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `id`      | `ObjectId` | **Obrigatório**. O ID da família que você quer excluir|
+| `id`      | `ObjectId` | **Obrigatório**. O ID do usuário que você quer encontrar|
 | `token`      | `string` | **Obrigatório no Header**. Token do usuário |
+
+#### Editar um usuário
+
+```http
+  PUT /api/user/{id}
+```
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `id`      | `ObjectId` | **Obrigatório**. O ID da usuário que você quer editar|
+| `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+
+Exemplo de `body` a ser enviado:
+
+```json
+{
+  "email": "email@email.com",
+}
+```
+
+#### Deletar um usuário
+
+```http
+  DELETE /api/user/{id}
+```
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `id`      | `ObjectId` | **Obrigatório**. O ID do usuário que você quer excluir|
+| `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
