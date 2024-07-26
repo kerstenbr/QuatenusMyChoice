@@ -15,9 +15,9 @@ const userSchema = new Schema({
     // A linha abaixo faz com que o Mongodb não retorne a senha
     select: false,
   },
-  admin: {
-    type: Boolean,
-    default: false,
+  role: {
+    type: String,
+    default: "undefined",
   },
 });
 

@@ -4,18 +4,18 @@ import Cookies from "js-cookie";
 
 const PanelUserDetail = ({ user }) => {
   const [email, setEmail] = useState("");
-  const [admin, setAdmin] = useState("");
+  const [role, setRole] = useState("");
 
   useEffect(() => {
     setEmail(user.email);
-    setAdmin(user.admin);
+    setRole(user.role);
   }, [user]);
 
   const handleUpdateUser = () => {
     try {
       const data = {
         email,
-        admin,
+        role,
       };
 
       axios.put(`${import.meta.env.VITE_BASE_URL}/api/user/${user._id}`, data, {
@@ -24,8 +24,8 @@ const PanelUserDetail = ({ user }) => {
         },
       });
       alert("Usuário atualizado com sucesso!");
-      // TODO: Eu estou forçando um reload para que os usuários sejam atualizados, trocar isso depois.
       window.location.reload();
+      // TODO: Eu estou forçando um reload para que os usuários sejam atualizados, trocar isso depois.
     } catch (error) {
       alert(`Oops, algo deu errado! - ${error.response.data.message}`);
       console.error(error.response.data.message);
@@ -50,7 +50,7 @@ const PanelUserDetail = ({ user }) => {
           console.error(error.response);
         });
     } else {
-      alert("vapo cancelado.")
+      alert("Exclusão do usuário cancelada.");
     }
   };
 
@@ -64,19 +64,35 @@ const PanelUserDetail = ({ user }) => {
         <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} />
       </div>
       <div className="mb-3">
-        <label htmlFor="admin" className="form-label">
-          Admin
+        <label htmlFor="role" className="form-label">
+          Role
         </label>
-        <select className="form-select" value={admin} onChange={(e) => setAdmin(e.target.value)}>
-          <option value={true}>Sim</option>
-          <option value={false}>Não</option>
+        <select className="form-select" value={role} onChange={(e) => setRole(e.target.value)}>
+          <option value="admin">00 - admin</option>
+          <option value="direção">01 - direção</option>
+          <option value="projetos">02 - projetos</option>
+          <option value="vendas">03 - vendas</option>
+          <option value="recursos humanos">04 - recursos humanos</option>
+          <option value="compras">05 - compras</option>
+          <option value="suporte a operações">06 - suporte a operações</option>
+          <option value="logistica">07 - logística</option>
+          <option value="ti" disabled>
+            08 - ti
+          </option>
+          <option value="qualidade">09 - qualidade</option>
+          <option value="marketing" disabled>
+            10 - marketing
+          </option>
+          <option value="customer success">11 - customer success</option>
+          <option value="financeiro">12 - financeiro</option>
+          <option value="undefined">undefined</option>
         </select>
       </div>
-      <button className="btn btn-sm btn-qorange mb-2" onClick={handleUpdateUser}>
-        Atualizar Usuário
-      </button>
-      <button className="btn btn-sm btn-danger float-end mb-2" onClick={handleDeleteUser}>
+      <button className="btn btn-sm btn-danger mb-2" onClick={handleDeleteUser}>
         Excluir Usuário
+      </button>
+      <button className="btn btn-sm btn-qorange float-end mb-2" onClick={handleUpdateUser}>
+        Atualizar Usuário
       </button>
     </div>
   );

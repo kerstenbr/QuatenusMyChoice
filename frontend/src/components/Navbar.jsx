@@ -35,7 +35,7 @@ const Navbar = () => {
           <img className="logo" src={Logo} />
         </Link>
         <div className="navbar-brand p-0" to="/">
-          {user && user.admin === true ? (
+          {user && user.role === "admin" ? (
             <Link to="/family/create">
               <button type="button" className="btn btn-sm btn-qblue me-1">
                 Criar Família
@@ -44,7 +44,7 @@ const Navbar = () => {
           ) : (
             <></>
           )}
-          {user && user.admin === true ? (
+          {user && user.role === "admin" ? (
             <Link to="/panel">
               <button type="button" className="btn btn-sm btn-qblue me-1">
                 Painel

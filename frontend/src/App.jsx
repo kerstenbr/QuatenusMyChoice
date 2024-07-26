@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
@@ -24,20 +23,25 @@ function App() {
         <Navbar />
         <main>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/search/:name" element={<Search />} />
-            <Route path="/family/seemore/:id" element={<SeeMoreFamily />} />
-
-            {user && user.admin === true ? (
+            {user !== undefined ? (
               <>
-                <Route path="/family/create" element={<CreateFamily />} />
-                <Route path="/family/edit/:id" element={<EditFamily />} />
-                <Route path="/family/delete/:id" element={<DeleteFamily />} />
-                <Route path="/panel" element={<Panel />} />
-                <Route path="/panel/users" element={<UserPanel />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/search/:name" element={<Search />} />
+                <Route path="/family/seemore/:id" element={<SeeMoreFamily />} />
+                {user && user.role === "admin" ? (
+                  <>
+                    <Route path="/family/create" element={<CreateFamily />} />
+                    <Route path="/family/edit/:id" element={<EditFamily />} />
+                    <Route path="/family/delete/:id" element={<DeleteFamily />} />
+                    <Route path="/panel" element={<Panel />} />
+                    <Route path="/panel/users" element={<UserPanel />} />
+                  </>
+                ) : (
+                  <Route path="*" element={<NotFound />} />
+                )}
               </>
             ) : (
-              <Route element={<NotFound />} />
+              <Route path="*" element={<Login />} />
             )}
 
             <Route path="/login" element={<Login />} />
