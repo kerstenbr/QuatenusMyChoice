@@ -1,42 +1,64 @@
-import { useEffect, useState } from "react"
-import axios from "axios"
-import Card from "../components/Card"
-import Searchbar from "../components/Searchbar"
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Card from "../components/Card";
+import Searchbar from "../components/Searchbar";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../context/userContext";
 
 const Home = () => {
-  const [families, setFamilies] = useState(null)
+  const [families, setFamilies] = useState(null);
+  const navigate = useNavigate();
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BASE_URL}/api/families/`)
       .then((response) => {
-        setFamilies(response.data)
-      }).catch((error) => {
-        alert(`Oops, algo deu errado!
-        - ${error.response.data.message}`)
-        console.error(error)
+        setFamilies(response.data);
       })
-  }, [])
+      .catch((error) => {
+        // alert(`Oops, algo deu errado!
+        // - ${error.response.data.message}`)
+        navigate("*");
+        console.error(error.response.data.message);
+      });
+  }, []);
 
   return (
     <div className="py-2 bg-light">
       <div className="container">
-        <Searchbar />
-        {
-          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {/* TODO: Achar outra forma mais coerente de organizar as famílias de produto, atualmente está por ordem alfabética */}
-            {families &&
-              [...families]
-                .sort((a, b) => a.name.localeCompare(b.name))
-                .map((family) => (
-                  <Card key={family._id} family={family} />
-                ))
+        {user.role !== "undefined" ? (
+          <>
+            <Searchbar />
+            {
+              <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {/* TODO: Achar outra forma mais coerente de organizar as famílias de produto, atualmente está por ordem alfabética */}
+                {families &&
+                  [...families]
+                    .sort((a, b) => a.name.localeCompare(b.name))
+                    .map((family) => <Card key={family._id} family={family} />)}
+              </div>
             }
-          </div>
-        }
+          </>
+        ) : (
+          <>
+            <div className="py-2 bg-light">
+              <div className="container">
+                <div class="alert alert-warning" role="alert">
+                  <h4 class="alert-heading">Sua conta está inativa!</h4>
+                  <p>
+                    Abra um ticket no QBM para a equipe de Projetos e Inovações e inclua o email usado para criar essa
+                    conta.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
