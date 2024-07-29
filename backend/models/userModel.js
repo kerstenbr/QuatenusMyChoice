@@ -12,7 +12,6 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
-    // A linha abaixo faz com que o Mongodb não retorne a senha
     select: false,
   },
   role: {

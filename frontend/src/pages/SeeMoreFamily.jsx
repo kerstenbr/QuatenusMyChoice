@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { UserContext } from "../context/userContext";
+import NotActiveAccountAlert from "../components/NotActiveAccountAlert";
 
 const SeeMoreFamily = () => {
   const { user } = useContext(UserContext);
@@ -262,17 +263,7 @@ const SeeMoreFamily = () => {
           </>
         ) : (
           <>
-            <div className="py-2 bg-light">
-              <div className="container">
-                <div className="alert alert-warning" role="alert">
-                  <h4 className="alert-heading">Sua conta está inativa!</h4>
-                  <p>
-                    Abra um ticket no QBM para a equipe de Projetos e Inovações e inclua o email usado para criar essa
-                    conta.
-                  </p>
-                </div>
-              </div>
-            </div>
+            <NotActiveAccountAlert/>
           </>
         )}
       </div>

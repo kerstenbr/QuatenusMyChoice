@@ -23,15 +23,7 @@ const EditFamily = () => {
         },
       })
       .then((response) => {
-        const {
-          name,
-          bannerLink,
-          qbmCode,
-          desc,
-          canvaLink,
-          addInfoLink,
-          products,
-        } = response.data;
+        const { name, bannerLink, qbmCode, desc, canvaLink, addInfoLink, products } = response.data;
 
         const productsArray = products
           ? Object.keys(products).map((productName) => ({
@@ -53,9 +45,7 @@ const EditFamily = () => {
         setProducts(productsArray);
       })
       .catch((error) => {
-        // alert(`Oops, algo deu errado! 
-        // - ${error.response.data.message}`);
-        navigate("*")
+        navigate("*");
         console.error(error.response.data.message);
       });
   }, [id]);
@@ -155,8 +145,7 @@ const EditFamily = () => {
 
   const handleTelemetryChange = (productIndex, key, value) => {
     const newProducts = [...products];
-    newProducts[productIndex].telemetry =
-      newProducts[productIndex].telemetry || {};
+    newProducts[productIndex].telemetry = newProducts[productIndex].telemetry || {};
     newProducts[productIndex].telemetry[key] = value;
     setProducts(newProducts);
   };
@@ -232,9 +221,7 @@ const EditFamily = () => {
                   className="form-control form-control-sm"
                   placeholder="Nome do Produto"
                   value={product.name}
-                  onChange={(e) =>
-                    handleProductNameChange(productIndex, e.target.value)
-                  }
+                  onChange={(e) => handleProductNameChange(productIndex, e.target.value)}
                 />
               </div>
               <div className="col-6 mb-2">
@@ -243,13 +230,7 @@ const EditFamily = () => {
                   className="form-control form-control-sm"
                   placeholder="Código do Produto"
                   value={product.codigoQbm}
-                  onChange={(e) =>
-                    handleProductValueChange(
-                      productIndex,
-                      "codigoQbm",
-                      e.target.value
-                    )
-                  }
+                  onChange={(e) => handleProductValueChange(productIndex, "codigoQbm", e.target.value)}
                 />
               </div>
               <div className="col-12 mb-2">
@@ -258,13 +239,7 @@ const EditFamily = () => {
                   className="form-control form-control-sm"
                   placeholder="Descrição"
                   value={product.desc}
-                  onChange={(e) =>
-                    handleProductValueChange(
-                      productIndex,
-                      "desc",
-                      e.target.value
-                    )
-                  }
+                  onChange={(e) => handleProductValueChange(productIndex, "desc", e.target.value)}
                 />
               </div>
               <div className="row">
@@ -286,14 +261,7 @@ const EditFamily = () => {
                           : "Erro"
                       }
                       value={value}
-                      onChange={(e) =>
-                        handleProductPriceChange(
-                          productIndex,
-                          "comAdesao",
-                          valueIndex,
-                          e.target.value
-                        )
-                      }
+                      onChange={(e) => handleProductPriceChange(productIndex, "comAdesao", valueIndex, e.target.value)}
                     />
                   </div>
                 ))}
@@ -319,14 +287,7 @@ const EditFamily = () => {
                           : "Erro"
                       }
                       value={value}
-                      onChange={(e) =>
-                        handleProductPriceChange(
-                          productIndex,
-                          "semAdesao",
-                          valueIndex,
-                          e.target.value
-                        )
-                      }
+                      onChange={(e) => handleProductPriceChange(productIndex, "semAdesao", valueIndex, e.target.value)}
                     />
                   </div>
                 ))}
@@ -337,9 +298,7 @@ const EditFamily = () => {
                   type="text"
                   className="form-control form-control-sm"
                   value={product.preco.fecho}
-                  onChange={(e) =>
-                    handleProductPriceFechoChange(productIndex, e.target.value)
-                  }
+                  onChange={(e) => handleProductPriceFechoChange(productIndex, e.target.value)}
                 />
               </div>
               <div className="mb-2 row">
@@ -350,13 +309,7 @@ const EditFamily = () => {
                     className="form-control form-control-sm"
                     placeholder="Digital"
                     value={product.telemetry?.digital || ""}
-                    onChange={(e) =>
-                      handleTelemetryChange(
-                        productIndex,
-                        "digital",
-                        e.target.value
-                      )
-                    }
+                    onChange={(e) => handleTelemetryChange(productIndex, "digital", e.target.value)}
                   />
                 </div>
                 <div className="col-2">
@@ -365,20 +318,12 @@ const EditFamily = () => {
                     className="form-control form-control-sm"
                     placeholder="Analógico"
                     value={product.telemetry?.analog || ""}
-                    onChange={(e) =>
-                      handleTelemetryChange(
-                        productIndex,
-                        "analog",
-                        e.target.value
-                      )
-                    }
+                    onChange={(e) => handleTelemetryChange(productIndex, "analog", e.target.value)}
                   />
                 </div>
               </div>
               <div>
-                <button
-                  className="btn btn-sm btn-danger"
-                  onClick={() => handleDeleteProduct(productIndex)}>
+                <button className="btn btn-sm btn-danger" onClick={() => handleDeleteProduct(productIndex)}>
                   Excluir {product.name}
                 </button>
               </div>

@@ -25,7 +25,6 @@ const register = async (request, response) => {
     const user = await User.create({ email, password, role });
 
     const token = createToken(user._id);
-    // console.log(user._id)
 
     return response.status(201).json(token);
   } catch (error) {
@@ -39,7 +38,7 @@ const login = async (request, response) => {
     const { email, password } = request.body;
 
     const user = await User.findOne({ email }).select("+password");
-    // const user = await User.findOne({ email })
+
     if (!user) {
       return response.status(401).json({ message: "Credenciais inválidas" });
     }
@@ -58,7 +57,7 @@ const login = async (request, response) => {
   }
 };
 
-const findAllUsers = async (request, response) => {
+const findAll = async (request, response) => {
   try {
     const allUsers = await User.find({});
     return response.status(200).json(allUsers);
@@ -70,9 +69,7 @@ const findAllUsers = async (request, response) => {
 
 const findUser = async (request, response) => {
   try {
-    // console.log(request.userId)
     const { id } = request.params;
-    // console.log("controller id: ", id)
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return response.status(404).json({ message: "Mongo ID inválido" });
@@ -115,13 +112,11 @@ const deleteUser = async (request, response) => {
     if (!user) {
       return response.status(404).json({ message: "Usuário não encontrada" });
     }
-    return response
-      .status(200)
-      .json({ message: `${user.email} foi excluido com sucesso` });
+    return response.status(200).json({ message: `${user.email} foi excluido com sucesso` });
   } catch (error) {
     console.log(error);
     return response.status(500).json({ message: error.message });
   }
 };
 
-export { register, login, findAllUsers, findUser, editUser, deleteUser };
+export { register, login, findAll, findUser, editUser, deleteUser };
