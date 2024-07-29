@@ -5,6 +5,7 @@ import Searchbar from "../components/Searchbar";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../context/userContext";
+import NotActiveAccountAlert from "../components/NotActiveAccountAlert";
 
 const Home = () => {
   const [families, setFamilies] = useState(null);
@@ -18,8 +19,6 @@ const Home = () => {
         setFamilies(response.data);
       })
       .catch((error) => {
-        // alert(`Oops, algo deu errado!
-        // - ${error.response.data.message}`)
         navigate("*");
         console.error(error.response.data.message);
       });
@@ -43,17 +42,7 @@ const Home = () => {
           </>
         ) : (
           <>
-            <div className="py-2 bg-light">
-              <div className="container">
-                <div className="alert alert-warning" role="alert">
-                  <h4 className="alert-heading">Sua conta está inativa!</h4>
-                  <p>
-                    Abra um ticket no QBM para a equipe de Projetos e Inovações e inclua o email usado para criar essa
-                    conta.
-                  </p>
-                </div>
-              </div>
-            </div>
+            <NotActiveAccountAlert/>
           </>
         )}
       </div>

@@ -46,8 +46,7 @@ const UserPanel = () => {
                     onClick={() => handleUserClick(user)}
                     key={user.email}
                     type="button"
-                    className="list-group-item list-group-item-action"
-                  >
+                    className="list-group-item list-group-item-action">
                     {user.email}
                   </button>
                 ))}
