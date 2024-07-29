@@ -294,6 +294,11 @@ Exemplo de `body` a ser enviado:
   POST /api/user/
 ```
 
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `nome`      | `string` | **Obrigatório**. Nome da família de produtos |
+| `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+
 Exemplo de `body` a ser enviado:
 
 ```json
