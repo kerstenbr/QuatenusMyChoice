@@ -8,7 +8,7 @@ Usada pra facilitar e simplificar a visualização das famílias de produtos e a
 
 ![App Screenshot](https://i.imgur.com/jax2qzQ.png)
 ![App Screenshot](https://i.imgur.com/7noOxyj.png)
-![App Screenshot](https://i.imgur.com/9pefd0K.png)
+![App Screenshot](https://i.imgur.com/hhvGZIv.png)
 
 ## Stack utilizada
 
