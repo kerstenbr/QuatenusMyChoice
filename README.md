@@ -8,7 +8,7 @@ Usada pra facilitar e simplificar a visualização das famílias de produtos e a
 
 ![App Screenshot](https://i.imgur.com/jax2qzQ.png)
 ![App Screenshot](https://i.imgur.com/7noOxyj.png)
-![App Screenshot](https://i.imgur.com/9pefd0K.png)
+![App Screenshot](https://i.imgur.com/hhvGZIv.png)
 
 ## Stack utilizada
 
@@ -276,3 +276,33 @@ Exemplo de `body` a ser enviado:
 | :---------- | :--------- | :------------------------------------------ |
 | `id`      | `ObjectId` | **Obrigatório**. O ID do usuário que você quer excluir|
 | `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+
+### Setores:
+
+#### Retorna todos os setores
+
+```http
+  GET /api/role/
+```
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+
+#### Criar um setor
+
+```http
+  POST /api/role/
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+
+Exemplo de `body` a ser enviado:
+
+```json
+{
+  "name": "vendas",
+  "active": true
+}
+```

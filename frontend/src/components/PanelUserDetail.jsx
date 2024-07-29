@@ -5,11 +5,29 @@ import Cookies from "js-cookie";
 const PanelUserDetail = ({ user }) => {
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
+  const [roles, setRoles] = useState("");
 
   useEffect(() => {
     setEmail(user.email);
     setRole(user.role);
   }, [user]);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BASE_URL}/api/role/`, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+      })
+      .then((response) => {
+        setRoles(response.data);
+      })
+      .catch((error) => {
+        alert(`Oops, algo deu errado!
+        - ${error.response.data.message}`);
+        console.error(error);
+      });
+  }, []);
 
   const handleUpdateUser = () => {
     try {
@@ -65,27 +83,15 @@ const PanelUserDetail = ({ user }) => {
       </div>
       <div className="mb-3">
         <label htmlFor="role" className="form-label">
-          Role
+          Setor
         </label>
         <select className="form-select" value={role} onChange={(e) => setRole(e.target.value)}>
-          <option value="admin">00 - admin</option>
-          <option value="direção">01 - direção</option>
-          <option value="projetos">02 - projetos</option>
-          <option value="vendas">03 - vendas</option>
-          <option value="recursos humanos">04 - recursos humanos</option>
-          <option value="compras">05 - compras</option>
-          <option value="suporte a operações">06 - suporte a operações</option>
-          <option value="logistica">07 - logística</option>
-          <option value="ti" disabled>
-            08 - ti
-          </option>
-          <option value="qualidade">09 - qualidade</option>
-          <option value="marketing" disabled>
-            10 - marketing
-          </option>
-          <option value="customer success">11 - customer success</option>
-          <option value="financeiro">12 - financeiro</option>
-          <option value="undefined">undefined</option>
+          {roles &&
+            [...roles].map((roles) => (
+              <option value={roles.name} key={roles.name}>
+                {roles.name}
+              </option>
+            ))}
         </select>
       </div>
       <button className="btn btn-sm btn-danger mb-2" onClick={handleDeleteUser}>

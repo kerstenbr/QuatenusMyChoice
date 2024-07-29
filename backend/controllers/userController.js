@@ -11,7 +11,7 @@ const createToken = (_id) => {
 
 const register = async (request, response) => {
   try {
-    const { email, password, admin } = request.body;
+    const { email, password, role } = request.body;
 
     if (!email || !password) {
       return response.status(400).json({ message: "Preencha todos os campos" });
@@ -22,7 +22,7 @@ const register = async (request, response) => {
       return response.status(400).json({ message: "Este email já está em uso" });
     }
 
-    const user = await User.create({ email, password, admin });
+    const user = await User.create({ email, password, role });
 
     const token = createToken(user._id);
     // console.log(user._id)
