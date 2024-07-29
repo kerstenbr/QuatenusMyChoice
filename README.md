@@ -276,3 +276,29 @@ Exemplo de `body` a ser enviado:
 | :---------- | :--------- | :------------------------------------------ |
 | `id`      | `ObjectId` | **Obrigatório**. O ID do usuário que você quer excluir|
 | `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+
+### Setores:
+
+#### Retorna todos os setores
+
+```http
+  GET /api/roles/
+```
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+
+#### Criar um setor
+
+```http
+  POST /api/user/
+```
+
+Exemplo de `body` a ser enviado:
+
+```json
+{
+  "name": "vendas",
+  "active": true
+}
+```

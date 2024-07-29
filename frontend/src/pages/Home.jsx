@@ -45,8 +45,8 @@ const Home = () => {
           <>
             <div className="py-2 bg-light">
               <div className="container">
-                <div class="alert alert-warning" role="alert">
-                  <h4 class="alert-heading">Sua conta está inativa!</h4>
+                <div className="alert alert-warning" role="alert">
+                  <h4 className="alert-heading">Sua conta está inativa!</h4>
                   <p>
                     Abra um ticket no QBM para a equipe de Projetos e Inovações e inclua o email usado para criar essa
                     conta.
