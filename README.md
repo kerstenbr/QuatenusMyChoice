@@ -282,7 +282,7 @@ Exemplo de `body` a ser enviado:
 #### Retorna todos os setores
 
 ```http
-  GET /api/roles/
+  GET /api/role/
 ```
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
@@ -291,12 +291,11 @@ Exemplo de `body` a ser enviado:
 #### Criar um setor
 
 ```http
-  POST /api/user/
+  POST /api/role/
 ```
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `nome`      | `string` | **Obrigatório**. Nome da família de produtos |
 | `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
 
 Exemplo de `body` a ser enviado:
