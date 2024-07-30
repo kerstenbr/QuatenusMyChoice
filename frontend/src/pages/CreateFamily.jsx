@@ -12,6 +12,7 @@ const CreateFamily = () => {
   const [canvaLink, setCanvaLink] = useState("");
   const [addInfoLink, setAddInfoLink] = useState("");
   const [products, setProducts] = useState([]);
+  const [links, setLinks] = useState([]);
   const navigate = useNavigate();
 
   const handleCreateFamily = () => {
@@ -32,6 +33,11 @@ const CreateFamily = () => {
       return acc;
     }, {});
 
+    const linksObject = links.reduce((acc, link) => {
+      acc[link.key] = link.url;
+      return acc;
+    }, {});
+
     const data = {
       name,
       bannerLink,
@@ -40,6 +46,7 @@ const CreateFamily = () => {
       canvaLink,
       addInfoLink,
       products: productsObject,
+      links: linksObject,
     };
 
     axios
@@ -114,6 +121,22 @@ const CreateFamily = () => {
     setProducts(newProducts);
   };
 
+  const handleAddLink = () => {
+    setLinks([...links, { key: "", url: "" }]);
+  };
+
+  const handleDeleteLink = (index) => {
+    const newLinks = [...links];
+    newLinks.splice(index, 1);
+    setLinks(newLinks);
+  };
+
+  const handleLinkChange = (index, field, value) => {
+    const newLinks = [...links];
+    newLinks[index][field] = value;
+    setLinks(newLinks);
+  };
+
   return (
     <div className="py-2 bg-light">
       <div className="container">
@@ -175,6 +198,39 @@ const CreateFamily = () => {
             />
           </div>
         </div>
+        <div>
+          <label>Links</label>
+          {links.map((link, index) => (
+            <div key={index} className="row mb-2">
+              <div className="col-5">
+                <input
+                  type="text"
+                  className="form-control form-control-sm"
+                  placeholder={`Nome`}
+                  value={link.key}
+                  onChange={(e) => handleLinkChange(index, "key", e.target.value)}
+                />
+              </div>
+              <div className="col-5">
+                <input
+                  type="text"
+                  className="form-control form-control-sm"
+                  placeholder="URL"
+                  value={link.url}
+                  onChange={(e) => handleLinkChange(index, "url", e.target.value)}
+                />
+              </div>
+              <div className="col-2">
+                <button className="btn btn-sm btn-danger" onClick={() => handleDeleteLink(index)}>
+                  Excluir
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+        <button className="btn btn-sm btn-primary mb-2" onClick={handleAddLink}>
+          Adicionar Link
+        </button>
         <div>
           <label>Segmento de Produtos</label>
           {products.map((product, productIndex) => (

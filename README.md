@@ -121,6 +121,9 @@ Exemplo de `body` a ser enviado:
   "qbmCode": "ft.teste",
   "bannerLink": "https://i.imgur.com/hANG5AI.png",
   "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+  "links": {
+    "Google": "https://www.google.com/"
+  },
   "canvaLink": "https://i.imgur.com/b8CiUT3.png",
   "addInfoLink": "https://i.imgur.com/7FcJhFx.png",
   "products": {

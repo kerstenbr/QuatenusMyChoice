@@ -17,8 +17,6 @@ const SeeMoreFamily = () => {
         setFamily(response.data);
       })
       .catch((error) => {
-        // alert(`Oops, algo deu errado!
-        // - ${error.response.data.message}`);
         navigate("*");
         console.error(error.response.data.message);
       });
@@ -61,6 +59,22 @@ const SeeMoreFamily = () => {
               <h4>Visão geral da família:</h4>
               <p>{family.desc}</p>
             </div>
+
+            {family.links && Object.keys(family.links).length > 0 && (
+              <div>
+                <h6>Links úteis:</h6>
+                <ul>
+                  {Object.entries(family.links).map(([key, url]) => (
+                    <li key={key}>
+                      <Link to={url} target="_blank" rel="noopener noreferrer">
+                        {key}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <hr />
+              </div>
+            )}
 
             {family.canvaLink ? (
               <>
@@ -263,7 +277,7 @@ const SeeMoreFamily = () => {
           </>
         ) : (
           <>
-            <NotActiveAccountAlert/>
+            <NotActiveAccountAlert />
           </>
         )}
       </div>
