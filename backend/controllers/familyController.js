@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 
 const createFamily = async (request, response) => {
   try {
-    if (!request.body.name) {
-      return response.status(400).send({ message: "O nome da família é obrigatório" });
+    if (!request.body.name || !request.body.qbmCode || !request.body.desc) {
+      return response.status(400).send({ message: "Preencha os campos obrigatórios" });
     }
 
     const newFamily = {
@@ -12,6 +12,7 @@ const createFamily = async (request, response) => {
       qbmCode: request.body.qbmCode,
       bannerLink: request.body.bannerLink,
       desc: request.body.desc,
+      links: request.body.links,
       canvaLink: request.body.canvaLink,
       addInfoLink: request.body.addInfoLink,
       products: request.body.products,
@@ -104,7 +105,7 @@ const findByName = async (request, response) => {
 
 const editFamily = async (request, response) => {
   try {
-    // TODO: É possível atualizar a família e deixar o nome com uma string vazia. 
+    // TODO: É possível atualizar a família e deixar o nome com uma string vazia.
     // if (!request.body.name) {
     //     return response.status(400).json({ message: "O nome da família é obrigátorio" })
     // }

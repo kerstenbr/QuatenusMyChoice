@@ -9,6 +9,7 @@ const EditFamily = () => {
   const [bannerLink, setBannerLink] = useState("");
   const [qbmCode, setQbmCode] = useState("");
   const [desc, setDesc] = useState("");
+  const [links, setLinks] = useState([]);
   const [canvaLink, setCanvaLink] = useState("");
   const [addInfoLink, setAddInfoLink] = useState("");
   const [products, setProducts] = useState([]);
@@ -23,7 +24,7 @@ const EditFamily = () => {
         },
       })
       .then((response) => {
-        const { name, bannerLink, qbmCode, desc, canvaLink, addInfoLink, products } = response.data;
+        const { name, bannerLink, qbmCode, desc, links, canvaLink, addInfoLink, products } = response.data;
 
         const productsArray = products
           ? Object.keys(products).map((productName) => ({
@@ -36,10 +37,18 @@ const EditFamily = () => {
             }))
           : [];
 
+        const linksArray = links
+          ? Object.keys(links).map((key) => ({
+              key,
+              url: links[key],
+            }))
+          : [];
+
         setName(name);
         setBannerLink(bannerLink);
         setQbmCode(qbmCode);
         setDesc(desc);
+        setLinks(linksArray);
         setCanvaLink(canvaLink);
         setAddInfoLink(addInfoLink);
         setProducts(productsArray);
@@ -60,11 +69,16 @@ const EditFamily = () => {
     const productsObject = products.reduce((acc, product) => {
       removeEmptyTelemetry(product);
       acc[product.name] = {
-        codigoQbm: product.codigoQbm,
+        qbmCode: product.qbmCode,
         desc: product.desc,
-        preco: product.preco,
+        price: product.price,
         telemetry: product.telemetry,
       };
+      return acc;
+    }, {});
+
+    const linksObject = links.reduce((acc, link) => {
+      acc[link.key] = link.url;
       return acc;
     }, {});
 
@@ -73,6 +87,7 @@ const EditFamily = () => {
       bannerLink,
       qbmCode,
       desc,
+      links: linksObject,
       canvaLink,
       addInfoLink,
       products: productsObject,
@@ -98,12 +113,12 @@ const EditFamily = () => {
       ...products,
       {
         name: "",
-        codigoQbm: "",
+        qbmCode: "",
         desc: "",
-        preco: {
-          comAdesao: Array(4).fill(""),
-          semAdesao: Array(5).fill(""),
-          fecho: "",
+        price: {
+          withMembership: Array(4).fill(""),
+          noMembership: Array(5).fill(""),
+          closure: "",
         },
         telemetry: {
           digital: "",
@@ -133,13 +148,13 @@ const EditFamily = () => {
 
   const handleProductPriceChange = (productIndex, type, priceIndex, value) => {
     const newProducts = [...products];
-    newProducts[productIndex].preco[type][priceIndex] = value;
+    newProducts[productIndex].price[type][priceIndex] = value;
     setProducts(newProducts);
   };
 
-  const handleProductPriceFechoChange = (productIndex, value) => {
+  const handleProductPriceClosureChange = (productIndex, value) => {
     const newProducts = [...products];
-    newProducts[productIndex].preco.fecho = value;
+    newProducts[productIndex].price.closure = value;
     setProducts(newProducts);
   };
 
@@ -148,6 +163,22 @@ const EditFamily = () => {
     newProducts[productIndex].telemetry = newProducts[productIndex].telemetry || {};
     newProducts[productIndex].telemetry[key] = value;
     setProducts(newProducts);
+  };
+
+  const handleAddLink = () => {
+    setLinks([...links, { key: "", url: "" }]);
+  };
+
+  const handleDeleteLink = (index) => {
+    const newLinks = [...links];
+    newLinks.splice(index, 1);
+    setLinks(newLinks);
+  };
+
+  const handleLinkChange = (index, field, value) => {
+    const newLinks = [...links];
+    newLinks[index][field] = value;
+    setLinks(newLinks);
   };
 
   return (
@@ -212,6 +243,39 @@ const EditFamily = () => {
           </div>
         </div>
         <div>
+          <label>Links</label>
+          {links.map((link, index) => (
+            <div key={index} className="row mb-2">
+              <div className="col-5">
+                <input
+                  type="text"
+                  className="form-control form-control-sm"
+                  placeholder={`Nome`}
+                  value={link.key}
+                  onChange={(e) => handleLinkChange(index, "key", e.target.value)}
+                />
+              </div>
+              <div className="col-5">
+                <input
+                  type="text"
+                  className="form-control form-control-sm"
+                  placeholder="URL"
+                  value={link.url}
+                  onChange={(e) => handleLinkChange(index, "url", e.target.value)}
+                />
+              </div>
+              <div className="col-2">
+                <button className="btn btn-sm btn-danger" onClick={() => handleDeleteLink(index)}>
+                  Excluir
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+        <button className="btn btn-sm btn-primary mb-2" onClick={handleAddLink}>
+          Adicionar Link
+        </button>
+        <div>
           <label>Segmento de Produtos</label>
           {products.map((product, productIndex) => (
             <div key={productIndex} className="row mb-3 border p-3">
@@ -229,8 +293,8 @@ const EditFamily = () => {
                   type="text"
                   className="form-control form-control-sm"
                   placeholder="Código do Produto"
-                  value={product.codigoQbm}
-                  onChange={(e) => handleProductValueChange(productIndex, "codigoQbm", e.target.value)}
+                  value={product.qbmCode}
+                  onChange={(e) => handleProductValueChange(productIndex, "qbmCode", e.target.value)}
                 />
               </div>
               <div className="col-12 mb-2">
@@ -244,7 +308,7 @@ const EditFamily = () => {
               </div>
               <div className="row">
                 <label>Preços com Adesão</label>
-                {product.preco.comAdesao.map((value, valueIndex) => (
+                {product.price.withMembership.map((value, valueIndex) => (
                   <div className="col-2" key={valueIndex}>
                     <input
                       type="text"
@@ -261,14 +325,14 @@ const EditFamily = () => {
                           : "Erro"
                       }
                       value={value}
-                      onChange={(e) => handleProductPriceChange(productIndex, "comAdesao", valueIndex, e.target.value)}
+                      onChange={(e) => handleProductPriceChange(productIndex, "withMembership", valueIndex, e.target.value)}
                     />
                   </div>
                 ))}
               </div>
               <div className="row">
                 <label>Preços sem Adesão</label>
-                {product.preco.semAdesao.map((value, valueIndex) => (
+                {product.price.noMembership.map((value, valueIndex) => (
                   <div className="col-2" key={valueIndex}>
                     <input
                       type="text"
@@ -287,18 +351,18 @@ const EditFamily = () => {
                           : "Erro"
                       }
                       value={value}
-                      onChange={(e) => handleProductPriceChange(productIndex, "semAdesao", valueIndex, e.target.value)}
+                      onChange={(e) => handleProductPriceChange(productIndex, "noMembership", valueIndex, e.target.value)}
                     />
                   </div>
                 ))}
               </div>
               <div className="mb-2">
-                <label>Preço de Fecho</label>
+                <label>Preço de Fechamento</label>
                 <input
                   type="text"
                   className="form-control form-control-sm"
-                  value={product.preco.fecho}
-                  onChange={(e) => handleProductPriceFechoChange(productIndex, e.target.value)}
+                  value={product.price.closure}
+                  onChange={(e) => handleProductPriceClosureChange(productIndex, e.target.value)}
                 />
               </div>
               <div className="mb-2 row">
