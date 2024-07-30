@@ -172,7 +172,7 @@ const SeeMoreFamily = () => {
                               return (
                                 <tr key={productName}>
                                   <td title={product.desc}>
-                                    {product.codigoQbm} - {productName}
+                                    {product.qbmCode} - {productName}
                                   </td>
                                   <td className="text-center">{product.telemetry.digital}</td>
                                   <td className="text-center">{product.telemetry.analog}</td>
@@ -230,18 +230,18 @@ const SeeMoreFamily = () => {
                         return (
                           <tr key={productName}>
                             <td title={product.desc}>
-                              {product.codigoQbm} - {productName}
+                              {product.qbmCode} - {productName}
                             </td>
-                            <td className="text-center">R$ {product.preco.comAdesao[0]}</td>
-                            <td className="text-center">R$ {product.preco.comAdesao[1]}</td>
-                            <td className="text-center">R$ {product.preco.comAdesao[2]}</td>
-                            <td className="text-center">R$ {product.preco.comAdesao[3]}</td>
-                            <td className="text-center">R$ {product.preco.semAdesao[0]}</td>
-                            <td className="text-center">R$ {product.preco.semAdesao[1]}</td>
-                            <td className="text-center">R$ {product.preco.semAdesao[2]}</td>
-                            <td className="text-center">R$ {product.preco.semAdesao[3]}</td>
-                            <td className="text-center">R$ {product.preco.semAdesao[4]}</td>
-                            <td className="text-center">R$ {product.preco.fecho}</td>
+                            <td className="text-center">R$ {product.price.withMembership[0]}</td>
+                            <td className="text-center">R$ {product.price.withMembership[1]}</td>
+                            <td className="text-center">R$ {product.price.withMembership[2]}</td>
+                            <td className="text-center">R$ {product.price.withMembership[3]}</td>
+                            <td className="text-center">R$ {product.price.noMembership[0]}</td>
+                            <td className="text-center">R$ {product.price.noMembership[1]}</td>
+                            <td className="text-center">R$ {product.price.noMembership[2]}</td>
+                            <td className="text-center">R$ {product.price.noMembership[3]}</td>
+                            <td className="text-center">R$ {product.price.noMembership[4]}</td>
+                            <td className="text-center">R$ {product.price.closure}</td>
                           </tr>
                         );
                       })

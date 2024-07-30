@@ -128,23 +128,23 @@ Exemplo de `body` a ser enviado:
   "addInfoLink": "https://i.imgur.com/7FcJhFx.png",
   "products": {
     "Fleet Teste": {
-      "codigoQBM": "ft.teste",
+      "qbmCide": "ft.teste",
       "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-      "preco": {
-        "comAdesao": [
+      "price": {
+        "withMembership": [
           "1000",
           "120",
           "115",
           "110"
         ],
-        "semAdesao": [
+        "noMembership": [
           "200",
           "195",
           "190",
           "185",
           "180"
         ],
-        "fecho": "100"
+        "closure": "100"
       },
       "telemetry": {
           "digital": "3",
@@ -152,23 +152,23 @@ Exemplo de `body` a ser enviado:
       }
     },
     "Fleet Teste 2": {
-      "codigoQBM": "ft.teste.2",
+      "qbmCide": "ft.teste.2",
       "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-      "preco": {
-        "comAdesao": [
+      "price": {
+        "withMembership": [
           "1000",
           "120",
           "115",
           "110"
         ],
-        "semAdesao": [
+        "noMembership": [
           "200",
           "195",
           "190",
           "185",
           "180"
         ],
-        "fecho": "100"
+        "closure": "100"
       }
     }
   }

@@ -25,9 +25,9 @@ const CreateFamily = () => {
     const productsObject = products.reduce((acc, product) => {
       removeEmptyTelemetry(product);
       acc[product.name] = {
-        codigoQbm: product.codigoQbm,
+        qbmCode: product.qbmCode,
         desc: product.desc,
-        preco: product.preco,
+        price: product.price,
         telemetry: product.telemetry,
       };
       return acc;
@@ -69,12 +69,12 @@ const CreateFamily = () => {
       ...products,
       {
         name: "",
-        codigoQbm: "",
+        qbmCode: "",
         desc: "",
-        preco: {
-          comAdesao: Array(4).fill(""),
-          semAdesao: Array(5).fill(""),
-          fecho: "",
+        price: {
+          withMembership: Array(4).fill(""),
+          noMembership: Array(5).fill(""),
+          closure: "",
         },
         telemetry: {
           digital: "",
@@ -104,13 +104,13 @@ const CreateFamily = () => {
 
   const handleProductPriceChange = (productIndex, type, priceIndex, value) => {
     const newProducts = [...products];
-    newProducts[productIndex].preco[type][priceIndex] = value;
+    newProducts[productIndex].price[type][priceIndex] = value;
     setProducts(newProducts);
   };
 
-  const handleProductPriceFechoChange = (productIndex, value) => {
+  const handleProductPriceClosureChange = (productIndex, value) => {
     const newProducts = [...products];
-    newProducts[productIndex].preco.fecho = value;
+    newProducts[productIndex].price.closure = value;
     setProducts(newProducts);
   };
 
@@ -249,8 +249,8 @@ const CreateFamily = () => {
                   type="text"
                   className="form-control form-control-sm"
                   placeholder="Código do Produto"
-                  value={product.codigoQbm}
-                  onChange={(e) => handleProductValueChange(productIndex, "codigoQbm", e.target.value)}
+                  value={product.qbmCode}
+                  onChange={(e) => handleProductValueChange(productIndex, "qbmCode", e.target.value)}
                 />
               </div>
               <div className="col-12 mb-2">
@@ -264,7 +264,7 @@ const CreateFamily = () => {
               </div>
               <div className="row">
                 <label>Preços com Adesão</label>
-                {product.preco.comAdesao.map((value, valueIndex) => (
+                {product.price.withMembership.map((value, valueIndex) => (
                   <div className="col-2" key={valueIndex}>
                     <input
                       type="text"
@@ -281,14 +281,14 @@ const CreateFamily = () => {
                           : "Erro"
                       }
                       value={value}
-                      onChange={(e) => handleProductPriceChange(productIndex, "comAdesao", valueIndex, e.target.value)}
+                      onChange={(e) => handleProductPriceChange(productIndex, "withMembership", valueIndex, e.target.value)}
                     />
                   </div>
                 ))}
               </div>
               <div className="row">
                 <label>Preços sem Adesão</label>
-                {product.preco.semAdesao.map((value, valueIndex) => (
+                {product.price.noMembership.map((value, valueIndex) => (
                   <div className="col-2" key={valueIndex}>
                     <input
                       type="text"
@@ -307,19 +307,19 @@ const CreateFamily = () => {
                           : "Erro"
                       }
                       value={value}
-                      onChange={(e) => handleProductPriceChange(productIndex, "semAdesao", valueIndex, e.target.value)}
+                      onChange={(e) => handleProductPriceChange(productIndex, "noMembership", valueIndex, e.target.value)}
                     />
                   </div>
                 ))}
               </div>
               <div className="mb-2">
-                <label>Fecho</label>
+                <label>Preço de Fechamento</label>
                 <input
                   type="text"
                   className="form-control form-control-sm"
-                  placeholder="Fecho"
-                  value={product.preco.fecho}
-                  onChange={(e) => handleProductPriceFechoChange(productIndex, e.target.value)}
+                  placeholder="Fechamento"
+                  value={product.price.closure}
+                  onChange={(e) => handleProductPriceClosureChange(productIndex, e.target.value)}
                 />
               </div>
               <div className="mb-2 row">
