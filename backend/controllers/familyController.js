@@ -1,5 +1,6 @@
 import Family from "../models/familyModel.js";
 import mongoose from "mongoose";
+import diacritics from "diacritics";
 
 const createFamily = async (request, response) => {
   try {
@@ -57,24 +58,6 @@ const findById = async (request, response) => {
   }
 };
 
-// const findByName = async (request, response) => {
-//     try {
-//         const { name } = request.query
-
-//         const families = await Family.find({ name: { $regex: `${name || ""}`, $options: "i" } })
-
-//         if (!families) {
-//             return response.status(404).json({ message: "Nenhuma família encontrada" })
-//         }
-
-//         return response.status(200).json(families)
-//     } catch (error) {
-//         console.log(error)
-//         return response.status(500).json({ message: error.message })
-//     }
-// }
-
-// Essa função pesquisa pelo nome do field do products
 const findByName = async (request, response) => {
   try {
     const { name } = request.query;
@@ -83,13 +66,16 @@ const findByName = async (request, response) => {
       return response.status(400).json({ message: "Nome do produto não fornecido" });
     }
 
-    const regex = new RegExp(name, "i");
+    const normalizedSearchTerm = diacritics.remove(name).toLowerCase().split(" ");
 
     const families = await Family.find();
 
     const filteredFamilies = families.filter((family) => {
       const keys = Object.keys(family.products);
-      return keys.some((key) => regex.test(key));
+      return keys.some((key) => {
+        const normalizedKey = diacritics.remove(key).toLowerCase();
+        return normalizedSearchTerm.every(term => normalizedKey.includes(term));
+      });
     });
 
     if (filteredFamilies.length === 0) {
@@ -102,6 +88,7 @@ const findByName = async (request, response) => {
     return response.status(500).json({ message: error.message });
   }
 };
+
 
 const editFamily = async (request, response) => {
   try {
@@ -132,9 +119,7 @@ const deleteFamily = async (request, response) => {
     if (!family) {
       return response.status(404).json({ message: "Família não encontrada" });
     }
-    return response
-      .status(200)
-      .json({ message: `A família ${family.name.toLocaleUpperCase()} foi excluida com sucesso` });
+    return response.status(200).json({ message: `A família ${family.name.toLocaleUpperCase()} foi excluida com sucesso` });
   } catch (error) {
     console.log(error);
     return response.status(500).json({ message: error.message });
