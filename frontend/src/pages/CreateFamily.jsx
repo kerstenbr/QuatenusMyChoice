@@ -74,6 +74,7 @@ const CreateFamily = () => {
         price: {
           withMembership: Array(4).fill(""),
           noMembership: Array(5).fill(""),
+          renovation: Array(3).fill(""),
           closure: "",
         },
         telemetry: {
@@ -145,57 +146,27 @@ const CreateFamily = () => {
         <div className="row">
           <div className="col-6 mb-2">
             <label>Nome</label>
-            <input
-              type="text"
-              className="form-control form-control-sm"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
+            <input type="text" className="form-control form-control-sm" value={name} onChange={(e) => setName(e.target.value)} />
           </div>
           <div className="col-6 mb-2">
             <label>Código do QBM</label>
-            <input
-              type="text"
-              className="form-control form-control-sm"
-              value={qbmCode}
-              onChange={(e) => setQbmCode(e.target.value)}
-            />
+            <input type="text" className="form-control form-control-sm" value={qbmCode} onChange={(e) => setQbmCode(e.target.value)} />
           </div>
           <div className="mb-2">
             <label>Link do Banner</label>
-            <input
-              type="text"
-              className="form-control form-control-sm"
-              value={bannerLink}
-              onChange={(e) => setBannerLink(e.target.value)}
-            />
+            <input type="text" className="form-control form-control-sm" value={bannerLink} onChange={(e) => setBannerLink(e.target.value)} />
           </div>
           <div className="mb-2">
             <label>Descrição</label>
-            <input
-              type="text"
-              className="form-control form-control-sm"
-              value={desc}
-              onChange={(e) => setDesc(e.target.value)}
-            />
+            <input type="text" className="form-control form-control-sm" value={desc} onChange={(e) => setDesc(e.target.value)} />
           </div>
           <div className="col-6 mb-2">
             <label>Link do Canva</label>
-            <input
-              type="text"
-              className="form-control form-control-sm"
-              value={canvaLink}
-              onChange={(e) => setCanvaLink(e.target.value)}
-            />
+            <input type="text" className="form-control form-control-sm" value={canvaLink} onChange={(e) => setCanvaLink(e.target.value)} />
           </div>
           <div className="col-6 mb-2">
             <label>Link da Informação Adicional</label>
-            <input
-              type="text"
-              className="form-control form-control-sm"
-              value={addInfoLink}
-              onChange={(e) => setAddInfoLink(e.target.value)}
-            />
+            <input type="text" className="form-control form-control-sm" value={addInfoLink} onChange={(e) => setAddInfoLink(e.target.value)} />
           </div>
         </div>
         <div>
@@ -270,15 +241,7 @@ const CreateFamily = () => {
                       type="text"
                       className="form-control form-control-sm mb-2"
                       placeholder={
-                        valueIndex === 0
-                          ? "Adesão"
-                          : valueIndex === 1
-                          ? "12 meses"
-                          : valueIndex === 2
-                          ? "24 meses"
-                          : valueIndex === 3
-                          ? "36 meses"
-                          : "Erro"
+                        valueIndex === 0 ? "Adesão" : valueIndex === 1 ? "12 meses" : valueIndex === 2 ? "24 meses" : valueIndex === 3 ? "36 meses" : "Erro"
                       }
                       value={value}
                       onChange={(e) => handleProductPriceChange(productIndex, "withMembership", valueIndex, e.target.value)}
@@ -308,6 +271,20 @@ const CreateFamily = () => {
                       }
                       value={value}
                       onChange={(e) => handleProductPriceChange(productIndex, "noMembership", valueIndex, e.target.value)}
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="row">
+                <label>Preços da Renovação</label>
+                {product.price.renovation.map((value, valueIndex) => (
+                  <div className="col-2" key={valueIndex}>
+                    <input
+                      type="text"
+                      className="form-control form-control-sm mb-2"
+                      placeholder={valueIndex === 0 ? "12 meses" : valueIndex === 1 ? "24 meses" : valueIndex === 2 ? "36 meses" : "Erro"}
+                      value={value}
+                      onChange={(e) => handleProductPriceChange(productIndex, "renovation", valueIndex, e.target.value)}
                     />
                   </div>
                 ))}

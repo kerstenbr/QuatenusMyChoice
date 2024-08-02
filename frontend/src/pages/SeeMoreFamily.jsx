@@ -26,9 +26,7 @@ const SeeMoreFamily = () => {
     navigate(-1);
   };
 
-  const hasTelemetry = family.products
-    ? Object.keys(family.products).some((productName) => family.products[productName].telemetry)
-    : false;
+  const hasTelemetry = family.products ? Object.keys(family.products).some((productName) => family.products[productName].telemetry) : false;
 
   return (
     <div className="py-2 bg-light">
@@ -203,7 +201,7 @@ const SeeMoreFamily = () => {
                       <th colSpan="3" className="text-center">
                         Com adesão
                       </th>
-                      <th colSpan="5" className="text-center">
+                      <th colSpan="5" className="text-center table-light">
                         Sem adesão
                       </th>
                       <th scope="col" className="text-center">
@@ -215,11 +213,11 @@ const SeeMoreFamily = () => {
                       <th className="text-center">12 meses</th>
                       <th className="text-center">24 meses</th>
                       <th className="text-center">36 meses</th>
-                      <th className="text-center">12 meses</th>
-                      <th className="text-center">24 meses</th>
-                      <th className="text-center">36 meses</th>
-                      <th className="text-center">48 meses</th>
-                      <th className="text-center">60 meses</th>
+                      <th className="text-center table-light">12 meses</th>
+                      <th className="text-center table-light">24 meses</th>
+                      <th className="text-center table-light">36 meses</th>
+                      <th className="text-center table-light">48 meses</th>
+                      <th className="text-center table-light">60 meses</th>
                       <th></th>
                     </tr>
                   </thead>
@@ -236,12 +234,71 @@ const SeeMoreFamily = () => {
                             <td className="text-center">R$ {product.price.withMembership[1]}</td>
                             <td className="text-center">R$ {product.price.withMembership[2]}</td>
                             <td className="text-center">R$ {product.price.withMembership[3]}</td>
-                            <td className="text-center">R$ {product.price.noMembership[0]}</td>
-                            <td className="text-center">R$ {product.price.noMembership[1]}</td>
-                            <td className="text-center">R$ {product.price.noMembership[2]}</td>
-                            <td className="text-center">R$ {product.price.noMembership[3]}</td>
-                            <td className="text-center">R$ {product.price.noMembership[4]}</td>
+                            <td className="text-center table-light">R$ {product.price.noMembership[0]}</td>
+                            <td className="text-center table-light">R$ {product.price.noMembership[1]}</td>
+                            <td className="text-center table-light">R$ {product.price.noMembership[2]}</td>
+                            <td className="text-center table-light">R$ {product.price.noMembership[3]}</td>
+                            <td className="text-center table-light">R$ {product.price.noMembership[4]}</td>
                             <td className="text-center">R$ {product.price.closure}</td>
+                          </tr>
+                        );
+                      })
+                    ) : (
+                      <tr>
+                        <td colSpan="11" className="text-center bg-danger text-white">
+                          Erro
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div>
+              <h4>Renovação:</h4>
+              <div className="table-responsive">
+                <table className="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">Produto</th>
+                      <th scope="col" className="text-center">
+                        12 meses
+                      </th>
+                      <th scope="col" className="text-center">
+                        24 meses
+                      </th>
+                      <th scope="col" className="text-center">
+                        36 meses
+                      </th>
+                      <th scope="col" className="text-center">
+                        Fecho
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {family.products ? (
+                      Object.keys(family.products).map((productName) => {
+                        const product = family.products[productName];
+                        return (
+                          <tr key={productName}>
+                            <td title={product.desc}>
+                              {product.qbmCode} - {productName}
+                            </td>
+                            {product.price.renovation ? (
+                              <>
+                                <td className="text-center">R$ {product.price.renovation[0]}</td>
+                                <td className="text-center">R$ {product.price.renovation[1]}</td>
+                                <td className="text-center">R$ {product.price.renovation[2]}</td>
+                                <td className="text-center">R$ {product.price.closure}</td>
+                              </>
+                            ) : (
+                              <>
+                                <td colSpan="4" className="text-center">
+                                  N/A
+                                </td>
+                              </>
+                            )}
                           </tr>
                         );
                       })
