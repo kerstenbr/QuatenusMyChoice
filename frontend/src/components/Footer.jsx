@@ -14,7 +14,7 @@ const Footer = () => {
                 Projetos e Inovações
               </Link>
             </p>
-            <p>
+            <p className="mb-0">
               Com ajuda de{" "}
               <Link to={"https://github.com/codebruno"} target="_blank" rel="noopener noreferrer">
                 Bruno Silva
@@ -22,25 +22,25 @@ const Footer = () => {
               ,{" "}
               <Link to={"https://github.com/EricSemE"} target="_blank" rel="noopener noreferrer">
                 Eric Caetano
-              </Link>{" "}
-              e{" "}
+              </Link>
+              ,
+            </p>
+            <p>
               <Link to={"https://github.com/lucind0"} target="_blank" rel="noopener noreferrer">
                 Kauã Lucindo
-              </Link>
+              </Link>{" "}
+              e Lilian Marinho
             </p>
           </div>
           <div className="col-md-6 mb-3 text-md-end">
             <p className="mb-1">
-              <Link to={"https://github.com/kerstenbr/QuatenusMyChoice"} target="_blank" rel="noopener noreferrer">
-                Repo do Projeto
+              <Link to={"https://qbm01.quatenus-system.com.br/quatenus10/QBM/Login/Login.aspx"} target="_blank" rel="noopener noreferrer">
+                Abra um ticket
               </Link>
             </p>
             <p className="mb-1">
-              <Link
-                to={"https://qbm01.quatenus-system.com.br/quatenus10/QBM/Login/Login.aspx"}
-                target="_blank"
-                rel="noopener noreferrer">
-                Reporte um bug
+              <Link to={"https://github.com/kerstenbr/QuatenusMyChoice"} target="_blank" rel="noopener noreferrer">
+                Repo do Projeto
               </Link>
             </p>
           </div>
