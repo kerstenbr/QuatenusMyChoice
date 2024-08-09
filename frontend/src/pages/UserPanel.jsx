@@ -42,18 +42,15 @@ const UserPanel = () => {
               [...users]
                 .sort((a, b) => a.email.localeCompare(b.email))
                 .map((user) => (
-                  <button
-                    onClick={() => handleUserClick(user)}
-                    key={user.email}
-                    type="button"
-                    className="list-group-item list-group-item-action">
-                    {user.email}
-                  </button>
+                  <>
+                    <button onClick={() => handleUserClick(user)} key={user.email} type="button" className="list-group-item list-group-item-action">
+                      {user.email}
+                    <p className="m-0">{user.role}</p>
+                    </button>
+                  </>
                 ))}
           </div>
-          <div className="col-9 border">
-            {selectedUser ? <PanelUserDetail user={selectedUser} /> : <h1 className="mt-2">Selecione um usuário</h1>}
-          </div>
+          <div className="col-9 border">{selectedUser ? <PanelUserDetail user={selectedUser} /> : <h1 className="mt-2">Selecione um usuário</h1>}</div>
         </div>
       </div>
     </div>
