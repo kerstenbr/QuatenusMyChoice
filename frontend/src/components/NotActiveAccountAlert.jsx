@@ -14,7 +14,7 @@ const NotActiveAccountAlert = () => {
               rel="noopener noreferrer">
               QBM
             </Link>{" "}
-            para a equipe de Projetos e Inovações e inclua o email usado para criar essa conta.
+            para a equipe de Projetos e Inovações e inclua o email usado para criar essa conta e o seu setor.
           </p>
         </div>
       </div>
