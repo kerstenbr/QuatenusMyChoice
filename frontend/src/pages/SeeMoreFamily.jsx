@@ -273,6 +273,12 @@ const SeeMoreFamily = () => {
                           36 meses
                         </th>
                         <th scope="col" className="text-center">
+                          48 meses
+                        </th>
+                        <th scope="col" className="text-center">
+                          60 meses
+                        </th>
+                        <th scope="col" className="text-center">
                           Fecho
                         </th>
                       </tr>
@@ -291,6 +297,8 @@ const SeeMoreFamily = () => {
                                   <td className="text-center">R$ {product.price.renovation[0]}</td>
                                   <td className="text-center">R$ {product.price.renovation[1]}</td>
                                   <td className="text-center">R$ {product.price.renovation[2]}</td>
+                                  <td className="text-center">R$ {product.price.renovation[3]}</td>
+                                  <td className="text-center">R$ {product.price.renovation[4]}</td>
                                   <td className="text-center">R$ {product.price.closure}</td>
                                 </>
                               ) : (

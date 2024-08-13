@@ -74,7 +74,7 @@ const CreateFamily = () => {
         price: {
           withMembership: Array(4).fill(""),
           noMembership: Array(5).fill(""),
-          renovation: Array(3).fill(""),
+          renovation: Array(5).fill(""),
           closure: "",
         },
         telemetry: {
@@ -282,7 +282,7 @@ const CreateFamily = () => {
                     <input
                       type="text"
                       className="form-control form-control-sm mb-2"
-                      placeholder={valueIndex === 0 ? "12 meses" : valueIndex === 1 ? "24 meses" : valueIndex === 2 ? "36 meses" : "Erro"}
+                      placeholder={valueIndex === 0 ? "12 meses" : valueIndex === 1 ? "24 meses" : valueIndex === 2 ? "36 meses" : valueIndex === 3 ? "48 meses" : valueIndex === 4 ? "60 meses" : "Erro"}
                       value={value}
                       onChange={(e) => handleProductPriceChange(productIndex, "renovation", valueIndex, e.target.value)}
                     />
