@@ -255,64 +255,66 @@ const SeeMoreFamily = () => {
               </div>
             </div>
 
-            <div>
-              <h4>Renovação:</h4>
-              <div className="table-responsive">
-                <table className="table table-bordered table-hover">
-                  <thead>
-                    <tr>
-                      <th scope="col">Produto</th>
-                      <th scope="col" className="text-center">
-                        12 meses
-                      </th>
-                      <th scope="col" className="text-center">
-                        24 meses
-                      </th>
-                      <th scope="col" className="text-center">
-                        36 meses
-                      </th>
-                      <th scope="col" className="text-center">
-                        Fecho
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {family.products ? (
-                      Object.keys(family.products).map((productName) => {
-                        const product = family.products[productName];
-                        return (
-                          <tr key={productName}>
-                            <td title={product.desc}>
-                              {product.qbmCode} - {productName}
-                            </td>
-                            {product.price.renovation ? (
-                              <>
-                                <td className="text-center">R$ {product.price.renovation[0]}</td>
-                                <td className="text-center">R$ {product.price.renovation[1]}</td>
-                                <td className="text-center">R$ {product.price.renovation[2]}</td>
-                                <td className="text-center">R$ {product.price.closure}</td>
-                              </>
-                            ) : (
-                              <>
-                                <td colSpan="4" className="text-center">
-                                  N/A
-                                </td>
-                              </>
-                            )}
-                          </tr>
-                        );
-                      })
-                    ) : (
+            {user.role === "customer success" || user.role === "admin" ? (
+              <div>
+                <h4>Renovação:</h4>
+                <div className="table-responsive">
+                  <table className="table table-bordered table-hover">
+                    <thead>
                       <tr>
-                        <td colSpan="11" className="text-center bg-danger text-white">
-                          Erro
-                        </td>
+                        <th scope="col">Produto</th>
+                        <th scope="col" className="text-center">
+                          12 meses
+                        </th>
+                        <th scope="col" className="text-center">
+                          24 meses
+                        </th>
+                        <th scope="col" className="text-center">
+                          36 meses
+                        </th>
+                        <th scope="col" className="text-center">
+                          Fecho
+                        </th>
                       </tr>
-                    )}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {family.products ? (
+                        Object.keys(family.products).map((productName) => {
+                          const product = family.products[productName];
+                          return (
+                            <tr key={productName}>
+                              <td title={product.desc}>
+                                {product.qbmCode} - {productName}
+                              </td>
+                              {product.price.renovation ? (
+                                <>
+                                  <td className="text-center">R$ {product.price.renovation[0]}</td>
+                                  <td className="text-center">R$ {product.price.renovation[1]}</td>
+                                  <td className="text-center">R$ {product.price.renovation[2]}</td>
+                                  <td className="text-center">R$ {product.price.closure}</td>
+                                </>
+                              ) : (
+                                <>
+                                  <td colSpan="4" className="text-center">
+                                    N/A
+                                  </td>
+                                </>
+                              )}
+                            </tr>
+                          );
+                        })
+                      ) : (
+                        <tr>
+                          <td colSpan="11" className="text-center bg-danger text-white">
+                            Erro
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
               </div>
-            </div>
+            ) : null}
 
             {family.products ? <hr /> : null}
 
