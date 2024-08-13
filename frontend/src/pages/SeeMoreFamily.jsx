@@ -26,9 +26,7 @@ const SeeMoreFamily = () => {
     navigate(-1);
   };
 
-  const hasTelemetry = family.products
-    ? Object.keys(family.products).some((productName) => family.products[productName].telemetry)
-    : false;
+  const hasTelemetry = family.products ? Object.keys(family.products).some((productName) => family.products[productName].telemetry) : false;
 
   return (
     <div className="py-2 bg-light">
@@ -232,15 +230,16 @@ const SeeMoreFamily = () => {
                             <td title={product.desc}>
                               {product.qbmCode} - {productName}
                             </td>
-                            <td className="text-center">R$ {product.price.withMembership[0]}</td>
-                            <td className="text-center">R$ {product.price.withMembership[1]}</td>
-                            <td className="text-center">R$ {product.price.withMembership[2]}</td>
-                            <td className="text-center">R$ {product.price.withMembership[3]}</td>
-                            <td className="text-center">R$ {product.price.noMembership[0]}</td>
-                            <td className="text-center">R$ {product.price.noMembership[1]}</td>
-                            <td className="text-center">R$ {product.price.noMembership[2]}</td>
-                            <td className="text-center">R$ {product.price.noMembership[3]}</td>
-                            <td className="text-center">R$ {product.price.noMembership[4]}</td>
+                            {product.price.withMembership[0] ? <td className="text-center">R$ {product.price.withMembership[0]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.withMembership[1] ? <td className="text-center">R$ {product.price.withMembership[1]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.withMembership[2] ? <td className="text-center">R$ {product.price.withMembership[2]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.withMembership[3] ? <td className="text-center">R$ {product.price.withMembership[3]}</td> : <td className="text-center">N/A</td>}
+                            
+                            {product.price.noMembership[0] ? <td className="text-center">R$ {product.price.noMembership[0]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.noMembership[1] ? <td className="text-center">R$ {product.price.noMembership[1]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.noMembership[2] ? <td className="text-center">R$ {product.price.noMembership[2]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.noMembership[3] ? <td className="text-center">R$ {product.price.noMembership[3]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.noMembership[4] ? <td className="text-center">R$ {product.price.noMembership[4]}</td> : <td className="text-center">N/A</td>}
                             <td className="text-center">R$ {product.price.closure}</td>
                           </tr>
                         );
@@ -256,6 +255,75 @@ const SeeMoreFamily = () => {
                 </table>
               </div>
             </div>
+
+            {user.role === "customer success" || user.role === "admin" ? (
+              <div>
+                <h4>Renovação:</h4>
+                <div className="table-responsive">
+                  <table className="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">Produto</th>
+                        <th scope="col" className="text-center">
+                          12 meses
+                        </th>
+                        <th scope="col" className="text-center">
+                          24 meses
+                        </th>
+                        <th scope="col" className="text-center">
+                          36 meses
+                        </th>
+                        <th scope="col" className="text-center">
+                          48 meses
+                        </th>
+                        <th scope="col" className="text-center">
+                          60 meses
+                        </th>
+                        <th scope="col" className="text-center">
+                          Fecho
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {family.products ? (
+                        Object.keys(family.products).map((productName) => {
+                          const product = family.products[productName];
+                          return (
+                            <tr key={productName}>
+                              <td title={product.desc}>
+                                {product.qbmCode} - {productName}
+                              </td>
+                              {product.price.renovation ? (
+                                <>
+                                  {product.price.renovation[0] ? <td className="text-center">R$ {product.price.renovation[0]}</td> : <td className="text-center">N/A</td>}
+                                  {product.price.renovation[1] ? <td className="text-center">R$ {product.price.renovation[1]}</td> : <td className="text-center">N/A</td>}
+                                  {product.price.renovation[2] ? <td className="text-center">R$ {product.price.renovation[2]}</td> : <td className="text-center">N/A</td>}
+                                  {product.price.renovation[3] ? <td className="text-center">R$ {product.price.renovation[3]}</td> : <td className="text-center">N/A</td>}
+                                  {product.price.renovation[4] ? <td className="text-center">R$ {product.price.renovation[4]}</td> : <td className="text-center">N/A</td>}
+                                  <td className="text-center">R$ {product.price.closure}</td>
+                                </>
+                              ) : (
+                                <>
+                                  <td colSpan="4" className="text-center">
+                                    N/A
+                                  </td>
+                                </>
+                              )}
+                            </tr>
+                          );
+                        })
+                      ) : (
+                        <tr>
+                          <td colSpan="11" className="text-center bg-danger text-white">
+                            Erro
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            ) : null}
 
             {family.products ? <hr /> : null}
 
