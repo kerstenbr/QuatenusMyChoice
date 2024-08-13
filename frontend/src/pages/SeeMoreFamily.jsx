@@ -201,7 +201,7 @@ const SeeMoreFamily = () => {
                       <th colSpan="3" className="text-center">
                         Com adesão
                       </th>
-                      <th colSpan="5" className="text-center table-light">
+                      <th colSpan="5" className="text-center">
                         Sem adesão
                       </th>
                       <th scope="col" className="text-center">
@@ -213,11 +213,11 @@ const SeeMoreFamily = () => {
                       <th className="text-center">12 meses</th>
                       <th className="text-center">24 meses</th>
                       <th className="text-center">36 meses</th>
-                      <th className="text-center table-light">12 meses</th>
-                      <th className="text-center table-light">24 meses</th>
-                      <th className="text-center table-light">36 meses</th>
-                      <th className="text-center table-light">48 meses</th>
-                      <th className="text-center table-light">60 meses</th>
+                      <th className="text-center">12 meses</th>
+                      <th className="text-center">24 meses</th>
+                      <th className="text-center">36 meses</th>
+                      <th className="text-center">48 meses</th>
+                      <th className="text-center">60 meses</th>
                       <th></th>
                     </tr>
                   </thead>
@@ -230,15 +230,16 @@ const SeeMoreFamily = () => {
                             <td title={product.desc}>
                               {product.qbmCode} - {productName}
                             </td>
-                            <td className="text-center">R$ {product.price.withMembership[0]}</td>
-                            <td className="text-center">R$ {product.price.withMembership[1]}</td>
-                            <td className="text-center">R$ {product.price.withMembership[2]}</td>
-                            <td className="text-center">R$ {product.price.withMembership[3]}</td>
-                            <td className="text-center table-light">R$ {product.price.noMembership[0]}</td>
-                            <td className="text-center table-light">R$ {product.price.noMembership[1]}</td>
-                            <td className="text-center table-light">R$ {product.price.noMembership[2]}</td>
-                            <td className="text-center table-light">R$ {product.price.noMembership[3]}</td>
-                            <td className="text-center table-light">R$ {product.price.noMembership[4]}</td>
+                            {product.price.withMembership[0] ? <td className="text-center">R$ {product.price.withMembership[0]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.withMembership[1] ? <td className="text-center">R$ {product.price.withMembership[1]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.withMembership[2] ? <td className="text-center">R$ {product.price.withMembership[2]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.withMembership[3] ? <td className="text-center">R$ {product.price.withMembership[3]}</td> : <td className="text-center">N/A</td>}
+                            
+                            {product.price.noMembership[0] ? <td className="text-center">R$ {product.price.noMembership[0]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.noMembership[1] ? <td className="text-center">R$ {product.price.noMembership[1]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.noMembership[2] ? <td className="text-center">R$ {product.price.noMembership[2]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.noMembership[3] ? <td className="text-center">R$ {product.price.noMembership[3]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.noMembership[4] ? <td className="text-center">R$ {product.price.noMembership[4]}</td> : <td className="text-center">N/A</td>}
                             <td className="text-center">R$ {product.price.closure}</td>
                           </tr>
                         );
@@ -294,11 +295,11 @@ const SeeMoreFamily = () => {
                               </td>
                               {product.price.renovation ? (
                                 <>
-                                  <td className="text-center">R$ {product.price.renovation[0]}</td>
-                                  <td className="text-center">R$ {product.price.renovation[1]}</td>
-                                  <td className="text-center">R$ {product.price.renovation[2]}</td>
-                                  <td className="text-center">R$ {product.price.renovation[3]}</td>
-                                  <td className="text-center">R$ {product.price.renovation[4]}</td>
+                                  {product.price.renovation[0] ? <td className="text-center">R$ {product.price.renovation[0]}</td> : <td className="text-center">N/A</td>}
+                                  {product.price.renovation[1] ? <td className="text-center">R$ {product.price.renovation[1]}</td> : <td className="text-center">N/A</td>}
+                                  {product.price.renovation[2] ? <td className="text-center">R$ {product.price.renovation[2]}</td> : <td className="text-center">N/A</td>}
+                                  {product.price.renovation[3] ? <td className="text-center">R$ {product.price.renovation[3]}</td> : <td className="text-center">N/A</td>}
+                                  {product.price.renovation[4] ? <td className="text-center">R$ {product.price.renovation[4]}</td> : <td className="text-center">N/A</td>}
                                   <td className="text-center">R$ {product.price.closure}</td>
                                 </>
                               ) : (
