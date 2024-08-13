@@ -16,10 +16,8 @@ const Card = ({ family }) => {
     const twoWeeksInMilliseconds = 14 * 24 * 60 * 60 * 1000;
 
     if (currentDate - creationDate <= twoWeeksInMilliseconds) {
-      console.log(`Família criada há duas semanas: ${family.name}`);
       setCreatedWeeks(true);
     } else {
-      console.log(`Família antiga: ${family.name}`);
       setCreatedWeeks(false);
     }
   }, [family.name]);
@@ -32,7 +30,6 @@ const Card = ({ family }) => {
         {createdWeeks ? <img className="position-absolute top-0 end-0" src={Novo} /> : null}
         <div className="card-body">
           <h3>{family.name}</h3>
-          {/* <p className="card-text">{family.desc}</p> */}
           <LimitedParagraph text={family.desc} limit={200} />
         </div>
 
