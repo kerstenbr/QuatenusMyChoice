@@ -80,7 +80,8 @@ const SeeMoreFamily = () => {
                 <hr />
               </>
             ) : (
-              <hr />
+              // <hr />
+              null
             )}
 
             <div>
@@ -325,11 +326,12 @@ const SeeMoreFamily = () => {
               </div>
             ) : null}
 
-            {family.products ? <hr /> : null}
+            {/* {family.products ? <hr /> : null} */}
 
             <div>
               {family.addInfoLink ? (
                 <>
+                  <hr />
                   <h4>Informação adicional da família:</h4>
                   <img style={{ width: "100%" }} src={family.addInfoLink} alt="Informação adicional da família" />
                 </>
