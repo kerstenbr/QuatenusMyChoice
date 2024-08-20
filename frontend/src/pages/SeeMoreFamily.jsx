@@ -338,6 +338,18 @@ const SeeMoreFamily = () => {
               ) : null}
             </div>
 
+
+            {user.role === "suporte a operações" || user.role === "admin" ? (
+              <div className="mt-2">
+              <Link 
+                to={`${import.meta.env.VITE_GA_LINK}`}
+                target="_blank" rel="noopener noreferrer">
+                Guias de Instalação
+              </Link>
+            </div>
+            ) : (null)}
+            
+
             <div>
               <hr />
               <p className="m-0 p-0">
