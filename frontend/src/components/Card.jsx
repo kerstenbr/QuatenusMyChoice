@@ -30,7 +30,7 @@ const Card = ({ family }) => {
         {createdWeeks ? <img className="position-absolute top-0 end-0" src={Novo} /> : null}
         <div className="card-body">
           <h3>{family.name}</h3>
-          <LimitedParagraph text={family.desc} limit={200} />
+          <LimitedParagraph text={family.desc} limit={150} />
         </div>
 
         {/* TODO: Achar outra maneira de fazer esse check, atualmente ele faz isso pra TODOS os cards... nada legal. */}
