@@ -231,21 +231,21 @@ const SeeMoreFamily = () => {
                       Object.keys(family.products).map((productName) => {
                         const product = family.products[productName];
                         return (
-                          <tr key={productName}>
-                            <td title={product.desc}>
+                          <tr key={productName} title={product.desc}>
+                            <td>
                               {product.qbmCode} - {productName}
                             </td>
-                            {product.price.withMembership[0] ? <td className="text-center">R$ {product.price.withMembership[0]}</td> : <td className="text-center">N/A</td>}
-                            {product.price.withMembership[1] ? <td className="text-center">R$ {product.price.withMembership[1]}</td> : <td className="text-center">N/A</td>}
-                            {product.price.withMembership[2] ? <td className="text-center">R$ {product.price.withMembership[2]}</td> : <td className="text-center">N/A</td>}
-                            {product.price.withMembership[3] ? <td className="text-center">R$ {product.price.withMembership[3]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.withMembership[0] ? <td className="text-center text-truncate">R$ {product.price.withMembership[0]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.withMembership[1] ? <td className="text-center text-truncate">R$ {product.price.withMembership[1]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.withMembership[2] ? <td className="text-center text-truncate">R$ {product.price.withMembership[2]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.withMembership[3] ? <td className="text-center text-truncate">R$ {product.price.withMembership[3]}</td> : <td className="text-center">N/A</td>}
                             
-                            {product.price.noMembership[0] ? <td className="text-center">R$ {product.price.noMembership[0]}</td> : <td className="text-center">N/A</td>}
-                            {product.price.noMembership[1] ? <td className="text-center">R$ {product.price.noMembership[1]}</td> : <td className="text-center">N/A</td>}
-                            {product.price.noMembership[2] ? <td className="text-center">R$ {product.price.noMembership[2]}</td> : <td className="text-center">N/A</td>}
-                            {product.price.noMembership[3] ? <td className="text-center">R$ {product.price.noMembership[3]}</td> : <td className="text-center">N/A</td>}
-                            {product.price.noMembership[4] ? <td className="text-center">R$ {product.price.noMembership[4]}</td> : <td className="text-center">N/A</td>}
-                            {product.price.closure ? <td className="text-center">R$ {product.price.closure}</td> : <td className="text-center">N/A</td>}
+                            {product.price.noMembership[0] ? <td className="text-center text-truncate">R$ {product.price.noMembership[0]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.noMembership[1] ? <td className="text-center text-truncate">R$ {product.price.noMembership[1]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.noMembership[2] ? <td className="text-center text-truncate">R$ {product.price.noMembership[2]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.noMembership[3] ? <td className="text-center text-truncate">R$ {product.price.noMembership[3]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.noMembership[4] ? <td className="text-center text-truncate">R$ {product.price.noMembership[4]}</td> : <td className="text-center">N/A</td>}
+                            {product.price.closure ? <td className="text-center text-truncate">R$ {product.price.closure}</td> : <td className="text-center">N/A</td>}
                           </tr>
                         );
                       })
@@ -300,12 +300,12 @@ const SeeMoreFamily = () => {
                               </td>
                               {product.price.renovation ? (
                                 <>
-                                  {product.price.renovation[0] ? <td className="text-center">R$ {product.price.renovation[0]}</td> : <td className="text-center">N/A</td>}
-                                  {product.price.renovation[1] ? <td className="text-center">R$ {product.price.renovation[1]}</td> : <td className="text-center">N/A</td>}
-                                  {product.price.renovation[2] ? <td className="text-center">R$ {product.price.renovation[2]}</td> : <td className="text-center">N/A</td>}
-                                  {product.price.renovation[3] ? <td className="text-center">R$ {product.price.renovation[3]}</td> : <td className="text-center">N/A</td>}
-                                  {product.price.renovation[4] ? <td className="text-center">R$ {product.price.renovation[4]}</td> : <td className="text-center">N/A</td>}
-                                  {product.price.renovationClosure ? <td className="text-center">R$ {product.price.renovationClosure}</td> : <td className="text-center">N/A</td>}
+                                  {product.price.renovation[0] ? <td className="text-center text-truncate">R$ {product.price.renovation[0]}</td> : <td className="text-center">N/A</td>}
+                                  {product.price.renovation[1] ? <td className="text-center text-truncate">R$ {product.price.renovation[1]}</td> : <td className="text-center">N/A</td>}
+                                  {product.price.renovation[2] ? <td className="text-center text-truncate">R$ {product.price.renovation[2]}</td> : <td className="text-center">N/A</td>}
+                                  {product.price.renovation[3] ? <td className="text-center text-truncate">R$ {product.price.renovation[3]}</td> : <td className="text-center">N/A</td>}
+                                  {product.price.renovation[4] ? <td className="text-center text-truncate">R$ {product.price.renovation[4]}</td> : <td className="text-center">N/A</td>}
+                                  {product.price.renovationClosure ? <td className="text-center text-truncate">R$ {product.price.renovationClosure}</td> : <td className="text-center">N/A</td>}
                                 </>
                               ) : (
                                 <>
