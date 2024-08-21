@@ -147,7 +147,8 @@ Exemplo de `body` a ser enviado:
           "185",
           "180"
         ],
-        "closure": "100"
+        "closure": "100",
+        "renovationCLosure": "50"
       },
       "telemetry": {
           "digital": "3",
@@ -171,7 +172,8 @@ Exemplo de `body` a ser enviado:
           "185",
           "180"
         ],
-        "closure": "100"
+        "closure": "200",
+        "renovationCLosure": "150"
       }
     }
   }
