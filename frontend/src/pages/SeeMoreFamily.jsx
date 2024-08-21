@@ -3,6 +3,8 @@ import axios from "axios";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { UserContext } from "../context/userContext";
 import NotActiveAccountAlert from "../components/NotActiveAccountAlert";
+import noCanva from "../assets/noCanva.gif"
+import noInfo from "../assets/noInfo.gif"
 
 const SeeMoreFamily = () => {
   const { user } = useContext(UserContext);
@@ -80,8 +82,10 @@ const SeeMoreFamily = () => {
                 <hr />
               </>
             ) : (
-              // <hr />
-              null
+              <>
+                <img style={{ width: "100%" }} src={noCanva} alt="Sem value proposition" />
+                <hr />
+              </>
             )}
 
             <div>
@@ -335,7 +339,13 @@ const SeeMoreFamily = () => {
                   <h4>Informação adicional da família:</h4>
                   <img style={{ width: "100%" }} src={family.addInfoLink} alt="Informação adicional da família" />
                 </>
-              ) : null}
+              ) : (
+                <>
+                  <hr />
+                  <h4>Informação adicional da família:</h4>
+                  <img style={{ width: "100%" }} src={noInfo} alt="Sem info adicional" />
+                </>
+              )}
             </div>
 
 
