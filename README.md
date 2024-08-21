@@ -30,6 +30,9 @@ Opcional: `PORT`
 Para o frontend:
 `VITE_BASE_URL`
 
+Opcional: `VITE_GA_LINK`
+
+
 ## Rodando localmente
 
 Clone o projeto

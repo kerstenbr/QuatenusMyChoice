@@ -3,6 +3,8 @@ import axios from "axios";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { UserContext } from "../context/userContext";
 import NotActiveAccountAlert from "../components/NotActiveAccountAlert";
+import noCanva from "../assets/noCanva.gif"
+import noInfo from "../assets/noInfo.gif"
 
 const SeeMoreFamily = () => {
   const { user } = useContext(UserContext);
@@ -80,7 +82,10 @@ const SeeMoreFamily = () => {
                 <hr />
               </>
             ) : (
-              <hr />
+              <>
+                <img style={{ width: "100%" }} src={noCanva} alt="Sem value proposition" />
+                <hr />
+              </>
             )}
 
             <div>
@@ -325,16 +330,35 @@ const SeeMoreFamily = () => {
               </div>
             ) : null}
 
-            {family.products ? <hr /> : null}
+            {/* {family.products ? <hr /> : null} */}
 
             <div>
               {family.addInfoLink ? (
                 <>
+                  <hr />
                   <h4>Informação adicional da família:</h4>
                   <img style={{ width: "100%" }} src={family.addInfoLink} alt="Informação adicional da família" />
                 </>
-              ) : null}
+              ) : (
+                <>
+                  <hr />
+                  <h4>Informação adicional da família:</h4>
+                  <img style={{ width: "100%" }} src={noInfo} alt="Sem info adicional" />
+                </>
+              )}
             </div>
+
+
+            {user.role === "suporte a operações" || user.role === "admin" ? (
+              <div className="mt-2">
+              <Link 
+                to={`${import.meta.env.VITE_GA_LINK}`}
+                target="_blank" rel="noopener noreferrer">
+                Guias de Instalação
+              </Link>
+            </div>
+            ) : (null)}
+            
 
             <div>
               <hr />
