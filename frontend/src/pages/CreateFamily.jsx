@@ -76,6 +76,7 @@ const CreateFamily = () => {
           noMembership: Array(5).fill(""),
           renovation: Array(5).fill(""),
           closure: "",
+          renovationClosure: "",
         },
         telemetry: {
           digital: "",
@@ -112,6 +113,12 @@ const CreateFamily = () => {
   const handleProductPriceClosureChange = (productIndex, value) => {
     const newProducts = [...products];
     newProducts[productIndex].price.closure = value;
+    setProducts(newProducts);
+  };
+
+  const handleProductPriceRenovationClosureChange = (productIndex, value) => {
+    const newProducts = [...products];
+    newProducts[productIndex].price.renovationClosure = value;
     setProducts(newProducts);
   };
 
@@ -233,7 +240,7 @@ const CreateFamily = () => {
                   onChange={(e) => handleProductValueChange(productIndex, "desc", e.target.value)}
                 />
               </div>
-              <div className="row">
+              <div className="row mt-2">
                 <label>Preços com Adesão</label>
                 {product.price.withMembership.map((value, valueIndex) => (
                   <div className="col-2" key={valueIndex}>
@@ -275,7 +282,17 @@ const CreateFamily = () => {
                   </div>
                 ))}
               </div>
-              <div className="row">
+              <div className="mb-2 col-2">
+                <label>Preço de Fechamento</label>
+                <input
+                  type="text"
+                  className="form-control form-control-sm"
+                  placeholder="Fechamento"
+                  value={product.price.closure}
+                  onChange={(e) => handleProductPriceClosureChange(productIndex, e.target.value)}
+                />
+              </div>
+              <div className="row mt-2">
                 <label>Preços da Renovação</label>
                 {product.price.renovation.map((value, valueIndex) => (
                   <div className="col-2" key={valueIndex}>
@@ -289,17 +306,17 @@ const CreateFamily = () => {
                   </div>
                 ))}
               </div>
-              <div className="mb-2">
-                <label>Preço de Fechamento</label>
+              <label>Preço de Fechamento da Renovação</label>
+              <div className="mb-2 col-2">
                 <input
                   type="text"
                   className="form-control form-control-sm"
-                  placeholder="Fechamento"
-                  value={product.price.closure}
-                  onChange={(e) => handleProductPriceClosureChange(productIndex, e.target.value)}
+                  placeholder="Fechamento da Renovação"
+                  value={product.price.renovationClosure}
+                  onChange={(e) => handleProductPriceRenovationClosureChange(productIndex, e.target.value)}
                 />
               </div>
-              <div className="mb-2 row">
+              <div className="row mb-2 mt-2">
                 <label>Telemetria</label>
                 <div className="col-2">
                   <input
