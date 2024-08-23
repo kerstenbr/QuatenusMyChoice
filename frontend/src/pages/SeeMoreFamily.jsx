@@ -174,8 +174,13 @@ const SeeMoreFamily = () => {
                             if (product.telemetry) {
                               return (
                                 <tr key={productName}>
-                                  <td title={product.desc}>
-                                    {product.qbmCode} - {productName}
+                                  <td>
+                                    <p className="m-0 p-0" style={{fontSize: '12px'}}>
+                                      {product.qbmCode}
+                                    </p>
+                                    <p className="m-0 p-0">
+                                      {productName}
+                                    </p>
                                   </td>
                                   <td className="text-center">{product.telemetry.digital}</td>
                                   <td className="text-center">{product.telemetry.analog}</td>
@@ -233,7 +238,12 @@ const SeeMoreFamily = () => {
                         return (
                           <tr key={productName} title={product.desc}>
                             <td>
-                              {product.qbmCode} - {productName}
+                              <p className="m-0 p-0" style={{fontSize: '12px'}}>
+                                {product.qbmCode}
+                              </p>
+                              <p className="m-0 p-0">
+                                {productName}
+                              </p>
                             </td>
                             {product.price.withMembership[0] ? <td className="text-center text-truncate">R$ {product.price.withMembership[0]}</td> : <td className="text-center">N/A</td>}
                             {product.price.withMembership[1] ? <td className="text-center text-truncate">R$ {product.price.withMembership[1]}</td> : <td className="text-center">N/A</td>}
@@ -295,9 +305,14 @@ const SeeMoreFamily = () => {
                           const product = family.products[productName];
                           return (
                             <tr key={productName}>
-                              <td title={product.desc}>
-                                {product.qbmCode} - {productName}
-                              </td>
+                              <td>
+                              <p className="m-0 p-0" style={{fontSize: '12px'}}>
+                                {product.qbmCode}
+                              </p>
+                              <p className="m-0 p-0">
+                                {productName}
+                              </p>
+                            </td>
                               {product.price.renovation ? (
                                 <>
                                   {product.price.renovation[0] ? <td className="text-center text-truncate">R$ {product.price.renovation[0]}</td> : <td className="text-center">N/A</td>}
@@ -363,7 +378,7 @@ const SeeMoreFamily = () => {
             <div>
               <hr />
               <p className="m-0 p-0">
-                {family._id} - Atualizado em: {new Date(family.updatedAt).toLocaleString()}
+                {family._id} - Atualizado em: {new Date(family.updatedAt).toLocaleString()}.
               </p>
             </div>
           </>
