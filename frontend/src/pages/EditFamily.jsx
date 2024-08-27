@@ -9,6 +9,7 @@ const EditFamily = () => {
   const [bannerLink, setBannerLink] = useState("");
   const [qbmCode, setQbmCode] = useState("");
   const [desc, setDesc] = useState("");
+  const [observations, setObservations] = useState("");
   const [links, setLinks] = useState([]);
   const [canvaLink, setCanvaLink] = useState("");
   const [addInfoLink, setAddInfoLink] = useState("");
@@ -24,7 +25,7 @@ const EditFamily = () => {
         },
       })
       .then((response) => {
-        const { name, bannerLink, qbmCode, desc, links, canvaLink, addInfoLink, products } = response.data;
+        const { name, bannerLink, qbmCode, desc, observations, links, canvaLink, addInfoLink, products } = response.data;
 
         const productsArray = products
           ? Object.keys(products).map((productName) => ({
@@ -48,6 +49,7 @@ const EditFamily = () => {
         setBannerLink(bannerLink);
         setQbmCode(qbmCode);
         setDesc(desc);
+        setObservations(observations)
         setLinks(linksArray);
         setCanvaLink(canvaLink);
         setAddInfoLink(addInfoLink);
@@ -87,6 +89,7 @@ const EditFamily = () => {
       bannerLink,
       qbmCode,
       desc,
+      observations,
       links: linksObject,
       canvaLink,
       addInfoLink,
@@ -218,6 +221,10 @@ const EditFamily = () => {
           <div className="col-6 mb-2">
             <label>Link da Informação Adicional</label>
             <input type="text" className="form-control form-control-sm" value={addInfoLink} onChange={(e) => setAddInfoLink(e.target.value)} />
+          </div>
+          <div className="col-6 mb-2">
+            <label>Observações</label>
+            <textarea className="form-control" rows={2} value={observations} onChange={(e) => setObservations(e.target.value)}/>
           </div>
         </div>
         <div>

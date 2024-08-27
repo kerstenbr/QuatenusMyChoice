@@ -13,6 +13,7 @@ const createFamily = async (request, response) => {
       qbmCode: request.body.qbmCode,
       bannerLink: request.body.bannerLink,
       desc: request.body.desc,
+      observations: request.body.observations,
       links: request.body.links,
       canvaLink: request.body.canvaLink,
       addInfoLink: request.body.addInfoLink,
