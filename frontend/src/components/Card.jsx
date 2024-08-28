@@ -28,9 +28,9 @@ const Card = ({ family }) => {
       <div className="card shadow-sm" style={{ height: "450px" }}>
         <img className="card-img-top" width="100%" height="225" src={family.bannerLink} />
         {createdWeeks ? <img className="position-absolute top-0 end-0" src={Novo} /> : null}
-        <div className="card-body">
+        <div className="card-body pb-0">
           <h3>{family.name}</h3>
-          <LimitedParagraph text={family.desc} limit={150} />
+          <LimitedParagraph text={family.desc} limit={130} />
         </div>
 
         {/* TODO: Achar outra maneira de fazer esse check, atualmente ele faz isso pra TODOS os cards... nada legal. */}
