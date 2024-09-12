@@ -8,29 +8,30 @@ import { UserContext } from "../context/userContext";
 
 const Card = ({ family }) => {
   const { user } = useContext(UserContext);
-  const [createdWeeks, setCreatedWeeks] = useState(false);
+  //TODO: Ativar novamente o aviso de familia nova caso eu arrume o bug do excel ignorar o createdAt que eu coloco
+  // const [createdWeeks, setCreatedWeeks] = useState(false);
 
-  useEffect(() => {
-    const currentDate = new Date();
-    const creationDate = new Date(family.createdAt);
-    const twoWeeksInMilliseconds = 14 * 24 * 60 * 60 * 1000;
+  // useEffect(() => {
+  //   const currentDate = new Date();
+  //   const creationDate = new Date(family.createdAt);
+  //   const twoWeeksInMilliseconds = 14 * 24 * 60 * 60 * 1000;
 
-    if (currentDate - creationDate <= twoWeeksInMilliseconds) {
-      setCreatedWeeks(true);
-    } else {
-      setCreatedWeeks(false);
-    }
-  }, [family.name]);
+  //   if (currentDate - creationDate <= twoWeeksInMilliseconds) {
+  //     setCreatedWeeks(true);
+  //   } else {
+  //     setCreatedWeeks(false);
+  //   }
+  // }, [family.name]);
 
   return (
     // TODO: Melhorar a responsividade do card em si, principalmente em telas menores aonde só aparece dois cards um do lado do outro
     <div className="col" style={{ minWidth: "300px" }}>
       <div className="card shadow-sm" style={{ height: "450px" }}>
         <img className="card-img-top" width="100%" height="225" src={family.bannerLink} />
-        {createdWeeks ? <img className="position-absolute top-0 end-0" src={Novo} /> : null}
-        <div className="card-body">
+        {/* {createdWeeks ? <img className="position-absolute top-0 end-0" src={Novo} /> : null} */}
+        <div className="card-body pb-0">
           <h3>{family.name}</h3>
-          <LimitedParagraph text={family.desc} limit={150} />
+          <LimitedParagraph text={family.desc} limit={155} />
         </div>
 
         {/* TODO: Achar outra maneira de fazer esse check, atualmente ele faz isso pra TODOS os cards... nada legal. */}

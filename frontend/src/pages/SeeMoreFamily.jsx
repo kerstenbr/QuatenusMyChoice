@@ -72,7 +72,6 @@ const SeeMoreFamily = () => {
                     </li>
                   ))}
                 </ul>
-                <hr />
               </div>
             )}
 
@@ -88,19 +87,22 @@ const SeeMoreFamily = () => {
                   ))}
                 </div>
                 
-              </div>) : (null)}
+              </div>) : (null)
+            }
+
+            <hr />
 
             {family.canvaLink ? (
               <>
                 <img style={{ width: "100%" }} src={family.canvaLink} alt="Canva" />
-                <hr />
               </>
             ) : (
               <>
                 <img style={{ width: "100%" }} src={noCanva} alt="Sem value proposition" />
-                <hr />
               </>
             )}
+
+            <hr />  
 
             <div>
               {hasTelemetry && (
@@ -361,16 +363,16 @@ const SeeMoreFamily = () => {
 
             {/* {family.products ? <hr /> : null} */}
 
+            <hr />
+
             <div>
               {family.addInfoLink ? (
                 <>
-                  <hr />
                   <h4>Informação adicional da família:</h4>
                   <img style={{ width: "100%" }} src={family.addInfoLink} alt="Informação adicional da família" />
                 </>
               ) : (
                 <>
-                  <hr />
                   <h4>Informação adicional da família:</h4>
                   <img style={{ width: "100%" }} src={noInfo} alt="Sem info adicional" />
                 </>
