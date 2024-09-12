@@ -89,13 +89,13 @@ Inicie o servidor
 #### Retorna as famílias que contém o produto procurado
 
 ```http
-  GET /api/families/search?name={}
+  GET /api/families/search?name={name}
 ```
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
 | `name`      | `string` | **Obrigatório**. Retorna todas as famílias que contém o produto com o nome pesquisado |
 
-#### Retorna uma família
+#### Retorna uma família pelo id
 
 ```http
   GET /api/families/{id}
@@ -103,7 +103,16 @@ Inicie o servidor
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `id`      | `ObjectId` | **Obrigatório**. O ID da família que você quer |
+| `id`      | `ObjectId` | **Obrigatório**. O id da família que você quer |
+
+#### Baixa um arquivo excel contendo todas as famílias
+
+```http
+  GET /api/families/download
+```
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
 
 #### Cria uma família
 
@@ -180,6 +189,16 @@ Exemplo de `body` a ser enviado:
   }
 }
 ```
+
+#### Cria famílias via arquivo excel
+
+```http
+  POST /api/families/upload
+```
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `file`      | `xls ou xlsx` | **Obrigatório**. Arquivo excel que será lido |
+| `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
 
 #### Editar uma família
 
