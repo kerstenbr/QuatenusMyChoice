@@ -140,8 +140,9 @@ Exemplo de `body` a ser enviado:
   "canvaLink": "https://i.imgur.com/b8CiUT3.png",
   "addInfoLink": "https://i.imgur.com/7FcJhFx.png",
   "products": {
-    "Fleet Teste": {
-      "qbmCide": "ft.teste",
+    {
+      "name": "Fleet Teste",
+      "qbmCode": "ft.teste",
       "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
       "price": {
         "withMembership": [
@@ -165,8 +166,9 @@ Exemplo de `body` a ser enviado:
           "analog": "2"
       }
     },
-    "Fleet Teste 2": {
-      "qbmCide": "ft.teste.2",
+    {
+      "name": "Fleet Teste 2",
+      "qbmCode": "ft.teste.2",
       "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
       "price": {
         "withMembership": [

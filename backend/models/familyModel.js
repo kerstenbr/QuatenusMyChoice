@@ -1,6 +1,17 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
+const productSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  qbmCode: String,
+  desc: String,
+  price: Object,
+  telemetry: Object,
+});
+
 const familySchema = new Schema(
   {
     name: {
@@ -22,10 +33,13 @@ const familySchema = new Schema(
     observations: String,
     canvaLink: String,
     addInfoLink: String,
-    products: Object,
+    products: [productSchema],
   },
   { timestamps: true }
 );
+
+// Criar índice textual no campo products.name
+familySchema.index({ "products.name": "text" });
 
 const Family = mongoose.model("Family", familySchema);
 
