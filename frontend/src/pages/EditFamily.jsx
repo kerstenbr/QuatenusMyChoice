@@ -49,7 +49,7 @@ const EditFamily = () => {
         setBannerLink(bannerLink);
         setQbmCode(qbmCode);
         setDesc(desc);
-        setObservations(observations)
+        setObservations(observations);
         setLinks(linksArray);
         setCanvaLink(canvaLink);
         setAddInfoLink(addInfoLink);
@@ -70,7 +70,8 @@ const EditFamily = () => {
   const handleEditFamily = () => {
     const productsObject = products.reduce((acc, product) => {
       removeEmptyTelemetry(product);
-      acc[product.name] = {
+      acc = {
+        name: product.name,
         qbmCode: product.qbmCode,
         desc: product.desc,
         price: product.price,
@@ -224,7 +225,7 @@ const EditFamily = () => {
           </div>
           <div className="col-6 mb-2">
             <label>Observações</label>
-            <textarea className="form-control" rows={2} value={observations} onChange={(e) => setObservations(e.target.value)}/>
+            <textarea className="form-control" rows={2} value={observations} onChange={(e) => setObservations(e.target.value)} />
           </div>
         </div>
         <div>
@@ -349,7 +350,19 @@ const EditFamily = () => {
                     <input
                       type="text"
                       className="form-control form-control-sm mb-2"
-                      placeholder={valueIndex === 0 ? "12 meses" : valueIndex === 1 ? "24 meses" : valueIndex === 2 ? "36 meses" : valueIndex === 3 ? "48 meses" : valueIndex === 4 ? "60 meses" : "Erro"}
+                      placeholder={
+                        valueIndex === 0
+                          ? "12 meses"
+                          : valueIndex === 1
+                          ? "24 meses"
+                          : valueIndex === 2
+                          ? "36 meses"
+                          : valueIndex === 3
+                          ? "48 meses"
+                          : valueIndex === 4
+                          ? "60 meses"
+                          : "Erro"
+                      }
                       value={value}
                       onChange={(e) => handleProductPriceChange(productIndex, "renovation", valueIndex, e.target.value)}
                     />

@@ -185,17 +185,16 @@ const SeeMoreFamily = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {Object.keys(family.products).map((productName) => {
-                            const product = family.products[productName];
+                          {family.products.map((product) => {
                             if (product.telemetry) {
                               return (
-                                <tr key={productName}>
+                                <tr key={product.name}>
                                   <td>
-                                    <p className="m-0 p-0" style={{fontSize: '12px'}}>
+                                    <p className="m-0 p-0" style={{ fontSize: '12px' }}>
                                       {product.qbmCode}
                                     </p>
                                     <p className="m-0 p-0">
-                                      {productName}
+                                      {product.name}
                                     </p>
                                   </td>
                                   <td className="text-center">{product.telemetry.digital}</td>
@@ -249,16 +248,15 @@ const SeeMoreFamily = () => {
                   </thead>
                   <tbody>
                     {family.products ? (
-                      Object.keys(family.products).map((productName) => {
-                        const product = family.products[productName];
+                      family.products.map((product) => {
                         return (
-                          <tr key={productName} title={product.desc}>
+                          <tr key={product.name} title={product.desc}>
                             <td>
                               <p className="m-0 p-0" style={{fontSize: '12px'}}>
                                 {product.qbmCode}
                               </p>
                               <p className="m-0 p-0">
-                                {productName}
+                                {product.name}
                               </p>
                             </td>
                             {product.price.withMembership[0] ? <td className="text-center text-truncate">R$ {product.price.withMembership[0]}</td> : <td className="text-center">N/A</td>}
@@ -317,16 +315,15 @@ const SeeMoreFamily = () => {
                     </thead>
                     <tbody>
                       {family.products ? (
-                        Object.keys(family.products).map((productName) => {
-                          const product = family.products[productName];
+                        family.products.map((product) => {
                           return (
-                            <tr key={productName}>
+                            <tr key={product.name}>
                               <td>
                               <p className="m-0 p-0" style={{fontSize: '12px'}}>
                                 {product.qbmCode}
                               </p>
                               <p className="m-0 p-0">
-                                {productName}
+                                {product.name}
                               </p>
                             </td>
                               {product.price.renovation ? (

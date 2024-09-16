@@ -2,6 +2,7 @@ import Family from "../models/familyModel.js";
 import mongoose from "mongoose";
 import diacritics from "diacritics";
 import XLSX from "xlsx";
+import Fuse from "fuse.js";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -74,15 +75,16 @@ const findByName = async (request, response) => {
       return response.status(400).json({ message: "Nome do produto não fornecido" });
     }
 
-    const normalizedSearchTerm = diacritics.remove(name).toLowerCase().split(" ");
+    // Normalizar o termo de busca
+    const normalizedSearchTerms = diacritics.remove(name).toLowerCase().split(" ");
 
     const families = await Family.find();
 
+    // Filtrar as famílias com base nos termos de busca normalizados
     const filteredFamilies = families.filter((family) => {
-      const keys = Object.keys(family.products);
-      return keys.some((key) => {
-        const normalizedKey = diacritics.remove(key).toLowerCase();
-        return normalizedSearchTerm.every((term) => normalizedKey.includes(term));
+      return family.products.some((product) => {
+        const normalizedProductName = diacritics.remove(product.name).toLowerCase();
+        return normalizedSearchTerms.every((term) => normalizedProductName.includes(term));
       });
     });
 
@@ -96,6 +98,59 @@ const findByName = async (request, response) => {
     return response.status(500).json({ message: error.message });
   }
 };
+
+// TODO: Implementar a busca com Fuse.js para melhorar a busca.
+// Atualmente não da para usar pois tem alguns problemas com a pesquisa. Não está bom o sufiente para ser usado.
+/* const findByName = async (request, response) => {
+  try {
+    const { name } = request.query;
+
+    if (!name) {
+      return response.status(400).json({ message: "Nome do produto não fornecido" });
+    }
+
+    // Normalizar o termo de busca
+    const normalizedSearchTerm = diacritics.remove(name).toLowerCase();
+    console.log(normalizedSearchTerm)
+
+    // Buscar todas as famílias e produtos
+    const families = await Family.find({});
+
+    if (families.length === 0) {
+      return response.status(404).json({ message: "Nenhuma família encontrada" });
+    }
+
+    // Configurar Fuse.js
+    const options = {
+      includeScore: true,
+      keys: [
+        { name: 'name', weight: 0.3 }, // Nome da família
+        { name: 'products.name', weight: 0.7 } // Nome dos produtos
+      ],
+      ignoreLocation: true,
+      // Um threshold de 0.0 requer um match perfeito (das letras e localização), 
+      // um threshold de 1.0 da match com qualquer coisa.
+      threshold: 0.4,
+      tokenize: true,
+      matchAllTokens: true,
+      findAllMatches: true,
+      shouldSort: true,
+    };
+
+    const fuse = new Fuse(families, options);
+
+    // Realizar a busca
+    const result = fuse.search(normalizedSearchTerm);
+
+    // Extrair os itens encontrados e ordenar pela relevância
+    const sortedFamilies = result.map(res => res.item);
+
+    return response.status(200).json(sortedFamilies);
+  } catch (error) {
+    console.log(error);
+    return response.status(500).json({ message: error.message });
+  }
+}; */
 
 const editFamily = async (request, response) => {
   try {
@@ -139,10 +194,10 @@ const downloadFamilies = async (request, response) => {
 
     // Transformando os dados para o formato que será exportado
     const data = families.flatMap((family) =>
-      Object.entries(family.products).map(([productName, productDetails]) => {
-        const priceWithMembership = productDetails.price?.withMembership || [];
-        const priceNoMembership = productDetails.price?.noMembership || [];
-        const priceRenovation = productDetails.price?.renovation || [];
+      family.products.map((product) => {
+        const priceWithMembership = product.price?.withMembership || [];
+        const priceNoMembership = product.price?.noMembership || [];
+        const priceRenovation = product.price?.renovation || [];
 
         return {
           familyName: family.name,
@@ -157,11 +212,11 @@ const downloadFamilies = async (request, response) => {
                 .map(([linkTitle, linkUrl]) => `${linkTitle}, ${linkUrl}`)
                 .join("; ")
             : "",
-          productName,
-          productQbmCode: productDetails.qbmCode,
-          productDesc: productDetails.desc,
-          productTelemetryDigital: productDetails.telemetry?.digital || "",
-          productTelemetryAnalog: productDetails.telemetry?.analog || "",
+          productName: product.name,
+          productQbmCode: product.qbmCode,
+          productDesc: product.desc,
+          productTelemetryDigital: product.telemetry?.digital || "",
+          productTelemetryAnalog: product.telemetry?.analog || "",
           productPriceWithMembership_adesao: priceWithMembership[0] || "",
           productPriceWithMembership_12meses: priceWithMembership[1] || "",
           productPriceWithMembership_24meses: priceWithMembership[2] || "",
@@ -171,15 +226,13 @@ const downloadFamilies = async (request, response) => {
           productPriceNoMembership_36meses: priceNoMembership[2] || "",
           productPriceNoMembership_48meses: priceNoMembership[3] || "",
           productPriceNoMembership_60meses: priceNoMembership[4] || "",
-          productPriceClosure: productDetails.price?.closure || "",
+          productPriceClosure: product.price?.closure || "",
           productPriceRenovation_12meses: priceRenovation[0] || "",
           productPriceRenovation_24meses: priceRenovation[1] || "",
           productPriceRenovation_36meses: priceRenovation[2] || "",
           productPriceRenovation_48meses: priceRenovation[3] || "",
           productPriceRenovation_60meses: priceRenovation[4] || "",
-          productPriceRenovationClosure: productDetails.price?.renovationClosure || "",
-          // TODO: Ativar novamente caso eu arrume o problema do excel ignorar o createdAt que eu coloco
-          // familyCreatedAt: family.createdAt,
+          productPriceRenovationClosure: product.price?.renovationClosure || "",
         };
       })
     );
@@ -208,9 +261,9 @@ const downloadFamilies = async (request, response) => {
 
 const uploadFamilies = async (request, response) => {
   const filePath = request.file.path; // Caminho do arquivo temporário
-  
+
   try {
-    //  Verificar a extensão do arquivo
+    // Verificar a extensão do arquivo
     const fileExtension = path.extname(request.file.originalname);
     if (fileExtension !== ".xls" && fileExtension !== ".xlsx") {
       return response.status(400).json({ message: "Formato de arquivo inválido. Apenas arquivos xls ou xlsx são permitidos." });
@@ -248,13 +301,14 @@ const uploadFamilies = async (request, response) => {
             : {},
           canvaLink: row.familyCanvaLink,
           addInfoLink: row.familyAddInfoLink,
-          products: {},
+          products: [],
           // TODO: Ativar novamente caso eu arrume o problema do excel ignorar o createdAt que eu coloco
           // createdAt: row.familyCreatedAt
         };
       }
 
       const productDetails = {
+        name: row.productName,
         qbmCode: row.productQbmCode,
         desc: row.productDesc,
         price: {
@@ -291,7 +345,7 @@ const uploadFamilies = async (request, response) => {
         };
       }
 
-      acc[row.familyName].products[row.productName] = productDetails;
+      acc[row.familyName].products.push(productDetails);
 
       return acc;
     }, {});

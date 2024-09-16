@@ -33,16 +33,13 @@ const Home = () => {
             {
               <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 {/* TODO: Achar outra forma mais coerente de organizar as famílias de produto, atualmente está por ordem alfabética */}
-                {families &&
-                  [...families]
-                    .sort((a, b) => a.name.localeCompare(b.name))
-                    .map((family) => <Card key={family._id} family={family} />)}
+                {families && [...families].sort((a, b) => a.name.localeCompare(b.name)).map((family) => <Card key={family._id} family={family} />)}
               </div>
             }
           </>
         ) : (
           <>
-            <NotActiveAccountAlert/>
+            <NotActiveAccountAlert />
           </>
         )}
       </div>
