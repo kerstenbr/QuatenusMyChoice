@@ -6,9 +6,9 @@ Usada pra facilitar e simplificar a visualização das famílias de produtos e a
 
 ## Screenshots
 
-![App Screenshot](https://i.imgur.com/jax2qzQ.png)
-![App Screenshot](https://i.imgur.com/7noOxyj.png)
-![App Screenshot](https://i.imgur.com/hhvGZIv.png)
+![App Screenshot](https://i.imgur.com/0KxyDbE.png)
+![App Screenshot](https://i.imgur.com/pKzSbwn.png)
+![App Screenshot](https://i.imgur.com/uY1pLfq.png)
 
 ## Stack utilizada
 
@@ -139,7 +139,7 @@ Exemplo de `body` a ser enviado:
   },
   "canvaLink": "https://i.imgur.com/b8CiUT3.png",
   "addInfoLink": "https://i.imgur.com/7FcJhFx.png",
-  "products": {
+  "products": [
     {
       "name": "Fleet Teste",
       "qbmCode": "ft.teste",
@@ -188,7 +188,7 @@ Exemplo de `body` a ser enviado:
         "renovationCLosure": "150"
       }
     }
-  }
+  ]
 }
 ```
 
