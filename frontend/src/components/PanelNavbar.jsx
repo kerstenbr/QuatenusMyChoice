@@ -71,10 +71,10 @@ const PanelNavbar = () => {
         Dashboard
       </button>
       <button type="button" className="btn btn-sm btn-qblue mb-1 mt-1 ms-1" onClick={handleBulkUpload}>
-        Uploud em Massa
+        Uploud em Lote
       </button>
       <button type="button" className="btn btn-sm btn-qblue mb-1 mt-1 ms-1" onClick={handleBulkDownload}>
-        Download em Massa
+        Download em Lote
       </button>
 
       {/* Modal */}
