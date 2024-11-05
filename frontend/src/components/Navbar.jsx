@@ -30,45 +30,75 @@ const Navbar = () => {
 
   return (
     <header>
-      <div className="container">
+      <div className="container d-flex align-items-center justify-content-between">
         <Link className="navbar-brand p-0" to="/">
           <img className="logo" src={Logo} />
         </Link>
-        <div className="navbar-brand p-0" to="/">
-          {user && user.role === "admin" ? (
-            <Link to="/family/create">
-              <button type="button" className="btn btn-sm btn-qblue me-1">
-                Criar Família
-              </button>
-            </Link>
-          ) : (
-            <></>
-          )}
-          {user && user.role === "admin" ? (
-            <Link to="/panel">
-              <button type="button" className="btn btn-sm btn-qblue me-1">
-                Painel
-              </button>
-            </Link>
-          ) : (
-            <></>
-          )}
-          {user ? (
-            <>
-              <button className="btn btn-sm btn-qblue me-1" onClick={signout}>
-                Sair
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/login">
-                <button className="btn btn-sm btn-qblue me-1">Entrar</button>
-              </Link>
-              <Link to="/register">
-                <button className="btn btn-sm btn-qblue me-1">Registrar</button>
-              </Link>
-            </>
-          )}
+        <div className="d-flex align-items-center">
+          <div className="dropdown">
+            <button
+              className="btn btn-sm btn-qblue dropdown-toggle me-1"
+              type="button"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Menu
+            </button>
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              {user && user.role === "admin" ? (
+                <>
+                  <li>
+                    <Link className="dropdown-item" to="/family/create">
+                      Criar Família
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/panel">
+                      Painel
+                    </Link>
+                  </li>
+                </>
+              ) : null}
+              {user && (user.role === "logística" || user.role === "técnica" || user.role === "admin") ? (
+                <>
+                  <li>
+                    <Link className="dropdown-item" to="/bom">
+                      BOM
+                    </Link>
+                  </li>
+                </>
+              ) : null}
+              {user && (user.role === "técnica" || user.role === "admin") ? (
+                <>
+                  <li>
+                    <Link className="dropdown-item" to="/payments">
+                      Pagamentos
+                    </Link>
+                  </li>
+                </>
+              ) : null}
+              {user ? (
+                <li>
+                  <button className="dropdown-item" onClick={signout}>
+                    Sair
+                  </button>
+                </li>
+              ) : (
+                <>
+                  <li>
+                    <Link className="dropdown-item" to="/login">
+                      Entrar
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/register">
+                      Registrar
+                    </Link>
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
         </div>
       </div>
     </header>
