@@ -3,11 +3,11 @@ import { Schema } from "mongoose";
 
 const itensSchema = new Schema(
   {
-    observation: [String],
+    observation: String,
     starsoftCode: [String],
     itens: [String],
     unit: [String],
-    quantity: [Number],
+    quantity: [String],
   },
   { _id: false }
 );
