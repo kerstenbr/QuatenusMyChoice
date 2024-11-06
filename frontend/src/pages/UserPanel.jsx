@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import PanelNavbar from "../components/PanelNavbar";
-import BackButton from "../components/BackButton";
-import PanelUserDetail from "../components/PanelUserDetail";
+import PanelNavbar from "../components/PanelNavbar.jsx";
+import BackButton from "../components/BackButton.jsx";
+import PanelUserDetail from "../components/PanelUserDetail.jsx";
 
 const UserPanel = () => {
   const [users, setUsers] = useState(null);

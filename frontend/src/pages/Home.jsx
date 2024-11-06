@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Card from "../components/Card";
-import Searchbar from "../components/Searchbar";
+import Card from "../components/family/Card.jsx";
+import Searchbar from "../components/family/Searchbar.jsx";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext } from "../context/userContext";
-import NotActiveAccountAlert from "../components/NotActiveAccountAlert";
+import { UserContext } from "../context/userContext.jsx";
+import NotActiveAccountAlert from "../components/NotActiveAccountAlert.jsx";
 
 const Home = () => {
   const [families, setFamilies] = useState(null);

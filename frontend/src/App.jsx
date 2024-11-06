@@ -1,19 +1,19 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import Search from "./pages/Search";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Footer from "./components/Footer";
-import CreateFamily from "./pages/CreateFamily";
-import SeeMoreFamily from "./pages/SeeMoreFamily";
-import EditFamily from "./pages/EditFamily";
-import DeleteFamily from "./pages/DeleteFamily";
-import Panel from "./pages/Panel";
-import UserPanel from "./pages/UserPanel";
-import NotFound from "./pages/NotFound";
+import Navbar from "./components/Navbar.jsx";
+import Home from "./pages/Home.jsx";
+import Search from "./pages/Search.jsx";
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
+import Footer from "./components/Footer.jsx";
+import CreateFamily from "./pages/CreateFamily.jsx";
+import SeeMoreFamily from "./pages/SeeMoreFamily.jsx";
+import EditFamily from "./pages/EditFamily.jsx";
+import DeleteFamily from "./pages/DeleteFamily.jsx";
+import Panel from "./pages/Panel.jsx";
+import UserPanel from "./pages/UserPanel.jsx";
+import NotFound from "./pages/NotFound.jsx";
 import { useContext } from "react";
-import { UserContext } from "./context/userContext";
+import { UserContext } from "./context/userContext.jsx";
 
 function App() {
   const { user } = useContext(UserContext);

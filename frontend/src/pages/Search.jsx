@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
-import Searchbar from "../components/Searchbar";
+import Searchbar from "../components/family/Searchbar.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Card from "../components/Card";
+import Card from "../components/family/Card.jsx";
 
 const Search = () => {
   const { name } = useParams();
