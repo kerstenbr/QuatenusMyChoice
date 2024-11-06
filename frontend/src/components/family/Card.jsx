@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Novo from "../../../src/assets/novo.png";
+// import Novo from "../../../src/assets/novo.png";
 import LimitedParagraph from "../LimitedParagraph";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/userContext";
