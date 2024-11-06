@@ -28,7 +28,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/search/:name" element={<Search />} />
                 <Route path="/family/seemore/:id" element={<SeeMoreFamily />} />
-                {user && user.role === "admin" ? (
+                {user && user.admin === true ? (
                   <>
                     <Route path="/family/create" element={<CreateFamily />} />
                     <Route path="/family/edit/:id" element={<EditFamily />} />

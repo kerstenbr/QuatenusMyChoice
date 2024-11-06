@@ -45,7 +45,7 @@ const Navbar = () => {
               Menu
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              {user && user.role === "admin" ? (
+              {user && user.admin === true ? (
                 <>
                   <li>
                     <Link className="dropdown-item" to="/family/create">
@@ -59,7 +59,7 @@ const Navbar = () => {
                   </li>
                 </>
               ) : null}
-              {user && (user.role === "logística" || user.role === "técnica" || user.role === "admin") ? (
+              {user && (user.role === "logística" || user.role === "técnica" || user.admin === true) ? (
                 <>
                   <li>
                     <Link className="dropdown-item" to="/bom">
@@ -68,7 +68,7 @@ const Navbar = () => {
                   </li>
                 </>
               ) : null}
-              {user && (user.role === "técnica" || user.role === "admin") ? (
+              {user && (user.role === "técnica" || user.admin === true) ? (
                 <>
                   <li>
                     <Link className="dropdown-item" to="/payments">

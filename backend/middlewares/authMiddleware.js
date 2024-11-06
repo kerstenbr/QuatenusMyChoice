@@ -31,6 +31,8 @@ const authenticateUser = async (request, response, next) => {
     request.userId = user._id.toString();
     request.email = user.email;
     request.role = user.role;
+    request.admin = user.admin;
+    request.manager = user.manager;
 
     next();
   } catch (error) {
@@ -41,7 +43,7 @@ const authenticateUser = async (request, response, next) => {
 
 const isAdmin = (request, response, next) => {
   try {
-    if (request.role !== "admin") {
+    if (request.admin !== true) {
       return response.status(401).send({ message: "Sem permissão" });
     }
 
@@ -52,4 +54,17 @@ const isAdmin = (request, response, next) => {
   }
 };
 
-export { authenticateUser, isAdmin };
+const isManager = (request, response, next) => {
+  try {
+    if (request.manager !== true || request.admin !== true) {
+      return response.status(401).send({ message: "Sem permissão" });
+    }
+
+    next();
+  } catch (error) {
+    console.log(error);
+    return response.status(500).send({ message: error.message });
+  }
+};
+
+export { authenticateUser, isAdmin, isManager };

@@ -38,7 +38,7 @@ const SeeMoreFamily = () => {
             <button className="btn btn-sm btn-qorange mb-2 float-end" onClick={goBack}>
               Voltar
             </button>
-            {user && user.role === "admin" ? (
+            {user && user.admin === true ? (
               <>
                 <Link to={`/family/edit/${family._id}`}>
                   <button type="button" className="btn btn-sm btn-warning me-1 text-white float-end">
@@ -285,7 +285,7 @@ const SeeMoreFamily = () => {
               </div>
             </div>
 
-            {user.role === "customer success" || user.role === "admin" ? (
+            {user.role === "customer success" || user.admin === true ? (
               <div>
                 <h4>Renovação:</h4>
                 <div className="table-responsive">
@@ -377,7 +377,7 @@ const SeeMoreFamily = () => {
             </div>
 
 
-            {user.role === "suporte a operações" || user.role === "admin" ? (
+            {user.role === "suporte a operações" || user.admin === true ? (
               <div className="mt-2">
               <Link 
                 to={`${import.meta.env.VITE_GA_LINK}`}

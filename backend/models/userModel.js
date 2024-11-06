@@ -18,6 +18,14 @@ const userSchema = new Schema({
     type: String,
     default: "undefined",
   },
+  admin: {
+    type: Boolean,
+    default: false,
+  },
+  manager: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 userSchema.pre("save", async function (next) {

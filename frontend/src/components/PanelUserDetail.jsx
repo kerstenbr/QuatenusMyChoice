@@ -5,11 +5,15 @@ import Cookies from "js-cookie";
 const PanelUserDetail = ({ user }) => {
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
-  const [roles, setRoles] = useState("");
+  const [roles, setRoles] = useState([]);
+  const [admin, setAdmin] = useState(false);
+  const [manager, setManager] = useState(false);
 
   useEffect(() => {
     setEmail(user.email);
     setRole(user.role);
+    setAdmin(user.admin);
+    setManager(user.manager);
   }, [user]);
 
   useEffect(() => {
@@ -34,6 +38,8 @@ const PanelUserDetail = ({ user }) => {
       const data = {
         email,
         role,
+        admin,
+        manager,
       };
 
       axios.put(`${import.meta.env.VITE_BASE_URL}/api/user/${user._id}`, data, {
@@ -87,12 +93,36 @@ const PanelUserDetail = ({ user }) => {
         </label>
         <select className="form-select" value={role} onChange={(e) => setRole(e.target.value)}>
           {roles &&
-            [...roles].map((roles) => (
-              <option value={roles.name} key={roles.name}>
-                {roles.name}
+            [...roles].map((role) => (
+              <option value={role.name} key={role.name}>
+                {role.name}
               </option>
             ))}
         </select>
+      </div>
+      <div className="mb-3 form-check">
+        <input
+          type="checkbox"
+          className="form-check-input"
+          id="admin"
+          checked={admin}
+          onChange={(e) => setAdmin(e.target.checked)}
+        />
+        <label className="form-check-label" htmlFor="admin">
+          Admin
+        </label>
+      </div>
+      <div className="mb-3 form-check">
+        <input
+          type="checkbox"
+          className="form-check-input"
+          id="manager"
+          checked={manager}
+          onChange={(e) => setManager(e.target.checked)}
+        />
+        <label className="form-check-label" htmlFor="manager">
+          Manager
+        </label>
       </div>
       <button className="btn btn-sm btn-danger mb-2" onClick={handleDeleteUser}>
         Excluir Usuário
