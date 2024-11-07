@@ -62,21 +62,23 @@ const Navbar = () => {
               {user && (user.role === "logística" || user.role === "técnica" || user.admin === true) ? (
                 <>
                   <li>
-                    <Link className="dropdown-item" to="/bom">
-                      BOM
+                    <Link className="dropdown-item" to="/logistics-sector/bom">
+                      Estoque
                     </Link>
                   </li>
                 </>
               ) : null}
-              {user && (user.role === "técnica" || user.admin === true) ? (
+              {/* TODO: Desativei por agora por que eu estava me confundindo, quando eu for trabalhar na parte de pagamento
+              dos técnicos eu reativo e continuo  */}
+              {/* {user && (user.role === "técnica" || user.admin === true) ? (
                 <>
                   <li>
-                    <Link className="dropdown-item" to="/payments">
-                      Pagamentos
+                    <Link className="dropdown-item" to="/tecnical-sector">
+                      Área Técnica
                     </Link>
                   </li>
                 </>
-              ) : null}
+              ) : null} */}
               {user ? (
                 <li>
                   <button className="dropdown-item" onClick={signout}>
