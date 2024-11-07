@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
-import Searchbar from "../../components/family/Searchbar.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Card from "../../components/family/Card.jsx";
+import FamilySearchbar from "../../components/family/FamilySearchbar.jsx";
+import FamilyCard from "../../components/family/FamilyCard.jsx";
 
-const Search = () => {
+const SearchFamily = () => {
   const { name } = useParams();
   const [families, setFamilies] = useState([]);
 
@@ -27,7 +27,7 @@ const Search = () => {
   return (
     <div className="py-2 bg-light">
       <div className="container">
-        <Searchbar />
+        <FamilySearchbar />
         <p className="alert alert-secondary p-1">
           {families.length !== 0
             ? `${families.length} ${
@@ -37,7 +37,7 @@ const Search = () => {
         </p>
         {
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {families && families.map((family) => <Card key={family._id} family={family} />)}
+            {families && families.map((family) => <FamilyCard key={family._id} family={family} />)}
           </div>
         }
       </div>
@@ -45,4 +45,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default SearchFamily;

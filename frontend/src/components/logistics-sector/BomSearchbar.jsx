@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-const Searchbar = () => {
+const BomSearchbar = () => {
   const {
     register,
     handleSubmit,
@@ -11,21 +11,22 @@ const Searchbar = () => {
   const navigate = useNavigate();
 
   const onSearch = (data) => {
-    const { name } = data;
-    navigate(`/search/${name}`);
+    console.log(data);
+    const { qbmCode } = data;
+    navigate(`/logistics-sector/bom/search/${qbmCode}`);
     reset();
   };
   return (
     // TODO: Talvez fazer um search as you type?
     <form className="input-group mb-3 mt-2" onSubmit={handleSubmit(onSearch)}>
       <input
-        {...register("name", { required: true })}
-        aria-invalid={errors.name ? "true" : "false"}
+        {...register("qbmCode", { required: true })}
+        aria-invalid={errors.qbmCode ? "true" : "false"}
         type="search"
         className="form-control"
         placeholder="Pesquise aqui"
       />
-      {errors.name?.type === "required"}
+      {errors.qbmCode?.type === "required"}
       <button type="submit" className="btn btn-sm btn-qorange">
         Pesquisar
       </button>
@@ -33,4 +34,4 @@ const Searchbar = () => {
   );
 };
 
-export default Searchbar;
+export default BomSearchbar;

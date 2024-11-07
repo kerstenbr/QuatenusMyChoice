@@ -1,8 +1,8 @@
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Searchbar from "../components/family/Searchbar";
-import Card from "../components/family/Card";
+import FamilySearchbar from "../components/family/FamilySearchbar";
+import FamilyCard from "../components/family/FamilyCard";
 
 const Home = () => {
   const [families, setFamilies] = useState([]);
@@ -23,10 +23,10 @@ const Home = () => {
   return (
     <div className="py-2 bg-light">
       <div className="container">
-        <Searchbar />
+        <FamilySearchbar />
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
           {/* TODO: Achar outra forma mais coerente de organizar as famílias de produto, atualmente está por ordem alfabética */}
-          {families && [...families].sort((a, b) => a.name.localeCompare(b.name)).map((family) => <Card key={family._id} family={family} />)}
+          {families && [...families].sort((a, b) => a.name.localeCompare(b.name)).map((family) => <FamilyCard key={family._id} family={family} />)}
         </div>
       </div>
     </div>

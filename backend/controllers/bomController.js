@@ -66,14 +66,14 @@ const findById = async (request, response) => {
 
 const findByName = async (request, response) => {
   try {
-    const { name } = request.query;
+    const { qbmCode } = request.query;
 
-    if (!name) {
+    if (!qbmCode) {
       return response.status(400).json({ message: "Nome do produto não fornecido" });
     }
 
     // Normalizar o termo de busca
-    const normalizedSearchTerm = diacritics.remove(name).toLowerCase();
+    const normalizedSearchTerm = diacritics.remove(qbmCode).toLowerCase();
 
     // Buscar os BOMs que correspondem ao qbmCode
     const boms = await Bom.find({

@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { UserContext } from "../../context/userContext.jsx";
-import NotActiveAccountAlert from "../../components/NotActiveAccountAlert.jsx";
 import noCanva from "../../assets/noCanva.gif";
 import noInfo from "../../assets/noInfo.gif";
 
