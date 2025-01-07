@@ -1,17 +1,18 @@
 import express from "express";
-import { authenticateUser, isAdmin } from "../middlewares/authMiddleware.js";
-import { createBom, findAll, findById, findByName, editBom, deleteBom } from "../controllers/bomController.js";
+import multer from 'multer';
+import { authenticateUser, isAdmin, isManager } from "../middlewares/authMiddleware.js";
+import { createBom, findAll, findById, findByName, editBom, deleteBom, downloadBoms, uploadBoms } from "../controllers/bomController.js";
 
 const router = express.Router();
+const upload = multer({ dest: 'uploads/bom' }); // Diretório temporário para armazenar o arquivo
 
-// Se houver problema no front, lembrar de tirar o authenticateUser de algumas rotas
 router.get("/", authenticateUser, findAll);
-// download aqui
+router.get("/download", authenticateUser, isAdmin, downloadBoms);
 router.get("/search", authenticateUser, findByName);
 router.get("/:id", authenticateUser, findById);
 router.post("/", authenticateUser, isAdmin, createBom);
-// uploud aqui
-router.put("/:id", authenticateUser, isAdmin, editBom);
+router.post('/upload', authenticateUser, isAdmin, upload.single('file'), uploadBoms);
+router.put("/:id", authenticateUser, isManager, editBom);
 router.delete("/:id", authenticateUser, isAdmin, deleteBom);
 
 export default router;

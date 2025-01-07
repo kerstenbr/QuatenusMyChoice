@@ -43,7 +43,7 @@ const authenticateUser = async (request, response, next) => {
 
 const isAdmin = (request, response, next) => {
   try {
-    if (request.admin !== true) {
+    if (!request.admin) {
       return response.status(401).send({ message: "Sem permissão" });
     }
 
@@ -56,7 +56,7 @@ const isAdmin = (request, response, next) => {
 
 const isManager = (request, response, next) => {
   try {
-    if (request.manager !== true || request.admin !== true) {
+    if (!request.manager && !request.admin) {
       return response.status(401).send({ message: "Sem permissão" });
     }
 

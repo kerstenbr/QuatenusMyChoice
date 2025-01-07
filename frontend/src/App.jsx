@@ -19,7 +19,11 @@ import { UserContext } from "./context/userContext.jsx";
 import ProtectedRoute from "./components/routes/ProtectedRoute.jsx";
 import AdminRoute from "./components/routes/AdminRoute.jsx";
 import RoleBasedRoute from "./components/routes/RoleBasedRoute.jsx";
+import ManagerRoute from "./components/routes/ManagerRoute.jsx";
 import ActiveAccountRoute from "./components/routes/ActiveAccountRoute.jsx";
+import CreateBom from "./pages/logistics-sector/CreateBom.jsx";
+import EditBom from "./pages/logistics-sector/EditBom.jsx";
+import DeleteBom from "./pages/logistics-sector/DeleteBom.jsx";
 
 function App() {
   const { user } = useContext(UserContext);
@@ -105,7 +109,7 @@ function App() {
               path="/logistics-sector/bom"
               element={
                 <ProtectedRoute user={user}>
-                  <RoleBasedRoute user={user} roles={["técnica", "logística", "admin"]}>
+                  <RoleBasedRoute user={user} roles={["técnica", "logística"]}>
                     <ActiveAccountRoute>
                       <Bom />
                     </ActiveAccountRoute>
@@ -118,10 +122,55 @@ function App() {
               path="/logistics-sector/bom/search/:qbmCode"
               element={
                 <ProtectedRoute user={user}>
-                  <RoleBasedRoute user={user} roles={["técnica", "logística", "admin"]}>
+                  <RoleBasedRoute user={user} roles={["técnica", "logística"]}>
                     <ActiveAccountRoute>
                       <SearchBom />
                     </ActiveAccountRoute>
+                  </RoleBasedRoute>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/logistics-sector/bom/create"
+              element={
+                <ProtectedRoute user={user}>
+                  <RoleBasedRoute user={user} roles={["técnica", "logística"]}>
+                    <ManagerRoute user={user}>
+                      <ActiveAccountRoute>
+                        <CreateBom />
+                      </ActiveAccountRoute>
+                    </ManagerRoute>
+                  </RoleBasedRoute>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/logistics-sector/bom/edit/:id"
+              element={
+                <ProtectedRoute user={user}>
+                  <RoleBasedRoute user={user} roles={["técnica", "logística"]}>
+                    <ManagerRoute user={user}>
+                      <ActiveAccountRoute>
+                        <EditBom />
+                      </ActiveAccountRoute>
+                    </ManagerRoute>
+                  </RoleBasedRoute>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/logistics-sector/bom/delete/:id"
+              element={
+                <ProtectedRoute user={user}>
+                  <RoleBasedRoute user={user} roles={["técnica", "logística"]}>
+                    <ManagerRoute user={user}>
+                      <ActiveAccountRoute>
+                        <DeleteBom />
+                      </ActiveAccountRoute>
+                    </ManagerRoute>
                   </RoleBasedRoute>
                 </ProtectedRoute>
               }

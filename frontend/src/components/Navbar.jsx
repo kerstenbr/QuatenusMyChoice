@@ -48,15 +48,21 @@ const Navbar = () => {
               {user && user.admin === true ? (
                 <>
                   <li>
+                    <Link className="dropdown-item" to="/panel">
+                      Painel
+                    </Link>
+                  </li>
+                  <li>
                     <Link className="dropdown-item" to="/family/create">
                       Criar Família
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" to="/panel">
-                      Painel
+                    <Link className="dropdown-item" to="/logistics-sector/bom/create">
+                      Criar B.O.M
                     </Link>
                   </li>
+                  <hr className="m-0 p-0" />
                 </>
               ) : null}
               {user && (user.role === "logística" || user.role === "técnica" || user.admin === true) ? (
@@ -68,6 +74,7 @@ const Navbar = () => {
                   </li>
                 </>
               ) : null}
+            
               {/* TODO: Desativei por agora por que eu estava me confundindo, quando eu for trabalhar na parte de pagamento
               dos técnicos eu reativo e continuo  */}
               {/* {user && (user.role === "técnica" || user.admin === true) ? (

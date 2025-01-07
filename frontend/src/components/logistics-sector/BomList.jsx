@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import { UserContext } from "../../context/userContext";
 
 const List = ({ product }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedBom, setSelectedBom] = useState(null);
   const [selectedType, setSelectedType] = useState("");
+  const { user } = useContext(UserContext);
 
   const handleShowModal = (bom, key) => {
     setSelectedBom(bom);
@@ -34,7 +37,7 @@ const List = ({ product }) => {
           <div>
             {/* Itera sobre os campos específicos e cria um botão para cada um, caso esteja presente no documento */}
             {["car", "motorcycle", "vessel", "truck", "machine"].map((key) => {
-              if (product[key]) {
+              if (product[key] && product[key].itens.length > 0) {
                 return (
                   <button key={key} className="btn btn-sm btn-qblue me-2" onClick={() => handleShowModal(product[key], key)}>
                     {keyTranslations[key]}
@@ -43,13 +46,33 @@ const List = ({ product }) => {
               }
               return null;
             })}
+            <div className="float-end">
+              {user && ((user.manager === true && user.role === "técnica") || user.admin === true) ? (
+                <Link to={`/logistics-sector/bom/edit/${product._id}`}>
+                  <button type="button" className="btn btn-sm btn-warning me-1 text-white">
+                    Editar
+                  </button>
+                </Link>
+              ) : (
+                <></>
+              )}
+              {user && user.admin === true ? (
+                <Link to={`/logistics-sector/bom/delete/${product._id}`}>
+                  <button type="button" className="btn btn-sm btn-danger">
+                    Excluir
+                  </button>
+                </Link>
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
         </div>
       </div>
 
       {showModal && (
         <div className="modal show d-block" tabIndex="-1" role="dialog">
-          <div className="modal-dialog modal-lg" role="document">
+          <div className="modal-dialog modal-xl" role="document">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">
