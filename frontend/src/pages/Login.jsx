@@ -2,9 +2,13 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../context/userContext";
+import { userLogged } from "../services/userService";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
   const {
     register,
     handleSubmit,
@@ -15,11 +19,11 @@ const Login = () => {
   const onLogin = (data) => {
     axios
       .post(`${import.meta.env.VITE_BASE_URL}/api/user/login`, data)
-      .then((response) => {
+      .then(async (response) => {
         Cookies.set("token", response.data, { expires: 3, sameSite: "strict" });
+        const userResponse = await userLogged();
+        setUser(userResponse.data);
         navigate("/");
-        // TODO: Eu estou forçando um reload para que o navbar seja atualizado, por que atualmente o contexto não está funcionando direito. Trocar isso depois.
-        window.location.reload();
       })
       .catch((error) => {
         alert(`Oops, algo deu errado!

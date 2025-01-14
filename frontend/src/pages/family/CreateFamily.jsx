@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import BackButton from "../components/BackButton";
+import BackButton from "../../components/BackButton.jsx";
 import Cookies from "js-cookie";
 
 const CreateFamily = () => {

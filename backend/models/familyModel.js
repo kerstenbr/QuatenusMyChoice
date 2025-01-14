@@ -1,16 +1,19 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
-const productSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
+const productSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    qbmCode: String,
+    desc: String,
+    price: Object,
+    telemetry: Object,
   },
-  qbmCode: String,
-  desc: String,
-  price: Object,
-  telemetry: Object,
-});
+  { _id: false }
+);
 
 const familySchema = new Schema(
   {

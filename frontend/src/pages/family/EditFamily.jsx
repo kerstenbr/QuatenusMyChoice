@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import BackButton from "../components/BackButton";
 import Cookies from "js-cookie";
+import BackButton from "../../components/BackButton.jsx";
 
 const EditFamily = () => {
   const [name, setName] = useState("");

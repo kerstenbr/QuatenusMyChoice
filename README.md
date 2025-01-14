@@ -1,19 +1,30 @@
-
 ![Logo](https://i.imgur.com/MTVXJmQ.png)
 
-O Quatenus MyChoice é uma ferramenta interna da Quatenus Brasil. 
-Usada pra facilitar e simplificar a visualização das famílias de produtos e auxiliar o usuário a entender melhor o produto.
+O Quatenus MyChoice é uma ferramenta interna da Quatenus Brasil, usada pra facilitar e simplificar a visualização das famílias de produtos e auxiliar o usuário a entender melhor o produto.
 
 ## Screenshots
 
-![App Screenshot](https://i.imgur.com/0KxyDbE.png)
-![App Screenshot](https://i.imgur.com/pKzSbwn.png)
-![App Screenshot](https://i.imgur.com/uY1pLfq.png)
+Página inicial:
+![Screenshot](https://i.imgur.com/Txrj46i.png)
+
+Pesquisa:
+![Screenshot](https://i.imgur.com/8PGYWhl.png)
+
+Informação sobre a família de produto 'Fleet Basic':
+![Screenshot](https://i.imgur.com/RogpZLM.png)
+
+Página do estoque:
+![Screenshot](https://i.imgur.com/hRruS9F.png)
+
+Informação do que deve ser enviado para o produto 'FT.BASIC - Carro':
+![Screenshot](https://i.imgur.com/0cz7OfO.png)
 
 ## Stack utilizada
 
 **Frontend:** React, Bootstrap
+
 **Backend:** Node, Express
+
 **Database:** MongoDB
 
 ## Variáveis de Ambiente
@@ -21,17 +32,24 @@ Usada pra facilitar e simplificar a visualização das famílias de produtos e a
 Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
 
 Para o backend:
-`DB_URI`
-`SECRET_JWT` 
-`SECRET_JWT_EXP`
 
-Opcional: `PORT`
+`DB_URI` - URI do mongodb
+
+`SECRET_JWT` - Hash string, ex: yajznbmahjd
+
+`SECRET_JWT_EXP` - Expiração do token JWT, ex: 24h
+
+Opcional:
+
+`PORT` - Padrão é 5555
 
 Para o frontend:
-`VITE_BASE_URL`
 
-Opcional: `VITE_GA_LINK`
+`VITE_BASE_URL` - URL base do site, ex: http://localhost:3000
 
+Opcional:
+
+`VITE_GA_LINK` - Link para a pasta que contém os Guias de Ativação
 
 ## Rodando localmente
 
@@ -62,7 +80,9 @@ Inicie o servidor
 ```bash
   npm run dev
 ```
+
 Instale as dependências do frontend
+
 ```bash
   cd frontend
 ```
@@ -72,6 +92,7 @@ Instale as dependências do frontend
 ```
 
 Inicie o servidor
+
 ```bash
   npm run dev
 ```
@@ -91,9 +112,10 @@ Inicie o servidor
 ```http
   GET /api/families/search?name={name}
 ```
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `name`      | `string` | **Obrigatório**. Retorna todas as famílias que contém o produto com o nome pesquisado |
+
+| Parâmetro | Tipo     | Descrição        |
+| :-------- | :------- | :--------------- |
+| `name`    | `string` | **Obrigatório**. |
 
 #### Retorna uma família pelo id
 
@@ -101,18 +123,19 @@ Inicie o servidor
   GET /api/families/{id}
 ```
 
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `id`      | `ObjectId` | **Obrigatório**. O id da família que você quer |
+| Parâmetro | Tipo       | Descrição        |
+| :-------- | :--------- | :--------------- |
+| `id`      | `ObjectId` | **Obrigatório**. |
 
 #### Baixa um arquivo excel contendo todas as famílias
 
 ```http
   GET /api/families/download
 ```
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+
+| Parâmetro | Tipo     | Descrição                                                         |
+| :-------- | :------- | :---------------------------------------------------------------- |
+| `token`   | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
 
 #### Cria uma família
 
@@ -120,12 +143,11 @@ Inicie o servidor
   POST /api/families/
 ```
 
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `nome`      | `string` | **Obrigatório**. Nome da família de produtos |
-| `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+| Parâmetro | Tipo     | Descrição                                                         |
+| :-------- | :------- | :---------------------------------------------------------------- |
+| `token`   | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
 
-Exemplo de `body` a ser enviado:
+name, qbmCode e desc são obrigatórios. Exemplo de `body` a ser enviado:
 
 ```json
 {
@@ -145,25 +167,14 @@ Exemplo de `body` a ser enviado:
       "qbmCode": "ft.teste",
       "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
       "price": {
-        "withMembership": [
-          "1000",
-          "120",
-          "115",
-          "110"
-        ],
-        "noMembership": [
-          "200",
-          "195",
-          "190",
-          "185",
-          "180"
-        ],
+        "withMembership": ["1000", "120", "115", "110"],
+        "noMembership": ["200", "195", "190", "185", "180"],
         "closure": "100",
         "renovationCLosure": "50"
       },
       "telemetry": {
-          "digital": "3",
-          "analog": "2"
+        "digital": "3",
+        "analog": "2"
       }
     },
     {
@@ -171,19 +182,8 @@ Exemplo de `body` a ser enviado:
       "qbmCode": "ft.teste.2",
       "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
       "price": {
-        "withMembership": [
-          "1000",
-          "120",
-          "115",
-          "110"
-        ],
-        "noMembership": [
-          "200",
-          "195",
-          "190",
-          "185",
-          "180"
-        ],
+        "withMembership": ["1000", "120", "115", "110"],
+        "noMembership": ["200", "195", "190", "185", "180"],
         "closure": "200",
         "renovationCLosure": "150"
       }
@@ -197,20 +197,22 @@ Exemplo de `body` a ser enviado:
 ```http
   POST /api/families/upload
 ```
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `file`      | `xls ou xlsx` | **Obrigatório**. Arquivo excel que será lido |
-| `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+
+| Parâmetro | Tipo          | Descrição                                                         |
+| :-------- | :------------ | :---------------------------------------------------------------- |
+| `file`    | `xls ou xlsx` | **Obrigatório**. Arquivo excel que será lido                      |
+| `token`   | `string`      | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
 
 #### Editar uma família
 
 ```http
   PUT /api/families/{id}
 ```
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `id`      | `ObjectId` | **Obrigatório**. O ID da família que você quer |
-| `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+
+| Parâmetro | Tipo       | Descrição                                                         |
+| :-------- | :--------- | :---------------------------------------------------------------- |
+| `id`      | `ObjectId` | **Obrigatório**.                                                  |
+| `token`   | `string`   | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
 
 Exemplo de `body` a ser enviado:
 
@@ -225,10 +227,11 @@ Exemplo de `body` a ser enviado:
 ```http
   DELETE /api/families/{id}
 ```
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `id`      | `ObjectId` | **Obrigatório**. O ID da família que você quer excluir|
-| `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+
+| Parâmetro | Tipo       | Descrição                                                         |
+| :-------- | :--------- | :---------------------------------------------------------------- |
+| `id`      | `ObjectId` | **Obrigatório**.                                                  |
+| `token`   | `string`   | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
 
 ### Usuários:
 
@@ -237,9 +240,10 @@ Exemplo de `body` a ser enviado:
 ```http
   GET /api/user/
 ```
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+
+| Parâmetro | Tipo     | Descrição                                                         |
+| :-------- | :------- | :---------------------------------------------------------------- |
+| `token`   | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
 
 #### Registrar
 
@@ -255,11 +259,13 @@ Exemplo de `body` a ser enviado:
   "password": "123"
 }
 ```
+
 #### Login
 
 ```http
   POST /api/user/login
 ```
+
 Exemplo de `body` a ser enviado:
 
 ```json
@@ -274,26 +280,28 @@ Exemplo de `body` a ser enviado:
 ```http
   GET /api/user/findUser/{id}
 ```
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `id`      | `ObjectId` | **Obrigatório**. O ID do usuário que você quer encontrar|
-| `token`      | `string` | **Obrigatório no Header**. Token do usuário |
+
+| Parâmetro | Tipo       | Descrição                                   |
+| :-------- | :--------- | :------------------------------------------ |
+| `id`      | `ObjectId` | **Obrigatório**.                            |
+| `token`   | `string`   | **Obrigatório no Header**. Token do usuário |
 
 #### Editar um usuário
 
 ```http
   PUT /api/user/{id}
 ```
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `id`      | `ObjectId` | **Obrigatório**. O ID da usuário que você quer editar|
-| `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+
+| Parâmetro | Tipo       | Descrição                                                         |
+| :-------- | :--------- | :---------------------------------------------------------------- |
+| `id`      | `ObjectId` | **Obrigatório**.                                                  |
+| `token`   | `string`   | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
 
 Exemplo de `body` a ser enviado:
 
 ```json
 {
-  "email": "email@email.com",
+  "email": "email@email.com"
 }
 ```
 
@@ -302,10 +310,11 @@ Exemplo de `body` a ser enviado:
 ```http
   DELETE /api/user/{id}
 ```
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `id`      | `ObjectId` | **Obrigatório**. O ID do usuário que você quer excluir|
-| `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+
+| Parâmetro | Tipo       | Descrição                                                         |
+| :-------- | :--------- | :---------------------------------------------------------------- |
+| `id`      | `ObjectId` | **Obrigatório**.                                                  |
+| `token`   | `string`   | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
 
 ### Setores:
 
@@ -314,9 +323,10 @@ Exemplo de `body` a ser enviado:
 ```http
   GET /api/role/
 ```
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+
+| Parâmetro | Tipo     | Descrição                                                         |
+| :-------- | :------- | :---------------------------------------------------------------- |
+| `token`   | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
 
 #### Criar um setor
 
@@ -324,9 +334,9 @@ Exemplo de `body` a ser enviado:
   POST /api/role/
 ```
 
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `token`      | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+| Parâmetro | Tipo     | Descrição                                                         |
+| :-------- | :------- | :---------------------------------------------------------------- |
+| `token`   | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
 
 Exemplo de `body` a ser enviado:
 
@@ -336,3 +346,133 @@ Exemplo de `body` a ser enviado:
   "active": true
 }
 ```
+
+### B.O.M:
+
+#### Retorna todos os boms
+
+```http
+  GET /api/bom/
+```
+
+#### Retorna os boms que contém o produto procurado
+
+```http
+  GET /api/bom/search?qbmCode={qbmCode}
+```
+
+| Parâmetro | Tipo     | Descrição        |
+| :-------- | :------- | :--------------- |
+| `qbmCode` | `string` | **Obrigatório**. |
+
+#### Retorna um bom pelo id
+
+```http
+  GET /api/bom/{id}
+```
+
+| Parâmetro | Tipo       | Descrição        |
+| :-------- | :--------- | :--------------- |
+| `id`      | `ObjectId` | **Obrigatório**. |
+
+#### Baixa um arquivo excel contendo todos os boms
+
+```http
+  GET /api/bom/download
+```
+
+| Parâmetro | Tipo     | Descrição                                                         |
+| :-------- | :------- | :---------------------------------------------------------------- |
+| `token`   | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+
+#### Cria uma família
+
+```http
+  POST /api/bom/
+```
+
+| Parâmetro | Tipo     | Descrição                                                         |
+| :-------- | :------- | :---------------------------------------------------------------- |
+| `token`   | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+
+qbmCode é obrigatório. Exemplo de `body` a ser enviado:
+
+```json
+{
+  "qbmCode": "FT.BASIC",
+  "car": {
+    "observation": "",
+    "starsoftCode": ["00", "01", "02", "05"],
+    "itens": ["RASTREADOR", "CHIP", "CHICOTE", "Kit de Instalação"],
+    "unit": ["un", "un", "un", "kit"],
+    "quantity": ["1", "1", "1", "1"]
+  },
+  "machine": {
+    "observation": "",
+    "starsoftCode": [],
+    "itens": [],
+    "unit": [],
+    "quantity": []
+  },
+  "motorcycle": {
+    "observation": "",
+    "starsoftCode": [],
+    "itens": [],
+    "unit": [],
+    "quantity": []
+  },
+  "truck": {
+    "observation": "",
+    "starsoftCode": [],
+    "itens": [],
+    "unit": [],
+    "quantity": []
+  },
+  "vessel": {
+    "observation": "",
+    "starsoftCode": [],
+    "itens": [],
+    "unit": [],
+    "quantity": []
+  }
+}
+```
+
+#### Cria boms via arquivo excel
+
+```http
+  POST /api/bom/upload
+```
+
+| Parâmetro | Tipo          | Descrição                                                         |
+| :-------- | :------------ | :---------------------------------------------------------------- |
+| `file`    | `xls ou xlsx` | **Obrigatório**. Arquivo excel que será lido                      |
+| `token`   | `string`      | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+
+#### Editar um bom
+
+```http
+  PUT /api/bom/{id}
+```
+
+| Parâmetro | Tipo     | Descrição                                                         |
+| :-------- | :------- | :---------------------------------------------------------------- |
+| `token`   | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+
+Exemplo de `body` a ser enviado:
+
+```json
+{
+  "qbmCode": "FT.BASIC.TESTE2"
+}
+```
+
+#### Deletar um bom
+
+```http
+  DELETE /api/bom/{id}
+```
+
+| Parâmetro | Tipo     | Descrição                                                         |
+| :-------- | :------- | :---------------------------------------------------------------- |
+| `token`   | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |

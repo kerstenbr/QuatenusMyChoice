@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
-import Novo from "../assets//novo.png";
-import LimitedParagraph from "./LimitedParagraph";
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../context/userContext";
-
+// import Novo from "../../../src/assets/novo.png";
+import LimitedParagraph from "../LimitedParagraph";
+import { UserContext } from "../../context/userContext";
 // TODO: Adicionar páginação
 
-const Card = ({ family }) => {
+const FamilyCard = ({ family }) => {
   const { user } = useContext(UserContext);
   //TODO: Ativar novamente o aviso de familia nova caso eu arrume o bug do excel ignorar o createdAt que eu coloco
   // const [createdWeeks, setCreatedWeeks] = useState(false);
@@ -34,14 +33,13 @@ const Card = ({ family }) => {
           <LimitedParagraph text={family.desc} limit={155} />
         </div>
 
-        {/* TODO: Achar outra maneira de fazer esse check, atualmente ele faz isso pra TODOS os cards... nada legal. */}
         <div className="ms-3 mb-3 me-3">
           <Link to={`/family/seemore/${family._id}`}>
             <button type="button" className="btn btn-sm btn-qblue me-1">
               Ver mais
             </button>
           </Link>
-          {user && user.role === "admin" ? (
+          {user && user.admin === true ? (
             <>
               <Link to={`/family/edit/${family._id}`}>
                 <button type="button" className="btn btn-sm btn-warning me-1 text-white">
@@ -63,4 +61,4 @@ const Card = ({ family }) => {
   );
 };
 
-export default Card;
+export default FamilyCard;

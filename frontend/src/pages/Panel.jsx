@@ -1,5 +1,5 @@
-import PanelNavbar from "../components/PanelNavbar";
-import BackButton from "../components/BackButton";
+import PanelNavbar from "../components/PanelNavbar.jsx";
+import BackButton from "../components/BackButton.jsx";
 
 const Panel = () => {
   return (

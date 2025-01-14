@@ -1,19 +1,29 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import Search from "./pages/Search";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Footer from "./components/Footer";
-import CreateFamily from "./pages/CreateFamily";
-import SeeMoreFamily from "./pages/SeeMoreFamily";
-import EditFamily from "./pages/EditFamily";
-import DeleteFamily from "./pages/DeleteFamily";
-import Panel from "./pages/Panel";
-import UserPanel from "./pages/UserPanel";
-import NotFound from "./pages/NotFound";
 import { useContext } from "react";
-import { UserContext } from "./context/userContext";
+import Navbar from "./components/Navbar.jsx";
+import Home from "./pages/Home.jsx";
+import SearchFamily from "./pages/family/SearchFamily.jsx";
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
+import Footer from "./components/Footer.jsx";
+import CreateFamily from "./pages/family/CreateFamily.jsx";
+import SeeMoreFamily from "./pages/family/SeeMoreFamily.jsx";
+import EditFamily from "./pages/family/EditFamily.jsx";
+import DeleteFamily from "./pages/family/DeleteFamily.jsx";
+import Panel from "./pages/Panel.jsx";
+import Bom from "./pages/logistics-sector/Bom.jsx";
+import SearchBom from "./pages/logistics-sector/SearchBom.jsx";
+import UserPanel from "./pages/UserPanel.jsx";
+import NotFound from "./pages/NotFound.jsx";
+import { UserContext } from "./context/userContext.jsx";
+import ProtectedRoute from "./components/routes/ProtectedRoute.jsx";
+import AdminRoute from "./components/routes/AdminRoute.jsx";
+import RoleBasedRoute from "./components/routes/RoleBasedRoute.jsx";
+import ManagerRoute from "./components/routes/ManagerRoute.jsx";
+import ActiveAccountRoute from "./components/routes/ActiveAccountRoute.jsx";
+import CreateBom from "./pages/logistics-sector/CreateBom.jsx";
+import EditBom from "./pages/logistics-sector/EditBom.jsx";
+import DeleteBom from "./pages/logistics-sector/DeleteBom.jsx";
 
 function App() {
   const { user } = useContext(UserContext);
@@ -23,26 +33,174 @@ function App() {
         <Navbar />
         <main>
           <Routes>
-            {user !== undefined ? (
-              <>
-                <Route path="/" element={<Home />} />
-                <Route path="/search/:name" element={<Search />} />
-                <Route path="/family/seemore/:id" element={<SeeMoreFamily />} />
-                {user && user.role === "admin" ? (
-                  <>
-                    <Route path="/family/create" element={<CreateFamily />} />
-                    <Route path="/family/edit/:id" element={<EditFamily />} />
-                    <Route path="/family/delete/:id" element={<DeleteFamily />} />
-                    <Route path="/panel" element={<Panel />} />
-                    <Route path="/panel/users" element={<UserPanel />} />
-                  </>
-                ) : (
-                  <Route path="*" element={<NotFound />} />
-                )}
-              </>
-            ) : (
-              <Route path="*" element={<Login />} />
-            )}
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute user={user}>
+                  <ActiveAccountRoute>
+                    <Home />
+                  </ActiveAccountRoute>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="family/search/:name"
+              element={
+                <ProtectedRoute user={user}>
+                  <ActiveAccountRoute>
+                    <SearchFamily />
+                  </ActiveAccountRoute>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/family/seemore/:id"
+              element={
+                <ProtectedRoute user={user}>
+                  <ActiveAccountRoute>
+                    <SeeMoreFamily />
+                  </ActiveAccountRoute>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/family/create"
+              element={
+                <ProtectedRoute user={user}>
+                  <AdminRoute user={user}>
+                    <ActiveAccountRoute>
+                      <CreateFamily />
+                    </ActiveAccountRoute>
+                  </AdminRoute>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/family/edit/:id"
+              element={
+                <ProtectedRoute user={user}>
+                  <AdminRoute user={user}>
+                    <ActiveAccountRoute>
+                      <EditFamily />
+                    </ActiveAccountRoute>
+                  </AdminRoute>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/family/delete/:id"
+              element={
+                <ProtectedRoute user={user}>
+                  <AdminRoute user={user}>
+                    <ActiveAccountRoute>
+                      <DeleteFamily />
+                    </ActiveAccountRoute>
+                  </AdminRoute>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/logistics-sector/bom"
+              element={
+                <ProtectedRoute user={user}>
+                  <RoleBasedRoute user={user} roles={["técnica", "logística"]}>
+                    <ActiveAccountRoute>
+                      <Bom />
+                    </ActiveAccountRoute>
+                  </RoleBasedRoute>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/logistics-sector/bom/search/:qbmCode"
+              element={
+                <ProtectedRoute user={user}>
+                  <RoleBasedRoute user={user} roles={["técnica", "logística"]}>
+                    <ActiveAccountRoute>
+                      <SearchBom />
+                    </ActiveAccountRoute>
+                  </RoleBasedRoute>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/logistics-sector/bom/create"
+              element={
+                <ProtectedRoute user={user}>
+                  <RoleBasedRoute user={user} roles={["técnica", "logística"]}>
+                    <ManagerRoute user={user}>
+                      <ActiveAccountRoute>
+                        <CreateBom />
+                      </ActiveAccountRoute>
+                    </ManagerRoute>
+                  </RoleBasedRoute>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/logistics-sector/bom/edit/:id"
+              element={
+                <ProtectedRoute user={user}>
+                  <RoleBasedRoute user={user} roles={["técnica", "logística"]}>
+                    <ManagerRoute user={user}>
+                      <ActiveAccountRoute>
+                        <EditBom />
+                      </ActiveAccountRoute>
+                    </ManagerRoute>
+                  </RoleBasedRoute>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/logistics-sector/bom/delete/:id"
+              element={
+                <ProtectedRoute user={user}>
+                  <RoleBasedRoute user={user} roles={["técnica", "logística"]}>
+                    <ManagerRoute user={user}>
+                      <ActiveAccountRoute>
+                        <DeleteBom />
+                      </ActiveAccountRoute>
+                    </ManagerRoute>
+                  </RoleBasedRoute>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/panel"
+              element={
+                <ProtectedRoute user={user}>
+                  <AdminRoute user={user}>
+                    <ActiveAccountRoute>
+                      <Panel />
+                    </ActiveAccountRoute>
+                  </AdminRoute>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/panel/users"
+              element={
+                <ProtectedRoute user={user}>
+                  <AdminRoute user={user}>
+                    <ActiveAccountRoute>
+                      <UserPanel />
+                    </ActiveAccountRoute>
+                  </AdminRoute>
+                </ProtectedRoute>
+              }
+            />
 
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

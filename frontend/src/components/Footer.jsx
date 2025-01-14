@@ -7,7 +7,6 @@ const Footer = () => {
         <div className="row">
           <div className="col-md-6 mb-3">
             <p className="mb-1">&copy; 2024 Quatenus MyChoice</p>
-            <p>v1.0.0</p>
             <p className="m-0">
               Criado por{" "}
               <Link to={"https://kerstenbr.github.io/SitePei/"} target="_blank" rel="noopener noreferrer">
