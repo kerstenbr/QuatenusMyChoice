@@ -29,7 +29,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header>
+    <header className="sticky-top">
       <div className="container d-flex align-items-center justify-content-between">
         <Link className="navbar-brand p-0" to="/">
           <img className="logo" src={Logo} />
