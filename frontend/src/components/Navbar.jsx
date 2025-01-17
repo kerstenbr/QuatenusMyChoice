@@ -65,11 +65,20 @@ const Navbar = () => {
                   <hr className="m-0 p-0" />
                 </>
               ) : null}
+              {user ? (
+                <>
+                  <li>
+                    <Link className="dropdown-item" to="/families">
+                      Famílias
+                    </Link>
+                  </li>
+                </>
+              ) : null}
               {user && (user.role === "logística" || user.role === "técnica" || user.admin === true) ? (
                 <>
                   <li>
                     <Link className="dropdown-item" to="/logistics-sector/bom">
-                      Estoque
+                      B.O.M
                     </Link>
                   </li>
                 </>
