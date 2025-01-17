@@ -1,32 +1,28 @@
-import { useEffect, useState, useContext } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import FamilySearchbar from "../components/family/FamilySearchbar";
-import FamilyCard from "../components/family/FamilyCard";
+import { useContext } from "react";
+import { UserContext } from "../context/userContext";
+import Card from "../components/Card";
+import familiesImage from "../assets/families.png";
+import bomImage from "../assets/bom.png";
+import faqImage from "../assets/faq.png";
+import paymentImage from "../assets/payment.png";
 
 const Home = () => {
-  const [families, setFamilies] = useState([]);
-  const navigate = useNavigate();
+  const { user } = useContext(UserContext);
 
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BASE_URL}/api/families/`)
-      .then((response) => {
-        setFamilies(response.data);
-      })
-      .catch((error) => {
-        navigate("*");
-        console.error(error.response.data.message);
-      });
-  }, [navigate]);
+  const cards = [
+    { image: familiesImage, title: "Famílias", path: "/families", canAccess: true },
+    { image: bomImage, title: "B.O.M", path: "/logistics-sector/bom", canAccess: user && (user.role === "logística" || user.role === "técnica" || user.admin === true), },
+    { image: faqImage, title: "F.A.Q", path: "", canAccess: false },
+    // { image: paymentImage, title: "Pagamento", path: "", canAccess: false },
+  ];
 
   return (
-    <div className="py-2 bg-light">
+    <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
       <div className="container">
-        <FamilySearchbar />
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          {/* TODO: Achar outra forma mais coerente de organizar as famílias de produto, atualmente está por ordem alfabética */}
-          {families && [...families].sort((a, b) => a.name.localeCompare(b.name)).map((family) => <FamilyCard key={family._id} family={family} />)}
+        <div className="row justify-content-center">
+          {cards.map((card, index) => (
+            <Card key={index} image={card.image} title={card.title} path={card.path} canAccess={card.canAccess} />
+          ))}
         </div>
       </div>
     </div>
