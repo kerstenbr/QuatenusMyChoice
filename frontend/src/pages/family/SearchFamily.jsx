@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import FamilySearchbar from "../../components/family/FamilySearchbar.jsx";
 import FamilyCard from "../../components/family/FamilyCard.jsx";
+import Cookies from "js-cookie";
 
 const SearchFamily = () => {
   const { name } = useParams();
@@ -10,7 +11,11 @@ const SearchFamily = () => {
 
   const search = () => {
     axios
-      .get(`${import.meta.env.VITE_BASE_URL}/api/families/search?name=${name}`)
+      .get(`${import.meta.env.VITE_BASE_URL}/api/families/search?name=${name}`, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+      })
       .then((response) => {
         setFamilies(response.data);
       })
@@ -30,9 +35,7 @@ const SearchFamily = () => {
         <FamilySearchbar />
         <p className="alert alert-secondary p-1">
           {families.length !== 0
-            ? `${families.length} ${
-                families.length > 1 ? `famílias contém o produto: ${name}` : `família contém o produto: ${name}`
-              }`
+            ? `${families.length} ${families.length > 1 ? `famílias contém o produto: ${name}` : `família contém o produto: ${name}`}`
             : `Nenhum produto encontrado para: ${name} :(`}
         </p>
         {

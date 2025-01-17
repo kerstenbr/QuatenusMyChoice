@@ -4,14 +4,12 @@ import { findAll, findById, findByName, createFamily, editFamily, deleteFamily, 
 import { authenticateUser, isAdmin } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
-const upload = multer({ dest: 'uploads/families' }); // Diretório temporário para armazenar o arquivo
+const upload = multer({ dest: 'uploads/families' });
 
-// TODO: Se eu coloco o authenticateUser o front sempre vai entregar um erro. Provavelmente é algo simples, mas agora eu não
-// estou entendendo o por que disso... Então por agora vou fazer a verificação somente no front
-router.get("/", findAll);
+router.get("/", authenticateUser, findAll);
 router.get("/download", authenticateUser, isAdmin, downloadFamilies);
-router.get("/search", findByName);
-router.get("/:id", findById);
+router.get("/search", authenticateUser, findByName);
+router.get("/:id", authenticateUser, findById);
 router.post("/", authenticateUser, isAdmin, createFamily);
 router.post('/upload', authenticateUser, isAdmin, upload.single('file'), uploadFamilies);
 router.put("/:id", authenticateUser, isAdmin, editFamily);

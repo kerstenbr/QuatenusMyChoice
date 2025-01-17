@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import FamilySearchbar from "../../components/family/FamilySearchbar";
 import FamilyCard from "../../components/family/FamilyCard";
+import Cookies from "js-cookie";
 
 const Families = () => {
   const [families, setFamilies] = useState([]);
@@ -10,7 +11,11 @@ const Families = () => {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BASE_URL}/api/families/`)
+      .get(`${import.meta.env.VITE_BASE_URL}/api/families/`, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+      })
       .then((response) => {
         setFamilies(response.data);
       })
