@@ -260,7 +260,7 @@ const downloadFamilies = async (request, response) => {
 };
 
 const uploadFamilies = async (request, response) => {
-  const filePath = request.file.path; // Caminho do arquivo temporário
+  const filePath = request.file.path;
 
   try {
     // Verificar a extensão do arquivo
@@ -302,8 +302,6 @@ const uploadFamilies = async (request, response) => {
           canvaLink: row.familyCanvaLink,
           addInfoLink: row.familyAddInfoLink,
           products: [],
-          // TODO: Ativar novamente caso eu arrume o problema do excel ignorar o createdAt que eu coloco
-          // createdAt: row.familyCreatedAt
         };
       }
 
@@ -361,7 +359,7 @@ const uploadFamilies = async (request, response) => {
     console.error("Erro ao processar o arquivo Excel:", error);
     response.status(500).json({ message: "Erro ao processar o arquivo Excel" });
   } finally {
-    fs.unlinkSync(filePath); // Remove o arquivo temporário
+    fs.unlinkSync(filePath);
   }
 };
 

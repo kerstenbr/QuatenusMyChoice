@@ -21,7 +21,6 @@ const SeeMoreFamily = () => {
       })
       .then((response) => {
         setFamily(response.data);
-        // TODO: Gambiarra. Não consigo pensar em outra forma de fazer a página abrir no topo.
         window.scrollTo(0, 0);
       })
       .catch((error) => {

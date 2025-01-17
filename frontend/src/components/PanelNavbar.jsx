@@ -62,8 +62,8 @@ const PanelNavbar = () => {
   };
 
   const handleBomsModal = () => {
-    setShowBomsModal(true)
-  }
+    setShowBomsModal(true);
+  };
 
   const handleBomsDownload = () => {
     axios

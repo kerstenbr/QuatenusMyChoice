@@ -11,7 +11,12 @@ const Home = () => {
 
   const cards = [
     { image: familiesImage, title: "Famílias", path: "/families", canAccess: true },
-    { image: bomImage, title: "B.O.M", path: "/logistics-sector/bom", canAccess: user && (user.role === "logística" || user.role === "técnica" || user.admin === true), },
+    {
+      image: bomImage,
+      title: "B.O.M",
+      path: "/logistics-sector/bom",
+      canAccess: user && (user.role === "logística" || user.role === "técnica" || user.admin === true),
+    },
     { image: faqImage, title: "F.A.Q", path: "", canAccess: false },
     // { image: paymentImage, title: "Pagamento", path: "", canAccess: false },
   ];

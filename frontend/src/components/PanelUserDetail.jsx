@@ -101,25 +101,13 @@ const PanelUserDetail = ({ user }) => {
         </select>
       </div>
       <div className="mb-3 form-check">
-        <input
-          type="checkbox"
-          className="form-check-input"
-          id="admin"
-          checked={admin}
-          onChange={(e) => setAdmin(e.target.checked)}
-        />
+        <input type="checkbox" className="form-check-input" id="admin" checked={admin} onChange={(e) => setAdmin(e.target.checked)} />
         <label className="form-check-label" htmlFor="admin">
           Admin
         </label>
       </div>
       <div className="mb-3 form-check">
-        <input
-          type="checkbox"
-          className="form-check-input"
-          id="manager"
-          checked={manager}
-          onChange={(e) => setManager(e.target.checked)}
-        />
+        <input type="checkbox" className="form-check-input" id="manager" checked={manager} onChange={(e) => setManager(e.target.checked)} />
         <label className="form-check-label" htmlFor="manager">
           Manager
         </label>

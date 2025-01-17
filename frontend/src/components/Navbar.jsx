@@ -83,7 +83,7 @@ const Navbar = () => {
                   </li>
                 </>
               ) : null}
-            
+
               {/* TODO: Desativei por agora por que eu estava me confundindo, quando eu for trabalhar na parte de pagamento
               dos técnicos eu reativo e continuo  */}
               {/* {user && (user.role === "técnica" || user.admin === true) ? (

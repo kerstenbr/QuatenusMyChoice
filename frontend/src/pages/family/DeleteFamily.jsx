@@ -53,9 +53,7 @@ const DeleteFamily = () => {
             <div className="card p-4 shadow-sm">
               <div className="card-body">
                 <h3 className="mb-3 fw-normal text-center">Deletar familia</h3>
-                <h5 className="mb-3 fw-normal text-center">
-                  Você quer mesmo excluir a família "{familyName}"? É impossível reverter essa ação.
-                </h5>
+                <h5 className="mb-3 fw-normal text-center">Você quer mesmo excluir a família "{familyName}"? É impossível reverter essa ação.</h5>
                 <div className="text-center">
                   <button className="btn btn-danger me-1" onClick={handleDeleteFamily}>
                     Sim, excluir

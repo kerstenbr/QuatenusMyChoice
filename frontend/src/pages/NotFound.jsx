@@ -15,10 +15,7 @@ const NotFound = () => {
             <div className="card p-4 shadow-sm">
               <div className="card-body">
                 <h1 className="mb-3 fw-normal text-center">404</h1>
-                <h5 className="mb-3 fw-normal text-center">
-                  {" "}
-                  Desculpe, algo deu errado e a página que você estava procurando não pode ser encontrada.
-                </h5>
+                <h5 className="mb-3 fw-normal text-center"> Desculpe, algo deu errado e a página que você estava procurando não pode ser encontrada.</h5>
                 <div className="text-center mb-3">
                   <img className="img-fluid" src={NotFoundImage} alt="Imagem de erro 404" />
                 </div>

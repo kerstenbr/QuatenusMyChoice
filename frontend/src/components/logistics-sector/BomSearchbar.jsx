@@ -17,7 +17,6 @@ const BomSearchbar = () => {
     reset();
   };
   return (
-    // TODO: Talvez fazer um search as you type?
     <form className="input-group mb-3 mt-2" onSubmit={handleSubmit(onSearch)}>
       <input
         {...register("qbmCode", { required: true })}

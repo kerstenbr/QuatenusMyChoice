@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import lockImage from "../assets/lock.png"; // Imagem de cadeado
+import lockImage from "../assets/lock.png";
 
 const Card = ({ image, title, path, canAccess }) => {
   const navigate = useNavigate();
 
   return (
-    <div className={`col-md-4 mb-4`} onClick={canAccess ? () => navigate(path) : null} style={{cursor: 'pointer'}}>
+    <div className={`col-md-4 mb-4`} onClick={canAccess ? () => navigate(path) : null} style={{ cursor: "pointer" }}>
       <div className="card border-0 shadow text-center h-100 position-relative">
         <div className="card-body d-flex flex-column justify-content-center align-items-center p-5">
           <img src={image} className="w-25 mb-3" />

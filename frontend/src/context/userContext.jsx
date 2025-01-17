@@ -16,9 +16,5 @@ export default function UserProvider({ children }) {
     }
   }, [user]);
 
-  return (
-    <UserContext.Provider value={{ user, setUser }}>
-      {children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>;
 }
