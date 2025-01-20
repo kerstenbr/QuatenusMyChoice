@@ -7,7 +7,7 @@ const Card = ({ image, title, path, canAccess }) => {
 
   return (
     <div className={`col-md-4 mb-4`} onClick={canAccess ? () => navigate(path) : null} style={{ cursor: "pointer" }}>
-      <div className="card border-0 shadow text-center h-100 position-relative">
+      <div className="card border-0 shadow text-center h-100 position-relative card-zoom">
         <div className="card-body d-flex flex-column justify-content-center align-items-center p-5">
           <img src={image} className="w-25 mb-3" />
           <h5 className="card-title text-orange mb-0">{title}</h5>
