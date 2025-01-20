@@ -4,7 +4,7 @@ import { authenticateUser, isAdmin, isManager } from "../middlewares/authMiddlew
 import { createBom, findAll, findById, findByName, editBom, deleteBom, downloadBoms, uploadBoms } from "../controllers/bomController.js";
 
 const router = express.Router();
-const upload = multer({ dest: 'uploads/bom' }); // Diretório temporário para armazenar o arquivo
+const upload = multer({ dest: 'uploads/bom' });
 
 router.get("/", authenticateUser, findAll);
 router.get("/download", authenticateUser, isAdmin, downloadBoms);

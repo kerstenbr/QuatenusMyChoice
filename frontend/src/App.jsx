@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useContext } from "react";
 import Navbar from "./components/Navbar.jsx";
 import Home from "./pages/Home.jsx";
+import Families from "./pages/family/Families.jsx";
 import SearchFamily from "./pages/family/SearchFamily.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
@@ -39,6 +40,17 @@ function App() {
                 <ProtectedRoute user={user}>
                   <ActiveAccountRoute>
                     <Home />
+                  </ActiveAccountRoute>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/families"
+              element={
+                <ProtectedRoute user={user}>
+                  <ActiveAccountRoute>
+                    <Families />
                   </ActiveAccountRoute>
                 </ProtectedRoute>
               }

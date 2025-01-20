@@ -29,7 +29,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header>
+    <header className="sticky-top">
       <div className="container d-flex align-items-center justify-content-between">
         <Link className="navbar-brand p-0" to="/">
           <img className="logo" src={Logo} />
@@ -65,16 +65,25 @@ const Navbar = () => {
                   <hr className="m-0 p-0" />
                 </>
               ) : null}
-              {user && (user.role === "logística" || user.role === "técnica" || user.admin === true) ? (
+              {user ? (
                 <>
                   <li>
-                    <Link className="dropdown-item" to="/logistics-sector/bom">
-                      Estoque
+                    <Link className="dropdown-item" to="/families">
+                      Famílias
                     </Link>
                   </li>
                 </>
               ) : null}
-            
+              {user && (user.role === "logística" || user.role === "técnica" || user.admin === true) ? (
+                <>
+                  <li>
+                    <Link className="dropdown-item" to="/logistics-sector/bom">
+                      B.O.M
+                    </Link>
+                  </li>
+                </>
+              ) : null}
+
               {/* TODO: Desativei por agora por que eu estava me confundindo, quando eu for trabalhar na parte de pagamento
               dos técnicos eu reativo e continuo  */}
               {/* {user && (user.role === "técnica" || user.admin === true) ? (

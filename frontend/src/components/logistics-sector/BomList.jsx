@@ -20,7 +20,6 @@ const List = ({ product }) => {
     setSelectedType("");
   };
 
-  // Mapeamento de chaves em inglês para português
   const keyTranslations = {
     car: "Carro",
     motorcycle: "Moto",
@@ -35,7 +34,6 @@ const List = ({ product }) => {
         <div className="card-body">
           <h5 className="card-title">{product.qbmCode}</h5>
           <div>
-            {/* Itera sobre os campos específicos e cria um botão para cada um, caso esteja presente no documento */}
             {["car", "motorcycle", "vessel", "truck", "machine"].map((key) => {
               if (product[key] && product[key].itens.length > 0) {
                 return (

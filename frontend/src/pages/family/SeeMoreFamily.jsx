@@ -4,6 +4,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { UserContext } from "../../context/userContext.jsx";
 import noCanva from "../../assets/noCanva.gif";
 import noInfo from "../../assets/noInfo.gif";
+import Cookies from "js-cookie";
 
 const SeeMoreFamily = () => {
   const { user } = useContext(UserContext);
@@ -13,9 +14,14 @@ const SeeMoreFamily = () => {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BASE_URL}/api/families/${id}`)
+      .get(`${import.meta.env.VITE_BASE_URL}/api/families/${id}`, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+      })
       .then((response) => {
         setFamily(response.data);
+        window.scrollTo(0, 0);
       })
       .catch((error) => {
         navigate("*");

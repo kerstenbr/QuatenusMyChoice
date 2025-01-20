@@ -132,9 +132,7 @@ const downloadBoms = async (request, response) => {
     // Transformando os dados para o formato que será exportado
     const data = boms.flatMap((bom) => {
       const vehicles = ["car", "motorcycle", "vessel", "truck", "machine"];
-      const maxLength = Math.max(
-        ...vehicles.map((vehicle) => (bom[vehicle]?.starsoftCode?.length || 0))
-      );
+      const maxLength = Math.max(...vehicles.map((vehicle) => bom[vehicle]?.starsoftCode?.length || 0));
 
       // Criar uma linha para cada índice até o maior número de itens
       return Array.from({ length: maxLength }).map((_, index) => {
@@ -176,7 +174,7 @@ const downloadBoms = async (request, response) => {
 };
 
 const uploadBoms = async (request, response) => {
-  const filePath = request.file.path; // Caminho do arquivo temporário
+  const filePath = request.file.path;
 
   try {
     // Verificar a extensão do arquivo
@@ -266,7 +264,7 @@ const uploadBoms = async (request, response) => {
     console.error("Erro ao processar o arquivo Excel:", error);
     response.status(500).json({ message: "Erro ao processar o arquivo Excel" });
   } finally {
-    fs.unlinkSync(filePath); // Remove o arquivo temporário
+    fs.unlinkSync(filePath);
   }
 };
 

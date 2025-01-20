@@ -10,8 +10,8 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "*", // Explicitly specify the allowed origin
-    credentials: true, // Important for cookies, authorization headers with HTTPS
+    origin: "*",
+    credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Origin", "Content-Type", "Accept", "Authorization", "X-Request-With"],
   })
