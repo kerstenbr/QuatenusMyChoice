@@ -331,7 +331,7 @@ const SeeMoreFamily = () => {
           </div>
         </div>
 
-        {user.role === "customer success" || user.admin === true ? (
+        {/*user.role === "customer success" || user.admin === true ? (
           <div>
             <h4>Renovação:</h4>
             <div className="table-responsive">
@@ -424,7 +424,7 @@ const SeeMoreFamily = () => {
               </table>
             </div>
           </div>
-        ) : null}
+        ) : null*/}
 
         {/* {family.products ? <hr /> : null} */}
 

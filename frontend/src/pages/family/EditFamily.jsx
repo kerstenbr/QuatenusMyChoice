@@ -164,11 +164,11 @@ const EditFamily = () => {
     setProducts(newProducts);
   };
 
-  const handleProductPriceRenovationClosureChange = (productIndex, value) => {
-    const newProducts = [...products];
-    newProducts[productIndex].price.renovationClosure = value;
-    setProducts(newProducts);
-  };
+  // const handleProductPriceRenovationClosureChange = (productIndex, value) => {
+  //   const newProducts = [...products];
+  //   newProducts[productIndex].price.renovationClosure = value;
+  //   setProducts(newProducts);
+  // };
 
   const handleTelemetryChange = (productIndex, key, value) => {
     const newProducts = [...products];
@@ -343,7 +343,7 @@ const EditFamily = () => {
                   onChange={(e) => handleProductPriceClosureChange(productIndex, e.target.value)}
                 />
               </div>
-              <div className="row mt-2">
+              {/* <div className="row mt-2">
                 <label>Preços da Renovação</label>
                 {product.price.renovation.map((value, valueIndex) => (
                   <div className="col-2" key={valueIndex}>
@@ -377,7 +377,7 @@ const EditFamily = () => {
                   value={product.price.renovationClosure}
                   onChange={(e) => handleProductPriceRenovationClosureChange(productIndex, e.target.value)}
                 />
-              </div>
+              </div> */}
               <div className="row mb-2 mt-2">
                 <label>Telemetria</label>
                 <div className="col-2">

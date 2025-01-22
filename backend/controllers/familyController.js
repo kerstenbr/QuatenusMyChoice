@@ -197,7 +197,7 @@ const downloadFamilies = async (request, response) => {
       family.products.map((product) => {
         const priceWithMembership = product.price?.withMembership || [];
         const priceNoMembership = product.price?.noMembership || [];
-        const priceRenovation = product.price?.renovation || [];
+        // const priceRenovation = product.price?.renovation || [];
 
         return {
           familyName: family.name,
@@ -227,12 +227,12 @@ const downloadFamilies = async (request, response) => {
           productPriceNoMembership_48meses: priceNoMembership[3] || "",
           productPriceNoMembership_60meses: priceNoMembership[4] || "",
           productPriceClosure: product.price?.closure || "",
-          productPriceRenovation_12meses: priceRenovation[0] || "",
-          productPriceRenovation_24meses: priceRenovation[1] || "",
-          productPriceRenovation_36meses: priceRenovation[2] || "",
-          productPriceRenovation_48meses: priceRenovation[3] || "",
-          productPriceRenovation_60meses: priceRenovation[4] || "",
-          productPriceRenovationClosure: product.price?.renovationClosure || "",
+          // productPriceRenovation_12meses: priceRenovation[0] || "",
+          // productPriceRenovation_24meses: priceRenovation[1] || "",
+          // productPriceRenovation_36meses: priceRenovation[2] || "",
+          // productPriceRenovation_48meses: priceRenovation[3] || "",
+          // productPriceRenovation_60meses: priceRenovation[4] || "",
+          // productPriceRenovationClosure: product.price?.renovationClosure || "",
         };
       })
     );
@@ -324,14 +324,14 @@ const uploadFamilies = async (request, response) => {
             row.productPriceNoMembership_60meses,
           ],
           closure: row.productPriceClosure,
-          renovation: [
-            row.productPriceRenovation_12meses,
-            row.productPriceRenovation_24meses,
-            row.productPriceRenovation_36meses,
-            row.productPriceRenovation_48meses,
-            row.productPriceRenovation_60meses,
-          ],
-          renovationClosure: row.productPriceRenovationClosure,
+          // renovation: [
+          //   row.productPriceRenovation_12meses,
+          //   row.productPriceRenovation_24meses,
+          //   row.productPriceRenovation_36meses,
+          //   row.productPriceRenovation_48meses,
+          //   row.productPriceRenovation_60meses,
+          // ],
+          // renovationClosure: row.productPriceRenovationClosure,
         },
       };
 
