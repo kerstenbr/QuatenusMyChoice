@@ -16,7 +16,7 @@ const FamilyCard = ({ family }) => {
           <h3>{family.name}</h3>
           {/* TODO: Mudar essa parte de baixo depois. Estou checando se o nome da família tem mais de 29 caracteres, se sim, eu limito
           a descrição a 100 caracteres, se não, eu deixo nos 155 caracteres */}
-          <LimitedParagraph text={family.desc} limit={family.name.length > 29 ? 100 : 155} />
+          <LimitedParagraph text={family.desc} limit={family.name.length > 29 ? 140 : 190} />
         </div>
 
         <div className="ms-3 mb-3 me-3">
