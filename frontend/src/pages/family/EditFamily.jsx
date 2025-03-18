@@ -1,3 +1,4 @@
+//teste
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
@@ -68,23 +69,22 @@ const EditFamily = () => {
   };
 
   const handleEditFamily = () => {
-    const productsObject = products.reduce((acc, product) => {
+    const sanitizedProducts = products.map((product) => {
       removeEmptyTelemetry(product);
-      acc = {
+      return {
         name: product.name,
         qbmCode: product.qbmCode,
         desc: product.desc,
         price: product.price,
         telemetry: product.telemetry,
       };
-      return acc;
-    }, {});
-
+    });
+  
     const linksObject = links.reduce((acc, link) => {
       acc[link.key] = link.url;
       return acc;
     }, {});
-
+  
     const data = {
       name,
       bannerLink,
@@ -94,9 +94,9 @@ const EditFamily = () => {
       links: linksObject,
       canvaLink,
       addInfoLink,
-      products: productsObject,
+      products: sanitizedProducts,
     };
-
+  
     axios
       .put(`${import.meta.env.VITE_BASE_URL}/api/families/${id}`, data, {
         headers: {
@@ -122,9 +122,7 @@ const EditFamily = () => {
         price: {
           withMembership: Array(4).fill(""),
           noMembership: Array(5).fill(""),
-          renovation: Array(5).fill(""),
           closure: "",
-          renovationClosure: "",
         },
         telemetry: {
           digital: "",
@@ -163,12 +161,6 @@ const EditFamily = () => {
     newProducts[productIndex].price.closure = value;
     setProducts(newProducts);
   };
-
-  // const handleProductPriceRenovationClosureChange = (productIndex, value) => {
-  //   const newProducts = [...products];
-  //   newProducts[productIndex].price.renovationClosure = value;
-  //   setProducts(newProducts);
-  // };
 
   const handleTelemetryChange = (productIndex, key, value) => {
     const newProducts = [...products];
@@ -343,41 +335,6 @@ const EditFamily = () => {
                   onChange={(e) => handleProductPriceClosureChange(productIndex, e.target.value)}
                 />
               </div>
-              {/* <div className="row mt-2">
-                <label>Preços da Renovação</label>
-                {product.price.renovation.map((value, valueIndex) => (
-                  <div className="col-2" key={valueIndex}>
-                    <input
-                      type="text"
-                      className="form-control form-control-sm mb-2"
-                      placeholder={
-                        valueIndex === 0
-                          ? "12 meses"
-                          : valueIndex === 1
-                          ? "24 meses"
-                          : valueIndex === 2
-                          ? "36 meses"
-                          : valueIndex === 3
-                          ? "48 meses"
-                          : valueIndex === 4
-                          ? "60 meses"
-                          : "Erro"
-                      }
-                      value={value}
-                      onChange={(e) => handleProductPriceChange(productIndex, "renovation", valueIndex, e.target.value)}
-                    />
-                  </div>
-                ))}
-              </div>
-              <label>Preço de Fechamento da Renovação</label>
-              <div className="mb-2 col-2">
-                <input
-                  type="text"
-                  className="form-control form-control-sm"
-                  value={product.price.renovationClosure}
-                  onChange={(e) => handleProductPriceRenovationClosureChange(productIndex, e.target.value)}
-                />
-              </div> */}
               <div className="row mb-2 mt-2">
                 <label>Telemetria</label>
                 <div className="col-2">
