@@ -83,6 +83,7 @@ const findByName = async (request, response) => {
     // Filtrar as famílias com base nos termos de busca normalizados
     const filteredFamilies = families.filter((family) => {
       return family.products.some((product) => {
+        if (!product.name) return false; // Verifica se o campo name está definido
         const normalizedProductName = diacritics.remove(product.name).toLowerCase();
         return normalizedSearchTerms.every((term) => normalizedProductName.includes(term));
       });
