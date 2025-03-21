@@ -65,7 +65,7 @@ const Navbar = () => {
                   <hr className="m-0 p-0" />
                 </>
               ) : null}
-              {user ? (
+              {/* {user ? (
                 <>
                   <li>
                     <Link className="dropdown-item" to="/families">
@@ -82,7 +82,7 @@ const Navbar = () => {
                     </Link>
                   </li>
                 </>
-              ) : null}
+              ) : null} */}
 
               {/* TODO: Desativei por agora por que eu estava me confundindo, quando eu for trabalhar na parte de pagamento
               dos técnicos eu reativo e continuo  */}

@@ -2,8 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { UserContext } from "../../context/userContext.jsx";
-import noCanva from "../../assets/noCanva.gif";
-import noInfo from "../../assets/noInfo.gif";
 import Cookies from "js-cookie";
 
 const SeeMoreFamily = () => {
@@ -80,7 +78,7 @@ const SeeMoreFamily = () => {
 
         {family.observations ? (
           <div className="alert alert-warning p-2" role="alert">
-            <svg
+            {/* <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
@@ -89,7 +87,8 @@ const SeeMoreFamily = () => {
               viewBox="0 0 16 16">
               <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
               <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
-            </svg>
+            </svg> */}
+            <p className="p-0 m-0 fw-bold">Atenção:</p>
             <div>
               {family.observations.split("\n").map((text, index) => (
                 <p className="m-0" key={index}>
@@ -104,15 +103,11 @@ const SeeMoreFamily = () => {
 
         {family.canvaLink ? (
           <>
-            <img style={{ width: "100%" }} src={family.canvaLink} alt="Canva" />
+            <img style={{ width: "100%" }} src={family.canvaLink} alt="Canva Value Proposition" />
+            <hr />
           </>
-        ) : (
-          <>
-            <img style={{ width: "100%" }} src={noCanva} alt="Sem value proposition" />
-          </>
-        )}
+        ) : null}
 
-        <hr />
 
         <div>
           {hasTelemetry && (
@@ -339,12 +334,7 @@ const SeeMoreFamily = () => {
               <h4>Informação adicional da família:</h4>
               <img style={{ width: "100%" }} src={family.addInfoLink} alt="Informação adicional da família" />
             </>
-          ) : (
-            <>
-              <h4>Informação adicional da família:</h4>
-              <img style={{ width: "100%" }} src={noInfo} alt="Sem info adicional" />
-            </>
-          )}
+          ) : null}
         </div>
 
         {user.role === "suporte a operações" || user.admin === true ? (

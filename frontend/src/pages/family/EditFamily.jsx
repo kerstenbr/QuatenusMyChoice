@@ -104,7 +104,7 @@ const EditFamily = () => {
         },
       })
       .then(() => {
-        navigate("/");
+        navigate(`/family/seemore/${id}`);
       })
       .catch((error) => {
         alert(`Oops, algo deu errado! - ${error.response.data.message}`);
