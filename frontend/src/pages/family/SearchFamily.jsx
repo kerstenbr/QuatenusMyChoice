@@ -20,7 +20,7 @@ const SearchFamily = () => {
         setFamilies(response.data);
       })
       .catch((error) => {
-        console.error(error.response.data.message);
+        console.error(error.response?.data?.message || "Erro ao buscar famílias.");
         setFamilies([]);
       });
   };
@@ -38,11 +38,11 @@ const SearchFamily = () => {
             ? `${families.length} ${families.length > 1 ? `famílias contém o produto: ${name}` : `família contém o produto: ${name}`}`
             : `Nenhum produto encontrado para: ${name} :(`}
         </p>
-        {
-          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {families && families.map((family) => <FamilyCard key={family._id} family={family} />)}
-          </div>
-        }
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          {families.map((family) => (
+            <FamilyCard key={family._id} family={family} />
+          ))}
+        </div>
       </div>
     </div>
   );
