@@ -46,7 +46,7 @@ const Home = () => {
         <div className="row justify-content-center">
           {cards.map((card, index) => (
             <Card key={index} icon={card.icon} title={card.title} path={card.path} canAccess={card.canAccess} />
-          ), console.log(cards))}
+          ))}
         </div>
       </div>
     </div>
