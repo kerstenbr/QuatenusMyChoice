@@ -261,53 +261,53 @@ const SeeMoreFamily = () => {
                           <p className="m-0 p-0">{product.name}</p>
                         </td>
                         {product.price.withMembership[0] ? (
-                          <td className="text-center text-truncate">R$ {product.price.withMembership[0]}</td>
+                          <td className="text-center text-truncate">{product.price.withMembership[0]}</td>
                         ) : (
                           <td className="text-center">N/A</td>
                         )}
                         {product.price.withMembership[1] ? (
-                          <td className="text-center text-truncate">R$ {product.price.withMembership[1]}</td>
+                          <td className="text-center text-truncate">{product.price.withMembership[1]}</td>
                         ) : (
                           <td className="text-center">N/A</td>
                         )}
                         {product.price.withMembership[2] ? (
-                          <td className="text-center text-truncate">R$ {product.price.withMembership[2]}</td>
+                          <td className="text-center text-truncate">{product.price.withMembership[2]}</td>
                         ) : (
                           <td className="text-center">N/A</td>
                         )}
                         {product.price.withMembership[3] ? (
-                          <td className="text-center text-truncate">R$ {product.price.withMembership[3]}</td>
+                          <td className="text-center text-truncate">{product.price.withMembership[3]}</td>
                         ) : (
                           <td className="text-center">N/A</td>
                         )}
 
                         {product.price.noMembership[0] ? (
-                          <td className="text-center text-truncate">R$ {product.price.noMembership[0]}</td>
+                          <td className="text-center text-truncate">{product.price.noMembership[0]}</td>
                         ) : (
                           <td className="text-center">N/A</td>
                         )}
                         {product.price.noMembership[1] ? (
-                          <td className="text-center text-truncate">R$ {product.price.noMembership[1]}</td>
+                          <td className="text-center text-truncate">{product.price.noMembership[1]}</td>
                         ) : (
                           <td className="text-center">N/A</td>
                         )}
                         {product.price.noMembership[2] ? (
-                          <td className="text-center text-truncate">R$ {product.price.noMembership[2]}</td>
+                          <td className="text-center text-truncate">{product.price.noMembership[2]}</td>
                         ) : (
                           <td className="text-center">N/A</td>
                         )}
                         {product.price.noMembership[3] ? (
-                          <td className="text-center text-truncate">R$ {product.price.noMembership[3]}</td>
+                          <td className="text-center text-truncate">{product.price.noMembership[3]}</td>
                         ) : (
                           <td className="text-center">N/A</td>
                         )}
                         {product.price.noMembership[4] ? (
-                          <td className="text-center text-truncate">R$ {product.price.noMembership[4]}</td>
+                          <td className="text-center text-truncate">{product.price.noMembership[4]}</td>
                         ) : (
                           <td className="text-center">N/A</td>
                         )}
                         {product.price.closure ? (
-                          <td className="text-center text-truncate">R$ {product.price.closure}</td>
+                          <td className="text-center text-truncate">{product.price.closure}</td>
                         ) : (
                           <td className="text-center">N/A</td>
                         )}
