@@ -205,7 +205,7 @@ const EditFamily = () => {
           </div>
           <div className="mb-2">
             <label>Descrição</label>
-            <input type="text" className="form-control form-control-sm" value={desc} onChange={(e) => setDesc(e.target.value)} />
+            <textarea className="form-control" rows={2} value={desc} onChange={(e) => setDesc(e.target.value)} />
           </div>
           <div className="col-6 mb-2">
             <label>Link do Canva</label>
@@ -215,7 +215,7 @@ const EditFamily = () => {
             <label>Link da Informação Adicional</label>
             <input type="text" className="form-control form-control-sm" value={addInfoLink} onChange={(e) => setAddInfoLink(e.target.value)} />
           </div>
-          <div className="col-6 mb-2">
+          <div className="col-12 mb-2">
             <label>Observações</label>
             <textarea className="form-control" rows={2} value={observations} onChange={(e) => setObservations(e.target.value)} />
           </div>

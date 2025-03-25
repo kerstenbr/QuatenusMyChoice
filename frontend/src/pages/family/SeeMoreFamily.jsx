@@ -58,7 +58,15 @@ const SeeMoreFamily = () => {
 
         <div>
           <h4>Visão geral da família:</h4>
-          <p>{family.desc}</p>
+          {family.desc ? (
+            <div className="mb-2">
+              {family.desc.split("\n").map((text, index) => (
+                <p className="m-0" key={index}>
+                  {text}
+                </p>
+              ))}
+            </div>
+          ) : null}
         </div>
 
         {family.links && Object.keys(family.links).length > 0 && (
@@ -107,7 +115,6 @@ const SeeMoreFamily = () => {
             <hr />
           </>
         ) : null}
-
 
         <div>
           {hasTelemetry && (
@@ -306,11 +313,7 @@ const SeeMoreFamily = () => {
                         ) : (
                           <td className="text-center">N/A</td>
                         )}
-                        {product.price.closure ? (
-                          <td className="text-center text-truncate">{product.price.closure}</td>
-                        ) : (
-                          <td className="text-center">N/A</td>
-                        )}
+                        {product.price.closure ? <td className="text-center text-truncate">{product.price.closure}</td> : <td className="text-center">N/A</td>}
                       </tr>
                     );
                   })
