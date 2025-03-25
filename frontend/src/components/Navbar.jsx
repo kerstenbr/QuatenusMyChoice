@@ -57,11 +57,11 @@ const Navbar = () => {
                       Criar Família
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link className="dropdown-item" to="/logistics-sector/bom/create">
                       Criar B.O.M
                     </Link>
-                  </li>
+                  </li> */}
                   <hr className="m-0 p-0" />
                 </>
               ) : null}
