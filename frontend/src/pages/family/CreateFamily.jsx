@@ -160,7 +160,7 @@ const CreateFamily = () => {
           </div>
           <div className="mb-2">
             <label>Descrição</label>
-            <input type="text" className="form-control form-control-sm" value={desc} onChange={(e) => setDesc(e.target.value)} />
+            <textarea className="form-control" rows={2} value={desc} onChange={(e) => setDesc(e.target.value)} />
           </div>
           <div className="col-6 mb-2">
             <label>Link do Canva</label>
