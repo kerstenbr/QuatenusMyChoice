@@ -9,6 +9,10 @@ const SeeMoreFamily = () => {
   const [family, setFamily] = useState({});
   const { id } = useParams();
   const navigate = useNavigate();
+  const [selectedWithMembership, setSelectedWithMembership] = useState(12);
+  const [selectedNoMembership, setSelectedNoMembership] = useState(12);
+  const [showFullTable, setShowFullTable] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     axios
@@ -29,6 +33,23 @@ const SeeMoreFamily = () => {
 
   const goBack = () => {
     navigate(-1);
+  };
+
+  const handleWithMembershipChange = (event) => {
+    setSelectedWithMembership(Number(event.target.value));
+  };
+
+  const handleNoMembershipChange = (event) => {
+    setSelectedNoMembership(Number(event.target.value));
+  };
+
+  const toggleTableView = () => {
+    setShowFullTable((prev) => !prev);
+    setMenuOpen(false);
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen((prev) => !prev);
   };
 
   const hasTelemetry = family.products ? Object.keys(family.products).some((productName) => family.products[productName].telemetry) : false;
@@ -224,108 +245,196 @@ const SeeMoreFamily = () => {
         </div>
 
         <div>
-          <h4>Segmentos de produtos:</h4>
-          <div className="table-responsive">
-            <table className="table table-bordered table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">Produto</th>
-                  <th scope="col" className="text-center">
-                    Adesão
-                  </th>
-                  <th colSpan="3" className="text-center">
-                    Com adesão
-                  </th>
-                  <th colSpan="5" className="text-center">
-                    Sem adesão
-                  </th>
-                  <th scope="col" className="text-center">
-                    Fecho
-                  </th>
-                </tr>
-                <tr>
-                  <th colSpan="2"></th>
-                  <th className="text-center">12 meses</th>
-                  <th className="text-center">24 meses</th>
-                  <th className="text-center">36 meses</th>
-                  <th className="text-center">12 meses</th>
-                  <th className="text-center">24 meses</th>
-                  <th className="text-center">36 meses</th>
-                  <th className="text-center">48 meses</th>
-                  <th className="text-center">60 meses</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {family.products ? (
-                  family.products.map((product) => {
-                    return (
-                      <tr key={product.name} title={product.desc}>
-                        <td>
-                          <p className="m-0 p-0" style={{ fontSize: "12px" }}>
-                            {product.qbmCode}
-                          </p>
-                          <p className="m-0 p-0">{product.name}</p>
-                        </td>
-                        {product.price.withMembership[0] ? (
-                          <td className="text-center text-truncate">{product.price.withMembership[0]}</td>
-                        ) : (
-                          <td className="text-center">N/A</td>
-                        )}
-                        {product.price.withMembership[1] ? (
-                          <td className="text-center text-truncate">{product.price.withMembership[1]}</td>
-                        ) : (
-                          <td className="text-center">N/A</td>
-                        )}
-                        {product.price.withMembership[2] ? (
-                          <td className="text-center text-truncate">{product.price.withMembership[2]}</td>
-                        ) : (
-                          <td className="text-center">N/A</td>
-                        )}
-                        {product.price.withMembership[3] ? (
-                          <td className="text-center text-truncate">{product.price.withMembership[3]}</td>
-                        ) : (
-                          <td className="text-center">N/A</td>
-                        )}
+          <h4 className="d-flex align-items-center">
+            Segmentos de produtos:
+            <div className="dropdown ms-2">
+              <button className="btn btn-sm dropdown-toggle" onClick={toggleMenu} type="button"></button>
+              {menuOpen && (
+                <ul className="dropdown-menu show">
+                  <li>
+                    <button className="dropdown-item" onClick={toggleTableView}>
+                      Tabela Alternativa
+                    </button>
+                  </li>
+                </ul>
+              )}
+            </div>
+          </h4>
 
-                        {product.price.noMembership[0] ? (
-                          <td className="text-center text-truncate">{product.price.noMembership[0]}</td>
-                        ) : (
-                          <td className="text-center">N/A</td>
-                        )}
-                        {product.price.noMembership[1] ? (
-                          <td className="text-center text-truncate">{product.price.noMembership[1]}</td>
-                        ) : (
-                          <td className="text-center">N/A</td>
-                        )}
-                        {product.price.noMembership[2] ? (
-                          <td className="text-center text-truncate">{product.price.noMembership[2]}</td>
-                        ) : (
-                          <td className="text-center">N/A</td>
-                        )}
-                        {product.price.noMembership[3] ? (
-                          <td className="text-center text-truncate">{product.price.noMembership[3]}</td>
-                        ) : (
-                          <td className="text-center">N/A</td>
-                        )}
-                        {product.price.noMembership[4] ? (
-                          <td className="text-center text-truncate">{product.price.noMembership[4]}</td>
-                        ) : (
-                          <td className="text-center">N/A</td>
-                        )}
-                        {product.price.closure ? <td className="text-center text-truncate">{product.price.closure}</td> : <td className="text-center">N/A</td>}
-                      </tr>
-                    );
-                  })
-                ) : (
+          <div className="table-responsive">
+            {!showFullTable ? (
+              <table className="table table-bordered table-hover table-sm">
+                <thead>
                   <tr>
-                    <td colSpan="11" className="text-center bg-danger text-white">
-                      Erro
-                    </td>
+                    <th scope="col">Produto</th>
+                    <th scope="col" className="text-center">
+                      Adesão
+                    </th>
+                    <th colSpan="1" className="text-center">
+                      Com adesão
+                    </th>
+                    <th colSpan="1" className="text-center">
+                      Sem adesão
+                    </th>
+                    <th scope="col" className="text-center">
+                      Fecho
+                    </th>
                   </tr>
-                )}
-              </tbody>
-            </table>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col" className="text-center"></th>
+                    <th colSpan="1" className="text-center">
+                      <select className="form-select form-select-sm" value={selectedWithMembership} onChange={handleWithMembershipChange}>
+                        <option value={12}>12 meses</option>
+                        <option value={24}>24 meses</option>
+                        <option value={36}>36 meses</option>
+                      </select>
+                    </th>
+                    <th colSpan="1" className="text-center">
+                      <select className="form-select form-select-sm" value={selectedNoMembership} onChange={handleNoMembershipChange}>
+                        <option value={12}>12 meses</option>
+                        <option value={24}>24 meses</option>
+                        <option value={36}>36 meses</option>
+                        <option value={48}>48 meses</option>
+                        <option value={60}>60 meses</option>
+                      </select>
+                    </th>
+                    <th scope="col" className="text-center"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {family.products ? (
+                    family.products.map((product) => {
+                      return (
+                        <tr key={product.name} title={product.desc}>
+                          <td>
+                            <p className="m-0 p-0" style={{ fontSize: "12px" }}>
+                              {product.qbmCode}
+                            </p>
+                            <p className="m-0 p-0">{product.name}</p>
+                          </td>
+                          <td className="text-center align-middle">{product.price.withMembership[0] || "N/A"}</td>
+                          <td className="text-center align-middle">{product.price.withMembership[selectedWithMembership / 12] || "N/A"}</td>
+                          <td className="text-center align-middle">{product.price.noMembership[selectedNoMembership / 12 - 1] || "N/A"}</td>
+                          <td className="text-center align-middle">{product.price.closure || "N/A"}</td>
+                        </tr>
+                      );
+                    })
+                  ) : (
+                    <tr>
+                      <td colSpan="5" className="text-center bg-danger text-white">
+                        Erro
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            ) : (
+              <table className="table table-bordered table-hover table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">Produto</th>
+                    <th scope="col" className="text-center">
+                      Adesão
+                    </th>
+                    <th colSpan="3" className="text-center">
+                      Com adesão
+                    </th>
+                    <th colSpan="5" className="text-center">
+                      Sem adesão
+                    </th>
+                    <th scope="col" className="text-center">
+                      Fecho
+                    </th>
+                  </tr>
+                  <tr>
+                    <th colSpan="2"></th>
+                    <th className="text-center">12 meses</th>
+                    <th className="text-center">24 meses</th>
+                    <th className="text-center">36 meses</th>
+                    <th className="text-center">12 meses</th>
+                    <th className="text-center">24 meses</th>
+                    <th className="text-center">36 meses</th>
+                    <th className="text-center">48 meses</th>
+                    <th className="text-center">60 meses</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {family.products ? (
+                    family.products.map((product) => {
+                      return (
+                        <tr key={product.name} title={product.desc}>
+                          <td>
+                            <p className="m-0 p-0" style={{ fontSize: "12px" }}>
+                              {product.qbmCode}
+                            </p>
+                            <p className="m-0 p-0">{product.name}</p>
+                          </td>
+                          {product.price.withMembership[0] ? (
+                            <td className="text-center text-truncate align-middle">{product.price.withMembership[0]}</td>
+                          ) : (
+                            <td className="text-center align-middle">N/A</td>
+                          )}
+                          {product.price.withMembership[1] ? (
+                            <td className="text-center text-truncate align-middle">{product.price.withMembership[1]}</td>
+                          ) : (
+                            <td className="text-center align-middle">N/A</td>
+                          )}
+                          {product.price.withMembership[2] ? (
+                            <td className="text-center text-truncate align-middle">{product.price.withMembership[2]}</td>
+                          ) : (
+                            <td className="text-center align-middle">N/A</td>
+                          )}
+                          {product.price.withMembership[3] ? (
+                            <td className="text-center text-truncate align-middle">{product.price.withMembership[3]}</td>
+                          ) : (
+                            <td className="text-center align-middle">N/A</td>
+                          )}
+
+                          {product.price.noMembership[0] ? (
+                            <td className="text-center text-truncate align-middle">{product.price.noMembership[0]}</td>
+                          ) : (
+                            <td className="text-center align-middle">N/A</td>
+                          )}
+                          {product.price.noMembership[1] ? (
+                            <td className="text-center text-truncate align-middle">{product.price.noMembership[1]}</td>
+                          ) : (
+                            <td className="text-center align-middle">N/A</td>
+                          )}
+                          {product.price.noMembership[2] ? (
+                            <td className="text-center text-truncate align-middle">{product.price.noMembership[2]}</td>
+                          ) : (
+                            <td className="text-center align-middle">N/A</td>
+                          )}
+                          {product.price.noMembership[3] ? (
+                            <td className="text-center text-truncate align-middle">{product.price.noMembership[3]}</td>
+                          ) : (
+                            <td className="text-center align-middle">N/A</td>
+                          )}
+                          {product.price.noMembership[4] ? (
+                            <td className="text-center text-truncate align-middle">{product.price.noMembership[4]}</td>
+                          ) : (
+                            <td className="text-center align-middle">N/A</td>
+                          )}
+                          {product.price.closure ? (
+                            <td className="text-center text-truncate align-middle">{product.price.closure}</td>
+                          ) : (
+                            <td className="text-center align-middle">N/A</td>
+                          )}
+                        </tr>
+                      );
+                    })
+                  ) : (
+                    <tr>
+                      <td colSpan="11" className="text-center bg-danger text-white">
+                        Erro
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            )}
           </div>
         </div>
 
