@@ -23,7 +23,7 @@ const CreateFamily = () => {
         delete product.telemetry;
       }
     };
-  
+
     const sanitizedProducts = products.map((product) => {
       removeEmptyTelemetry(product);
       return {
@@ -34,12 +34,12 @@ const CreateFamily = () => {
         telemetry: product.telemetry,
       };
     });
-  
+
     const linksObject = links.reduce((acc, link) => {
       acc[link.key] = link.url;
       return acc;
     }, {});
-  
+
     const data = {
       name,
       bannerLink,
@@ -51,7 +51,7 @@ const CreateFamily = () => {
       products: sanitizedProducts,
       links: linksObject,
     };
-  
+
     axios
       .post(`${import.meta.env.VITE_BASE_URL}/api/families/`, data, {
         headers: {
@@ -77,6 +77,7 @@ const CreateFamily = () => {
         price: {
           withMembership: Array(4).fill(""),
           noMembership: Array(5).fill(""),
+          renovation: Array(3).fill(""),
           closure: "",
         },
         telemetry: {
@@ -277,6 +278,21 @@ const CreateFamily = () => {
                       }
                       value={value}
                       onChange={(e) => handleProductPriceChange(productIndex, "noMembership", valueIndex, e.target.value)}
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="row">
+                <label>Preços da Renovação</label>
+
+                {product.price.renovation.map((value, valueIndex) => (
+                  <div className="col-2" key={valueIndex}>
+                    <input
+                      type="text"
+                      className="form-control form-control-sm mb-2"
+                      placeholder={valueIndex === 0 ? "12 meses" : valueIndex === 1 ? "24 meses" : valueIndex === 2 ? "36 meses" : "Erro"}
+                      value={value}
+                      onChange={(e) => handleProductPriceChange(productIndex, "renovation", valueIndex, e.target.value)}
                     />
                   </div>
                 ))}

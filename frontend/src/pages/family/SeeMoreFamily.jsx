@@ -11,7 +11,9 @@ const SeeMoreFamily = () => {
   const navigate = useNavigate();
   const [selectedWithMembership, setSelectedWithMembership] = useState(12);
   const [selectedNoMembership, setSelectedNoMembership] = useState(12);
+  const [showCompactTable, setShowCompactTable] = useState(true);
   const [showFullTable, setShowFullTable] = useState(false);
+  const [showRenovationTable, setShowRenovationTable] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -43,8 +45,29 @@ const SeeMoreFamily = () => {
     setSelectedNoMembership(Number(event.target.value));
   };
 
-  const toggleTableView = () => {
-    setShowFullTable((prev) => !prev);
+  // const toggleTableView = () => {
+  //   setShowFullTable((prev) => !prev);
+  //   setMenuOpen(false);
+  // };
+
+  const togleFullTable = () => {
+    setShowFullTable(true);
+    setShowCompactTable(false);
+    setShowRenovationTable(false);
+    setMenuOpen(false);
+  };
+
+  const togleCompactTable = () => {
+    setShowFullTable(false);
+    setShowCompactTable(true);
+    setShowRenovationTable(false);
+    setMenuOpen(false);
+  };
+
+  const togleRenovationTable = () => {
+    setShowFullTable(false);
+    setShowCompactTable(false);
+    setShowRenovationTable(true);
     setMenuOpen(false);
   };
 
@@ -252,17 +275,29 @@ const SeeMoreFamily = () => {
               {menuOpen && (
                 <ul className="dropdown-menu show">
                   <li>
-                    <button className="dropdown-item" onClick={toggleTableView}>
-                      Tabela Alternativa
+                    <button className="dropdown-item" onClick={togleCompactTable}>
+                      Tabela Compacta
                     </button>
                   </li>
+                  <li>
+                    <button className="dropdown-item" onClick={togleFullTable}>
+                      Tabela Completa
+                    </button>
+                  </li>
+                  {user && (user.admin === true || user.role === "cs") && (
+                    <li>
+                    <button className="dropdown-item" onClick={togleRenovationTable}>
+                      Tabela de Renovação
+                    </button>
+                  </li>
+                  )}
                 </ul>
               )}
             </div>
           </h4>
 
           <div className="table-responsive">
-            {!showFullTable ? (
+            {showCompactTable && (
               <table className="table table-bordered table-hover table-sm">
                 <thead>
                   <tr>
@@ -329,7 +364,8 @@ const SeeMoreFamily = () => {
                   )}
                 </tbody>
               </table>
-            ) : (
+            )}
+            {showFullTable && (
               <table className="table table-bordered table-hover table-sm">
                 <thead>
                   <tr>
@@ -414,6 +450,63 @@ const SeeMoreFamily = () => {
                           )}
                           {product.price.noMembership[4] ? (
                             <td className="text-center text-truncate align-middle">{product.price.noMembership[4]}</td>
+                          ) : (
+                            <td className="text-center align-middle">N/A</td>
+                          )}
+                          {product.price.closure ? (
+                            <td className="text-center text-truncate align-middle">{product.price.closure}</td>
+                          ) : (
+                            <td className="text-center align-middle">N/A</td>
+                          )}
+                        </tr>
+                      );
+                    })
+                  ) : (
+                    <tr>
+                      <td colSpan="11" className="text-center bg-danger text-white">
+                        Erro
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            )}
+            {showRenovationTable && (
+              <table className="table table-bordered table-hover table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">Produto</th>
+                    <th className="text-center">12 meses</th>
+                    <th className="text-center">24 meses</th>
+                    <th className="text-center">36 meses</th>
+                    <th scope="col" className="text-center">
+                      Fecho
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {family.products ? (
+                    family.products.map((product) => {
+                      return (
+                        <tr key={product.name} title={product.desc}>
+                          <td>
+                            <p className="m-0 p-0" style={{ fontSize: "12px" }}>
+                              {product.qbmCode}
+                            </p>
+                            <p className="m-0 p-0">{product.name}</p>
+                          </td>
+                          {product.price.renovation[0] ? (
+                            <td className="text-center text-truncate align-middle">{product.price.renovation[0]}</td>
+                          ) : (
+                            <td className="text-center align-middle">N/A</td>
+                          )}
+                          {product.price.renovation[1] ? (
+                            <td className="text-center text-truncate align-middle">{product.price.renovation[1]}</td>
+                          ) : (
+                            <td className="text-center align-middle">N/A</td>
+                          )}
+                          {product.price.renovation[2] ? (
+                            <td className="text-center text-truncate align-middle">{product.price.renovation[2]}</td>
                           ) : (
                             <td className="text-center align-middle">N/A</td>
                           )}

@@ -122,6 +122,7 @@ const EditFamily = () => {
         price: {
           withMembership: Array(4).fill(""),
           noMembership: Array(5).fill(""),
+          renovation: Array(3).fill(""),
           closure: "",
         },
         telemetry: {
@@ -322,6 +323,21 @@ const EditFamily = () => {
                       }
                       value={value}
                       onChange={(e) => handleProductPriceChange(productIndex, "noMembership", valueIndex, e.target.value)}
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="row">
+                <label>Preços da Renovação</label>
+
+                {product.price.renovation.map((value, valueIndex) => (
+                  <div className="col-2" key={valueIndex}>
+                    <input
+                      type="text"
+                      className="form-control form-control-sm mb-2"
+                      placeholder={valueIndex === 0 ? "12 meses" : valueIndex === 1 ? "24 meses" : valueIndex === 2 ? "36 meses" : "Erro"}
+                      value={value}
+                      onChange={(e) => handleProductPriceChange(productIndex, "renovation", valueIndex, e.target.value)}
                     />
                   </div>
                 ))}
