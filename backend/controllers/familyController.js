@@ -198,6 +198,7 @@ const downloadFamilies = async (request, response) => {
       family.products.map((product) => {
         const priceWithMembership = product.price?.withMembership || [];
         const priceNoMembership = product.price?.noMembership || [];
+        const priceRenovation = product.price?.renovation || [];
 
         return {
           familyName: family.name,
@@ -226,6 +227,9 @@ const downloadFamilies = async (request, response) => {
           productPriceNoMembership_36meses: priceNoMembership[2] || "",
           productPriceNoMembership_48meses: priceNoMembership[3] || "",
           productPriceNoMembership_60meses: priceNoMembership[4] || "",
+          productPriceRenovation_12meses: priceRenovation[0] || "",
+          productPriceRenovation_24meses: priceRenovation[1] || "",
+          productPriceRenovation_36meses: priceRenovation[2] || "",
           productPriceClosure: product.price?.closure || "",
         };
       })
@@ -316,6 +320,11 @@ const uploadFamilies = async (request, response) => {
             row.productPriceNoMembership_36meses,
             row.productPriceNoMembership_48meses,
             row.productPriceNoMembership_60meses,
+          ],
+          renovation: [
+            row.productPriceRenovation_12meses,
+            row.productPriceRenovation_24meses,
+            row.productPriceRenovation_36meses,
           ],
           closure: row.productPriceClosure,
         },

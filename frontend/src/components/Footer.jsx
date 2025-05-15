@@ -6,15 +6,9 @@ const Footer = () => {
       <div className="container">
         <div className="row">
           <div className="col-md-6 mb-3">
-            <p className="mb-1">&copy; 2024 Quatenus MyChoice</p>
-            <p className="m-0">
-              Criado por{" "}
-              <Link to={"https://kerstenbr.github.io/SitePei/"} target="_blank" rel="noopener noreferrer">
-                Projetos e Inovações
-              </Link>
-            </p>
+            <p className="mb-1">&copy; {new Date().getFullYear()} Quatenus MyChoice</p>
             <p className="mb-0">
-              Com ajuda de{" "}
+              Criado com a ajuda de{" "}
               <Link to={"https://github.com/codebruno"} target="_blank" rel="noopener noreferrer">
                 Bruno Silva
               </Link>

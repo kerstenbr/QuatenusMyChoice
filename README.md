@@ -169,8 +169,8 @@ name, qbmCode e desc são obrigatórios. Exemplo de `body` a ser enviado:
       "price": {
         "withMembership": ["1000", "120", "115", "110"],
         "noMembership": ["200", "195", "190", "185", "180"],
+        "renovation": ["150", "160", "170"],
         "closure": "100",
-        "renovationCLosure": "50"
       },
       "telemetry": {
         "digital": "3",
@@ -184,8 +184,8 @@ name, qbmCode e desc são obrigatórios. Exemplo de `body` a ser enviado:
       "price": {
         "withMembership": ["1000", "120", "115", "110"],
         "noMembership": ["200", "195", "190", "185", "180"],
+        "renovation": ["150", "160", "170"],
         "closure": "200",
-        "renovationCLosure": "150"
       }
     }
   ]
