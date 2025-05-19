@@ -84,3 +84,34 @@ header a {
 .card-zoom:hover {
   transform: scale(1.05);
 }
+
+.custom-tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.custom-tooltip-wrapper .custom-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  width: 320px;
+  background-color: #222;
+  color: #fff;
+  text-align: left;
+  border-radius: 4px;
+  padding: 6px 10px;
+  position: absolute;
+  /* z-index: 10; */
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.2s;
+  font-size: 13px;
+  pointer-events: none;
+}
+
+.custom-tooltip-wrapper:hover .custom-tooltip,
+.custom-tooltip-wrapper:focus-within .custom-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
