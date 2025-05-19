@@ -79,12 +79,12 @@ const EditFamily = () => {
         telemetry: product.telemetry,
       };
     });
-  
+
     const linksObject = links.reduce((acc, link) => {
       acc[link.key] = link.url;
       return acc;
     }, {});
-  
+
     const data = {
       name,
       bannerLink,
@@ -96,7 +96,7 @@ const EditFamily = () => {
       addInfoLink,
       products: sanitizedProducts,
     };
-  
+
     axios
       .put(`${import.meta.env.VITE_BASE_URL}/api/families/${id}`, data, {
         headers: {
@@ -189,7 +189,9 @@ const EditFamily = () => {
   return (
     <div className="py-2 bg-light">
       <div className="container">
-        <BackButton />
+        <div className="sticky-top" style={{ top: "80px", zIndex: "1" }}>
+          <BackButton />
+        </div>
         <h1 className="mt-3 mb-4">Editar Família</h1>
         <div className="row">
           <div className="col-6 mb-2">
