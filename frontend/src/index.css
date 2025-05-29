@@ -2,7 +2,7 @@
 
 :root {
   --primary: #f36e21;
-  --secundary: #00968f;
+  --secondary: #00968f;
   --error: #e7195a;
 }
 
@@ -35,16 +35,16 @@ header a {
 
 .btn-qblue {
   --bs-btn-color: #fff !important;
-  --bs-btn-bg: var(--secundary) !important;
-  --bs-btn-border-color: var(--secundary);
+  --bs-btn-bg: var(--secondary) !important;
+  --bs-btn-border-color: var(--secondary);
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: var(--secundary);
+  --bs-btn-hover-bg: var(--secondary);
   --bs-btn-focus-shadow-rgb: 225, 83, 97;
   --bs-btn-active-color: #fff;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   --bs-btn-disabled-color: #fff;
-  --bs-btn-disabled-bg: var(--secundary);
-  --bs-btn-disabled-border-color: var(--secundary);
+  --bs-btn-disabled-bg: var(--secondary);
+  --bs-btn-disabled-border-color: var(--secondary);
 }
 
 .btn-qorange {
@@ -62,8 +62,8 @@ header a {
 }
 
 .form-check-input:checked {
-  background-color: var(--primary) !important;
-  border-color: var(--primary) !important;
+  background-color: var(--secondary) !important;
+  border-color: var(--secondary) !important;
 }
 
 .dropdown-item.active,
