@@ -1,13 +1,16 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import FamilySearchbar from "../../components/family/FamilySearchbar.jsx";
 import FamilyCard from "../../components/family/FamilyCard.jsx";
+import FamilyList from "../../components/family/FamilyList.jsx";
 import Cookies from "js-cookie";
+import { ViewContext } from "../../context/viewContext";
 
 const SearchFamily = () => {
   const { name } = useParams();
   const [families, setFamilies] = useState([]);
+  const view = useContext(ViewContext);
 
   const search = () => {
     axios
@@ -38,11 +41,19 @@ const SearchFamily = () => {
             ? `${families.length} ${families.length > 1 ? `famílias contém o produto: ${name}` : `família contém o produto: ${name}`}`
             : `Nenhum produto encontrado para: ${name} :(`}
         </p>
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          {families.map((family) => (
-            <FamilyCard key={family._id} family={family} />
-          ))}
-        </div>
+        {view.view === "card" ? (
+          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {families.map((family) => (
+              <FamilyCard key={family._id} family={family} />
+            ))}
+          </div>
+        ) : (
+          <div className="row m-0 p-0">
+            {families.map((family) => (
+              <FamilyList key={family._id} family={family} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

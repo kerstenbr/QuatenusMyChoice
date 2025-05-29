@@ -61,6 +61,11 @@ header a {
   --bs-btn-disabled-border-color: var(--primary);
 }
 
+.form-check-input:checked {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
 .dropdown-item.active,
 .dropdown-item:active {
   color: #fff;
