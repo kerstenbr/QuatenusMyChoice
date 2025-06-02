@@ -63,9 +63,12 @@ const Login = () => {
                     <label htmlFor="floatingPassword">Senha</label>
                     {errors.password && <div className="invalid-feedback">{errors.password.message}</div>}
                   </div>
-                  <div>
+                  <div className="d-flex justify-content-between">
                     <Link to="/register">
-                      <p>Não tem uma conta?</p>
+                      <p className="">Não tem uma conta?</p>
+                    </Link>
+                    <Link onClick={() => alert("Entre em contato com o suporte para recuperar sua senha.")}>
+                      <p>Esqueceu sua senha?</p>
                     </Link>
                   </div>
                   <button className="btn btn-lg btn-qorange w-100" type="submit">

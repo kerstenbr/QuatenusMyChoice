@@ -2,7 +2,7 @@
 
 :root {
   --primary: #f36e21;
-  --secundary: #00968f;
+  --secondary: #00968f;
   --error: #e7195a;
 }
 
@@ -10,47 +10,11 @@
   font-family: "Nunito";
 }
 
-.btn-qblue {
-  --bs-btn-color: #fff !important;
-  --bs-btn-bg: var(--secundary) !important;
-  --bs-btn-border-color: var(--secundary);
-  --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: var(--secundary);
-  --bs-btn-focus-shadow-rgb: 225, 83, 97;
-  --bs-btn-active-color: #fff;
-  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #fff;
-  --bs-btn-disabled-bg: var(--secundary);
-  --bs-btn-disabled-border-color: var(--secundary);
-}
-
-.btn-qorange {
-  --bs-btn-color: #fff !important;
-  --bs-btn-bg: var(--primary) !important;
-  --bs-btn-border-color: var(--primary);
-  --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: var(--primary);
-  --bs-btn-focus-shadow-rgb: 225, 83, 97;
-  --bs-btn-active-color: #fff;
-  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #fff;
-  --bs-btn-disabled-bg: var(--primary);
-  --bs-btn-disabled-border-color: var(--primary);
-}
-
-.dropdown-item.active,
-.dropdown-item:active {
-  color: #fff;
-  text-decoration: none;
-  background-color: var(--primary) !important;
-}
-
 body {
   background: #f1f1f1;
   margin: 0;
 }
 
-/* NAVBAR */
 header {
   background: var(--primary);
 }
@@ -69,6 +33,46 @@ header a {
   text-decoration: none;
 }
 
+.btn-qblue {
+  --bs-btn-color: #fff !important;
+  --bs-btn-bg: var(--secondary) !important;
+  --bs-btn-border-color: var(--secondary);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--secondary);
+  --bs-btn-focus-shadow-rgb: 225, 83, 97;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: var(--secondary);
+  --bs-btn-disabled-border-color: var(--secondary);
+}
+
+.btn-qorange {
+  --bs-btn-color: #fff !important;
+  --bs-btn-bg: var(--primary) !important;
+  --bs-btn-border-color: var(--primary);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--primary);
+  --bs-btn-focus-shadow-rgb: 225, 83, 97;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: var(--primary);
+  --bs-btn-disabled-border-color: var(--primary);
+}
+
+.form-check-input:checked {
+  background-color: var(--secondary) !important;
+  border-color: var(--secondary) !important;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  color: #fff;
+  text-decoration: none;
+  background-color: var(--primary) !important;
+}
+
 .text-qorange {
   color: var(--primary);
 }
@@ -83,4 +87,34 @@ header a {
 
 .card-zoom:hover {
   transform: scale(1.05);
+}
+
+.custom-tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.custom-tooltip-wrapper .custom-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  width: 320px;
+  background-color: #222;
+  color: #fff;
+  text-align: left;
+  border-radius: 4px;
+  padding: 6px 10px;
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.2s;
+  font-size: 13px;
+  pointer-events: none;
+}
+
+.custom-tooltip-wrapper:hover .custom-tooltip,
+.custom-tooltip-wrapper:focus-within .custom-tooltip {
+  visibility: visible;
+  opacity: 1;
 }

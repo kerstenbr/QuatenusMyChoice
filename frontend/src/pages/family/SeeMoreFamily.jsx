@@ -15,6 +15,7 @@ const SeeMoreFamily = () => {
   const [showFullTable, setShowFullTable] = useState(false);
   const [showRenovationTable, setShowRenovationTable] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     axios
@@ -45,10 +46,11 @@ const SeeMoreFamily = () => {
     setSelectedNoMembership(Number(event.target.value));
   };
 
-  // const toggleTableView = () => {
-  //   setShowFullTable((prev) => !prev);
-  //   setMenuOpen(false);
-  // };
+  const copyToClipboard = (name, desc) => {
+    navigator.clipboard.writeText(`${name}: \n${desc}`);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
 
   const togleFullTable = () => {
     setShowFullTable(true);
@@ -84,7 +86,7 @@ const SeeMoreFamily = () => {
           <button className="btn btn-sm btn-qorange mb-2 float-end" onClick={goBack}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-return-left mb-1" viewBox="0 0 16 16">
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"
               />
             </svg>
@@ -143,7 +145,7 @@ const SeeMoreFamily = () => {
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-exclamation-triangle float-start mt-1 me-1"
+              className="bi bi-exclamation-triangle float-start mt-1 me-1"
               viewBox="0 0 16 16">
               <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z" />
               <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
@@ -302,7 +304,24 @@ const SeeMoreFamily = () => {
             </div>
           </h4>
 
-          <div className="table-responsive">
+          <div className="table-responsive overflow-visible">
+            {copied && (
+              <div
+                style={{
+                  position: "fixed",
+                  top: 20,
+                  right: 20,
+                  background: "#222",
+                  color: "#fff",
+                  padding: "8px 18px",
+                  borderRadius: "6px",
+                  zIndex: 99999,
+                  fontWeight: "bold",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+                }}>
+                Copiado
+              </div>
+            )}
             {showCompactTable && (
               <table className="table table-bordered table-hover table-sm">
                 <thead>
@@ -347,12 +366,29 @@ const SeeMoreFamily = () => {
                   {family.products ? (
                     family.products.map((product) => {
                       return (
-                        <tr key={product.name} title={product.desc}>
+                        <tr key={product.name}>
                           <td>
-                            <p className="m-0 p-0" style={{ fontSize: "12px" }}>
-                              {product.qbmCode}
-                            </p>
-                            <p className="m-0 p-0">{product.name}</p>
+                            <div className="d-flex align-items-center justify-content-between g-4">
+                              <span>
+                                <p className="m-0 p-0" style={{ fontSize: "12px" }}>
+                                  {product.qbmCode}
+                                </p>
+                                <p className="m-0 p-0 d-inline">{product.name}</p>
+                              </span>
+                              <span className="custom-tooltip-wrapper" onClick={() => copyToClipboard(product.name, product.desc)}>
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="16"
+                                  height="16"
+                                  fill="currentColor"
+                                  className="bi bi-info-circle"
+                                  viewBox="0 0 16 16">
+                                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                                </svg>
+                                <span className="custom-tooltip">{product.desc}</span>
+                              </span>
+                            </div>
                           </td>
                           <td className="text-center align-middle">{product.price.withMembership[0] || "N/A"}</td>
                           <td className="text-center align-middle">{product.price.withMembership[selectedWithMembership / 12] || "N/A"}</td>
@@ -406,12 +442,29 @@ const SeeMoreFamily = () => {
                   {family.products ? (
                     family.products.map((product) => {
                       return (
-                        <tr key={product.name} title={product.desc}>
+                        <tr key={product.name}>
                           <td>
-                            <p className="m-0 p-0" style={{ fontSize: "12px" }}>
-                              {product.qbmCode}
-                            </p>
-                            <p className="m-0 p-0">{product.name}</p>
+                            <div className="d-flex align-items-center justify-content-between g-4">
+                              <span>
+                                <p className="m-0 p-0" style={{ fontSize: "12px" }}>
+                                  {product.qbmCode}
+                                </p>
+                                <p className="m-0 p-0 d-inline">{product.name}</p>
+                              </span>
+                              <span className="custom-tooltip-wrapper" onClick={() => copyToClipboard(product.name, product.desc)}>
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="16"
+                                  height="16"
+                                  fill="currentColor"
+                                  className="bi bi-info-circle"
+                                  viewBox="0 0 16 16">
+                                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                                </svg>
+                                <span className="custom-tooltip">{product.desc}</span>
+                              </span>
+                            </div>
                           </td>
                           {product.price.withMembership[0] ? (
                             <td className="text-center text-truncate align-middle">{product.price.withMembership[0]}</td>
@@ -485,7 +538,7 @@ const SeeMoreFamily = () => {
                     width="16"
                     height="16"
                     fill="currentColor"
-                    class="bi bi-exclamation-triangle float-start mt-1 me-1"
+                    className="bi bi-exclamation-triangle float-start mt-1 me-1"
                     viewBox="0 0 16 16">
                     <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z" />
                     <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
@@ -511,12 +564,29 @@ const SeeMoreFamily = () => {
                     {family.products ? (
                       family.products.map((product) => {
                         return (
-                          <tr key={product.name} title={product.desc}>
+                          <tr key={product.name}>
                             <td>
-                              <p className="m-0 p-0" style={{ fontSize: "12px" }}>
-                                {product.qbmCode}
-                              </p>
-                              <p className="m-0 p-0">{product.name}</p>
+                              <div className="d-flex align-items-center justify-content-between g-4">
+                                <span>
+                                  <p className="m-0 p-0" style={{ fontSize: "12px" }}>
+                                    {product.qbmCode}
+                                  </p>
+                                  <p className="m-0 p-0 d-inline">{product.name}</p>
+                                </span>
+                                <span className="custom-tooltip-wrapper" onClick={() => copyToClipboard(product.name, product.desc)}>
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    className="bi bi-info-circle"
+                                    viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                                  </svg>
+                                  <span className="custom-tooltip">{product.desc}</span>
+                                </span>
+                              </div>
                             </td>
                             {product.price.renovation[0] ? (
                               <td className="text-center text-truncate align-middle">{product.price.renovation[0]}</td>
