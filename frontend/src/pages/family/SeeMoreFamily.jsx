@@ -47,9 +47,22 @@ const SeeMoreFamily = () => {
   };
 
   const copyToClipboard = (name, desc) => {
-    navigator.clipboard.writeText(`${name}: \n${desc}`);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
+    if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+      var textarea = document.createElement("textarea");
+      textarea.textContent = `${name}: \n${desc}`;
+      textarea.style.position = "fixed";
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        return document.execCommand("copy");
+      } catch (error) {
+        console.warn("Erro ao copiar o texto", error);
+      } finally {
+        document.body.removeChild(textarea);
+        setTimeout(() => setCopied(false), 1500);
+        setCopied(true);
+      }
+    }
   };
 
   const togleFullTable = () => {
