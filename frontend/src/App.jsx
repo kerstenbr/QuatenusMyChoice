@@ -57,7 +57,7 @@ function App() {
             />
 
             <Route
-              path="family/search/:name"
+              path="/family/search/:name"
               element={
                 <ProtectedRoute user={user}>
                   <ActiveAccountRoute>
