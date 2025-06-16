@@ -14,9 +14,6 @@ Famílias:
 Pesquisa:
 ![Screenshot](https://i.imgur.com/eCAGFBo.png)
 
-Informação sobre a família de produto 'Fleet Basic':
-![Screenshot](https://i.imgur.com/9GLR48B.gif)
-
 ## Stack utilizada
 
 **Frontend:** React, Bootstrap
