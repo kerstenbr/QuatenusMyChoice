@@ -5,19 +5,17 @@ O Quatenus MyChoice é uma ferramenta interna da Quatenus Brasil, usada pra faci
 ## Screenshots
 
 Página inicial:
-![Screenshot](https://i.imgur.com/Txrj46i.png)
+![Screenshot](https://i.imgur.com/uNXbt4j.png)
+
+Famílias:
+![Screenshot](https://i.imgur.com/7aROcTZ.png)
+![Screenshot](https://i.imgur.com/9rq1XtN.png)
 
 Pesquisa:
-![Screenshot](https://i.imgur.com/8PGYWhl.png)
+![Screenshot](https://i.imgur.com/eCAGFBo.png)
 
 Informação sobre a família de produto 'Fleet Basic':
-![Screenshot](https://i.imgur.com/RogpZLM.png)
-
-Página do estoque:
-![Screenshot](https://i.imgur.com/hRruS9F.png)
-
-Informação do que deve ser enviado para o produto 'FT.BASIC - Carro':
-![Screenshot](https://i.imgur.com/0cz7OfO.png)
+![Screenshot](https://i.imgur.com/9GLR48B.gif)
 
 ## Stack utilizada
 
@@ -107,16 +105,6 @@ Inicie o servidor
   GET /api/families/
 ```
 
-#### Retorna as famílias que contém o produto procurado
-
-```http
-  GET /api/families/search?name={name}
-```
-
-| Parâmetro | Tipo     | Descrição        |
-| :-------- | :------- | :--------------- |
-| `name`    | `string` | **Obrigatório**. |
-
 #### Retorna uma família pelo id
 
 ```http
@@ -147,7 +135,10 @@ Inicie o servidor
 | :-------- | :------- | :---------------------------------------------------------------- |
 | `token`   | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
 
-name, qbmCode e desc são obrigatórios. Exemplo de `body` a ser enviado:
+name, qbmCode e desc são obrigatórios. 
+O campo "tags" é preenchido automaticamente.
+
+Exemplo de `body` a ser enviado:
 
 ```json
 {
@@ -172,6 +163,7 @@ name, qbmCode e desc são obrigatórios. Exemplo de `body` a ser enviado:
         "renovation": ["150", "160", "170"],
         "closure": "100",
       },
+      "tags": ["Fleet", "Teste"]
       "telemetry": {
         "digital": "3",
         "analog": "2"
@@ -186,7 +178,8 @@ name, qbmCode e desc são obrigatórios. Exemplo de `body` a ser enviado:
         "noMembership": ["200", "195", "190", "185", "180"],
         "renovation": ["150", "160", "170"],
         "closure": "200",
-      }
+      },
+      "tags": ["Fleet", "Teste", "2"]
     }
   ]
 }

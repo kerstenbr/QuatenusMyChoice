@@ -47,13 +47,11 @@ const Families = () => {
       if (!product.name) return false;
       const normalizedProductName = normalize(product.name);
 
-      // Filtro por nome (igual ao backend)
       const matchesName = searchTerm
         .split(" ")
         .filter(Boolean)
         .every((term) => normalizedProductName.includes(normalize(term)));
 
-      // Filtro por tags (todas as tags selecionadas devem estar em product.tags)
       const matchesTags =
         selectedTags.length === 0 ||
         selectedTags.every((tag) =>
