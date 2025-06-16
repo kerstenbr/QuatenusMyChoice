@@ -77,6 +77,7 @@ const EditFamily = () => {
         desc: product.desc,
         price: product.price,
         telemetry: product.telemetry,
+        tags: product.name.split(/\s+/).filter(Boolean),
       };
     });
 

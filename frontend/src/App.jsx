@@ -56,7 +56,7 @@ function App() {
               }
             />
 
-            <Route
+            {/* <Route
               path="/family/search/:name"
               element={
                 <ProtectedRoute user={user}>
@@ -65,7 +65,7 @@ function App() {
                   </ActiveAccountRoute>
                 </ProtectedRoute>
               }
-            />
+            /> */}
 
             <Route
               path="/family/seemore/:id"

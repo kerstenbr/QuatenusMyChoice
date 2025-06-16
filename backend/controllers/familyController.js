@@ -321,14 +321,12 @@ const uploadFamilies = async (request, response) => {
             row.productPriceNoMembership_48meses,
             row.productPriceNoMembership_60meses,
           ],
-          renovation: [
-            row.productPriceRenovation_12meses,
-            row.productPriceRenovation_24meses,
-            row.productPriceRenovation_36meses,
-          ],
+          renovation: [row.productPriceRenovation_12meses, row.productPriceRenovation_24meses, row.productPriceRenovation_36meses],
           closure: row.productPriceClosure,
         },
       };
+
+      productDetails.tags = (productDetails.name || "").split(/\s+/).filter(Boolean);
 
       // Adiciona o campo telemetry apenas se houver dados
       if (row.productTelemetryDigital || row.productTelemetryAnalog) {
