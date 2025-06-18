@@ -46,6 +46,8 @@ const SeeMoreFamily = () => {
     setSelectedNoMembership(Number(event.target.value));
   };
 
+  // Essa função está dessa maneira pois o MyChoice é servido via HTTP.
+  // TODO: Quando o MyChoice for servido via HTTPS, essa função deve alterada.
   const copyToClipboard = (name, desc) => {
     if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
       var textarea = document.createElement("textarea");
