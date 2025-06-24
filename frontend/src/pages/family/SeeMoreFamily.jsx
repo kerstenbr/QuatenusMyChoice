@@ -46,6 +46,8 @@ const SeeMoreFamily = () => {
     setSelectedNoMembership(Number(event.target.value));
   };
 
+  // Essa função está dessa maneira pois o MyChoice é servido via HTTP.
+  // TODO: Quando o MyChoice for servido via HTTPS, essa função deve alterada.
   const copyToClipboard = (name, desc) => {
     if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
       var textarea = document.createElement("textarea");
@@ -292,7 +294,14 @@ const SeeMoreFamily = () => {
           <h4 className="d-flex align-items-center">
             Segmentos de produtos:
             <div className="dropdown ms-2">
-              <button className="btn btn-sm dropdown-toggle" onClick={toggleMenu} type="button"></button>
+              <button className="btn btn-sm" onClick={toggleMenu} type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
+                  <path
+                    fillRule="evenodd"
+                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+                  />
+                </svg>
+              </button>
               {menuOpen && (
                 <ul className="dropdown-menu show">
                   <li>

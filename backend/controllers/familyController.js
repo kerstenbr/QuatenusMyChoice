@@ -1,8 +1,6 @@
 import Family from "../models/familyModel.js";
 import mongoose from "mongoose";
-import diacritics from "diacritics";
 import XLSX from "xlsx";
-import Fuse from "fuse.js";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -67,91 +65,38 @@ const findById = async (request, response) => {
   }
 };
 
-const findByName = async (request, response) => {
-  try {
-    const { name } = request.query;
+// const findByName = async (request, response) => {
+//   try {
+//     const { name } = request.query;
 
-    if (!name) {
-      return response.status(400).json({ message: "Nome do produto não fornecido" });
-    }
+//     if (!name) {
+//       return response.status(400).json({ message: "Nome do produto não fornecido" });
+//     }
 
-    // Normalizar o termo de busca
-    const normalizedSearchTerms = diacritics.remove(name).toLowerCase().split(" ");
+//     // Normalizar o termo de busca
+//     const normalizedSearchTerms = diacritics.remove(name).toLowerCase().split(" ");
 
-    const families = await Family.find();
+//     const families = await Family.find();
 
-    // Filtrar as famílias com base nos termos de busca normalizados
-    const filteredFamilies = families.filter((family) => {
-      return family.products.some((product) => {
-        if (!product.name) return false; // Verifica se o campo name está definido
-        const normalizedProductName = diacritics.remove(product.name).toLowerCase();
-        return normalizedSearchTerms.every((term) => normalizedProductName.includes(term));
-      });
-    });
+//     // Filtrar as famílias com base nos termos de busca normalizados
+//     const filteredFamilies = families.filter((family) => {
+//       return family.products.some((product) => {
+//         if (!product.name) return false; // Verifica se o campo name está definido
+//         const normalizedProductName = diacritics.remove(product.name).toLowerCase();
+//         return normalizedSearchTerms.every((term) => normalizedProductName.includes(term));
+//       });
+//     });
 
-    if (filteredFamilies.length === 0) {
-      return response.status(404).json({ message: "Nenhuma família encontrada" });
-    }
+//     if (filteredFamilies.length === 0) {
+//       return response.status(404).json({ message: "Nenhuma família encontrada" });
+//     }
 
-    return response.status(200).json(filteredFamilies);
-  } catch (error) {
-    console.log(error);
-    return response.status(500).json({ message: error.message });
-  }
-};
-
-// TODO: Implementar a busca com Fuse.js para melhorar a busca.
-// Atualmente não da para usar pois tem alguns problemas com a pesquisa. Não está bom o sufiente para ser usado.
-/* const findByName = async (request, response) => {
-  try {
-    const { name } = request.query;
-
-    if (!name) {
-      return response.status(400).json({ message: "Nome do produto não fornecido" });
-    }
-
-    // Normalizar o termo de busca
-    const normalizedSearchTerm = diacritics.remove(name).toLowerCase();
-    console.log(normalizedSearchTerm)
-
-    // Buscar todas as famílias e produtos
-    const families = await Family.find({});
-
-    if (families.length === 0) {
-      return response.status(404).json({ message: "Nenhuma família encontrada" });
-    }
-
-    // Configurar Fuse.js
-    const options = {
-      includeScore: true,
-      keys: [
-        { name: 'name', weight: 0.3 }, // Nome da família
-        { name: 'products.name', weight: 0.7 } // Nome dos produtos
-      ],
-      ignoreLocation: true,
-      // Um threshold de 0.0 requer um match perfeito (das letras e localização), 
-      // um threshold de 1.0 da match com qualquer coisa.
-      threshold: 0.4,
-      tokenize: true,
-      matchAllTokens: true,
-      findAllMatches: true,
-      shouldSort: true,
-    };
-
-    const fuse = new Fuse(families, options);
-
-    // Realizar a busca
-    const result = fuse.search(normalizedSearchTerm);
-
-    // Extrair os itens encontrados e ordenar pela relevância
-    const sortedFamilies = result.map(res => res.item);
-
-    return response.status(200).json(sortedFamilies);
-  } catch (error) {
-    console.log(error);
-    return response.status(500).json({ message: error.message });
-  }
-}; */
+//     return response.status(200).json(filteredFamilies);
+//   } catch (error) {
+//     console.log(error);
+//     return response.status(500).json({ message: error.message });
+//   }
+// };
 
 const editFamily = async (request, response) => {
   try {
@@ -321,14 +266,12 @@ const uploadFamilies = async (request, response) => {
             row.productPriceNoMembership_48meses,
             row.productPriceNoMembership_60meses,
           ],
-          renovation: [
-            row.productPriceRenovation_12meses,
-            row.productPriceRenovation_24meses,
-            row.productPriceRenovation_36meses,
-          ],
+          renovation: [row.productPriceRenovation_12meses, row.productPriceRenovation_24meses, row.productPriceRenovation_36meses],
           closure: row.productPriceClosure,
         },
       };
+
+      productDetails.tags = (productDetails.name || "").split(/\s+/).filter(Boolean);
 
       // Adiciona o campo telemetry apenas se houver dados
       if (row.productTelemetryDigital || row.productTelemetryAnalog) {
@@ -358,4 +301,4 @@ const uploadFamilies = async (request, response) => {
   }
 };
 
-export { findAll, findById, findByName, createFamily, editFamily, deleteFamily, downloadFamilies, uploadFamilies };
+export { findAll, findById, createFamily, editFamily, deleteFamily, downloadFamilies, uploadFamilies };

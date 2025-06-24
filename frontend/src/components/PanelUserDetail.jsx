@@ -109,7 +109,7 @@ const PanelUserDetail = ({ user }) => {
       <div className="mb-3 form-check">
         <input type="checkbox" className="form-check-input" id="manager" checked={manager} onChange={(e) => setManager(e.target.checked)} />
         <label className="form-check-label" htmlFor="manager">
-          Manager
+          Gestor
         </label>
       </div>
       <button className="btn btn-sm btn-danger mb-2" onClick={handleDeleteUser}>

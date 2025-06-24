@@ -35,7 +35,7 @@ const Home = () => {
         </svg>
       ),
       title: "F.A.Q",
-      path: "",
+      path: "/faq",
       canAccess: false,
     },
   ];
