@@ -118,3 +118,9 @@ header a {
   visibility: visible;
   opacity: 1;
 }
+
+.faq-container .accordion-button:hover,
+.accordion-button:not(.collapsed) {
+  background-color: var(--primary) !important;
+  color: #fff !important;
+}

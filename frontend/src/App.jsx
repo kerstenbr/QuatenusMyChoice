@@ -2,18 +2,22 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useContext } from "react";
 import Navbar from "./components/Navbar.jsx";
 import Home from "./pages/Home.jsx";
-import Families from "./pages/family/Families.jsx";
-import SearchFamily from "./pages/family/SearchFamily.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Footer from "./components/Footer.jsx";
+import Families from "./pages/family/Families.jsx";
+import SearchFamily from "./pages/family/SearchFamily.jsx";
 import CreateFamily from "./pages/family/CreateFamily.jsx";
 import SeeMoreFamily from "./pages/family/SeeMoreFamily.jsx";
 import EditFamily from "./pages/family/EditFamily.jsx";
 import DeleteFamily from "./pages/family/DeleteFamily.jsx";
-import Panel from "./pages/Panel.jsx";
 import Bom from "./pages/logistics-sector/Bom.jsx";
 import SearchBom from "./pages/logistics-sector/SearchBom.jsx";
+import CreateBom from "./pages/logistics-sector/CreateBom.jsx";
+import EditBom from "./pages/logistics-sector/EditBom.jsx";
+import DeleteBom from "./pages/logistics-sector/DeleteBom.jsx";
+import Faq from "./pages/faq/Faq.jsx";
+import Panel from "./pages/Panel.jsx";
 import UserPanel from "./pages/UserPanel.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import { UserContext } from "./context/userContext.jsx";
@@ -22,9 +26,6 @@ import AdminRoute from "./components/routes/AdminRoute.jsx";
 import RoleBasedRoute from "./components/routes/RoleBasedRoute.jsx";
 import ManagerRoute from "./components/routes/ManagerRoute.jsx";
 import ActiveAccountRoute from "./components/routes/ActiveAccountRoute.jsx";
-import CreateBom from "./pages/logistics-sector/CreateBom.jsx";
-import EditBom from "./pages/logistics-sector/EditBom.jsx";
-import DeleteBom from "./pages/logistics-sector/DeleteBom.jsx";
 
 function App() {
   const { user } = useContext(UserContext);
@@ -184,6 +185,17 @@ function App() {
                       </ActiveAccountRoute>
                     </ManagerRoute>
                   </RoleBasedRoute>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/faq"
+              element={
+                <ProtectedRoute user={user}>
+                  <ActiveAccountRoute>
+                    <Faq />
+                  </ActiveAccountRoute>
                 </ProtectedRoute>
               }
             />
