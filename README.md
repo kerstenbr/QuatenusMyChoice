@@ -8,11 +8,11 @@ Página inicial:
 ![Screenshot](https://i.imgur.com/uNXbt4j.png)
 
 Famílias:
-![Screenshot](https://i.imgur.com/7aROcTZ.png)
-![Screenshot](https://i.imgur.com/9rq1XtN.png)
+![Screenshot](https://i.imgur.com/lEBxBXk.png)
+![Screenshot](https://i.imgur.com/yZx7pkg.png)
 
 Pesquisa:
-![Screenshot](https://i.imgur.com/eCAGFBo.png)
+![Screenshot](https://i.imgur.com/N2Yb5Af.png)
 
 ## Stack utilizada
 
@@ -132,7 +132,7 @@ Inicie o servidor
 | :-------- | :------- | :---------------------------------------------------------------- |
 | `token`   | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
 
-name, qbmCode e desc são obrigatórios. 
+name, qbmCode e desc são obrigatórios.
 O campo "tags" é preenchido automaticamente.
 
 Exemplo de `body` a ser enviado:
@@ -337,7 +337,7 @@ Exemplo de `body` a ser enviado:
 }
 ```
 
-### B.O.M:
+<!-- ### B.O.M:
 
 #### Retorna todos os boms
 
@@ -465,4 +465,4 @@ Exemplo de `body` a ser enviado:
 
 | Parâmetro | Tipo     | Descrição                                                         |
 | :-------- | :------- | :---------------------------------------------------------------- |
-| `token`   | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin |
+| `token`   | `string` | **Obrigatório no Header**. Token do usuário, precisa ser um admin | -->
