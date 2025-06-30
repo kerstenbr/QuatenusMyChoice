@@ -1,4 +1,3 @@
-import { useForm } from "react-hook-form";
 import { ViewContext } from "../../context/viewContext";
 import { useContext } from "react";
 import Select from "react-select";
